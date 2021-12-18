@@ -1,6 +1,6 @@
 # converting source code to graph:
 
-the graph is a jason file, contains two arrays: vertices and edges.
+the graph is a json file, contains two arrays: vertices and edges.
 
 
 ## vertex
