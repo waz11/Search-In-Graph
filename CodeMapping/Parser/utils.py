@@ -1,3 +1,7 @@
+import javalang
+
+primitive_types = ['Boolean', 'boolean', 'char', 'byte', 'short', 'int', 'long', 'float', 'double', 'String', 'string',
+                   'System', 'System.out', 'Scanner', 'Log']
 
 def extract_specific_code(position, parser_token_list, obj, current_query, modifiers=None):
     """

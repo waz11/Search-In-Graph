@@ -1,3 +1,10 @@
+from pathlib import Path
+
+import javalang
+
+from CodeMapping import CodeWrapper
+from CodeMapping.Parser.utils import primitive_types
+
 
 class codeParser:
 
@@ -18,13 +25,13 @@ class codeParser:
         """
 
         """get the java classes name"""
-        fin = open(join(temp_dir, 'utils/java_classes_names.txt'), "rt")
+        fin = open(Path( 'utils/java_classes_names.txt'), "rt")
         for line in fin:
             line = line.replace('\n', '')
             self.system_methods.append(line)
         fin.close()
         """get the java util classes name"""
-        fin = open(join(temp_dir, 'utils/java_util_names.txt'), "rt")
+        fin = open(Path('utils/java_util_names.txt'), "rt")
         for line in fin:
             line = line.replace('\n', '')
             self.java_util_method.append(line)

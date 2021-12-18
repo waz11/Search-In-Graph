@@ -2,7 +2,9 @@
 
 
 # from googlesearch import search
-from CodeMapping import stackoverflow_java_queries
+# from CodeMapping import stackoverflow_java_queries
+
+from CodeMapping.Parser.utils import primitive_types
 
 
 class Task:
@@ -124,7 +126,7 @@ class CodeWrapper(Task):
         :return class task object, None if doesn't exists
         """
         for curr_class in self.sub_classes:
-            if curr_class.get_class_name() in stackoverflow_java_queries.primitive_types:
+            if curr_class.get_class_name() in primitive_types:
                 continue
             else:
                 if curr_class.get_class_name() == class_to_return:

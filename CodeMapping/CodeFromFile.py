@@ -3,9 +3,10 @@ import os
 from pathlib import Path
 import re
 
-from CodeMapping import stackoverflow_java_queries
+# from CodeMapping import stackoverflow_java_queries
 from CodeMapping.CodeWrapper import CodeWrapper
 from CodeMapping.MapCreator import MapCreator
+from CodeMapping.Parser.codeParser import codeParser
 
 
 class CodeFromFile:
@@ -15,7 +16,8 @@ class CodeFromFile:
         self.name = name
         self.output_path = output_path
         self.full_code_text = ""
-        self.code_parser = stackoverflow_java_queries.codeParser()
+        self.code_parser = codeParser()
+
 
     def concat_files(self):
         pathlist = Path(self.file_path).glob('**/*.java')
