@@ -3,8 +3,8 @@ import os
 from pathlib import Path
 import re
 
-from CodeMapping.CodeWrapper import CodeWrapper
-from CodeMapping.MapCreator import MapCreator
+from CodeMapping.Parser.CodeWrapper import CodeWrapper
+from CodeMapping.Parser.MapCreator import MapCreator
 from CodeMapping.Parser.codeParser import codeParser
 
 

@@ -1,6 +1,6 @@
 from pathlib import Path
 import javalang
-from CodeMapping import CodeWrapper
+from CodeMapping.Parser import CodeWrapper
 from CodeMapping.Components.ClassComponent import ClassComponent
 from CodeMapping.Components.MethodComponent import MethodComponent
 from CodeMapping.Parser.utils import primitive_types
