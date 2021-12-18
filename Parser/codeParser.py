@@ -1,9 +1,11 @@
 from pathlib import Path
 import javalang
-from CodeMapping.Parser import CodeWrapper
-from CodeMapping.Components.ClassComponent import ClassComponent
-from CodeMapping.Components.MethodComponent import MethodComponent
-from CodeMapping.Parser.utils import primitive_types
+
+from Components.ClassAttribute import ClassAttribute
+from Parser import CodeWrapper
+from Components.ClassComponent import ClassComponent
+from Components.MethodComponent import MethodComponent
+from Parser.utils import primitive_types
 
 
 class codeParser:
@@ -998,7 +1000,7 @@ class codeParser:
             if len(type_name) == 1:
                 attribute_class = self.add_attributes_new(current_class, declare, current_query, type_name[0],
                                                           data_structure)
-                attribute = CodeWrapper.ClassAttribute(current_class, declare.name, attribute_class,
+                attribute = ClassAttribute(current_class, declare.name, attribute_class,
                                                        ds_class)
 
             else:
@@ -1007,7 +1009,7 @@ class codeParser:
                 for object_type in type_name:
                     attribute_types.append(self.add_attributes_new(current_class, declare, current_query,
                                                                    object_type, data_structure))
-                    attribute = CodeWrapper.MultiTypeClassAttribute(current_class, declare.name, attribute_types,
+                    attribute = MultiTypeClassAttribute(current_class, declare.name, attribute_types,
                                                                     ds_class)
 
             """add attribute annotation"""
@@ -1119,18 +1121,18 @@ class codeParser:
             if parameter.type.name in primitive_types or parameter.type.name in self.system_methods \
                     or parameter.type.name == 'T':
                 current_class = ClassComponent(parameter.type.name)
-                attribute = CodeWrapper.ClassAttribute(None, parameter.name, current_class)
+                attribute = ClassAttribute(None, parameter.name, current_class)
                 method.add_method_attributes(attribute)
                 continue
 
             current_class = current_query.get_class(parameter.type.name)
             """checks if the class is already declared"""
             if current_class is not None:
-                attribute = CodeWrapper.ClassAttribute(None, parameter.name, current_class)
+                attribute = ClassAttribute(None, parameter.name, current_class)
                 method.add_method_attributes(attribute)
             else:
                 new_class = ClassComponent(parameter.type.name)
-                attribute = CodeWrapper.ClassAttribute(None, parameter.name, new_class)
+                attribute = ClassAttribute(None, parameter.name, new_class)
                 method.add_method_attributes(attribute)
 
     def extract_constructor(self, constructor, current_class, number_of_constructors, parser_token_list, current_query):

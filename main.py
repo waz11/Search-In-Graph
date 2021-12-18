@@ -1,4 +1,4 @@
-from CodeMapping.Parser.CodeFromFile import CodeFromFile
+from Parser.CodeFromFile import CodeFromFile
 
 
 def main():

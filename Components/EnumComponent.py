@@ -1,4 +1,4 @@
-from CodeMapping.Components.Component import Component
+from Components.Component import Component
 
 
 class EnumComponent(Component):

@@ -3,9 +3,9 @@ import os
 from pathlib import Path
 import re
 
-from CodeMapping.Parser.CodeWrapper import CodeWrapper
-from CodeMapping.Parser.MapCreator import MapCreator
-from CodeMapping.Parser.codeParser import codeParser
+from Parser.CodeWrapper import CodeWrapper
+from Parser.MapCreator import MapCreator
+from Parser.codeParser import codeParser
 
 
 class CodeFromFile:

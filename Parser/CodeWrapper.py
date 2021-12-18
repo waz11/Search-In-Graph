@@ -1,6 +1,5 @@
-from CodeMapping.Components.ClassAttribute import ClassAttribute
-from CodeMapping.Parser.utils import primitive_types
-from CodeMapping.Components.Component import Component
+from Parser.utils import primitive_types
+from Components.Component import Component
 
 
 class CodeWrapper(Component):
