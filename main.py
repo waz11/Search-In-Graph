@@ -9,5 +9,6 @@ def main():
     code_from_file.concat_files()
     code_from_file.test_new_file()
 
+
 if __name__ == '__main__':
     main()
