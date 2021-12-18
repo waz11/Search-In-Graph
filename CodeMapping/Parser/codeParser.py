@@ -1149,11 +1149,6 @@ class codeParser:
             new_constructor = MethodComponent(constructor_name, current_class)
             if constructor.documentation is not None:
                 new_constructor.set_documentation(constructor.documentation)
-        # new_constructor.set_code(extract_specific_code(constructor.position, parser_token_list, constructor,
-        #                                                current_query, modifiers=constructor.modifiers))
         if len(current_class.Constructors) < number_of_constructors:
             current_class.add_class_methods(new_constructor)
             current_class.add_constructors(new_constructor)
-
-
-# ------------------------------------------------------------------------------

@@ -4,15 +4,6 @@ primitive_types = ['Boolean', 'boolean', 'char', 'byte', 'short', 'int', 'long',
                    'System', 'System.out', 'Scanner', 'Log']
 
 def extract_specific_code(position, parser_token_list, obj, current_query, modifiers=None):
-    """
-    extract_specific_code Function - extract code from parse tree
-    :param current_query:
-    :param obj:
-    :param position:
-    :param parser_token_list:
-    :param modifiers:
-    :return: code - txt represents the code of the specific object
-    """
     current_query.changed_code()  # notify that code has been changed
     start_index = 0
 
