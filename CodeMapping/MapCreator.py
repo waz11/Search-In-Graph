@@ -10,6 +10,8 @@ def handle_task(mapped_dict, name, key, **kwargs):
     mapped_dict["key"] = key
     if "type" in kwargs and kwargs["type"]:
         mapped_dict["type"] = kwargs["type"]
+    if "att_names" in kwargs and kwargs["att_names"]:
+        mapped_dict["Attributes"] = kwargs["att_names"]
 
 
 def handle_arrows(mapped_arrows_dict, first_key, second_key, category, text, index_call=None):
@@ -32,7 +34,7 @@ class MapCreator:
         self.current_mapped_methods = []
 
     def create_dictionary(self, task):
-        full_task_dict = {"vertexes": [], "edges": []}
+        full_task_dict = {"vertices": [], "edges": []}
         key = -1
 
         """ add the query task"""
@@ -100,7 +102,7 @@ class MapCreator:
                 handle_task(mapped_task_dict, sub_class.class_name, key, comments=sub_class.documentation,
                             type="Class", att_names=sub_class.get_class_atts_names())
 
-                full_task_dict["vertexes"].append(mapped_task_dict)
+                full_task_dict["vertices"].append(mapped_task_dict)
                 sub_class.set_key(key)
                 current_key = key
                 key = key - 1
@@ -122,7 +124,7 @@ class MapCreator:
                     score=code.score, url=code.url, type="query", post=code.text)
         key = key - 1
         """append the task to the map"""
-        full_task_dict["vertexes"].append(mapped_task_dict)
+        full_task_dict["vertices"].append(mapped_task_dict)
         return key, full_task_dict, query_key
 
     def create_class_task(self, code, full_task_dict, key, query_key):
@@ -135,7 +137,7 @@ class MapCreator:
 
             key = key - 1
             """append the class to the map"""
-            full_task_dict["vertexes"].append(mapped_task_dict)
+            full_task_dict["vertices"].append(mapped_task_dict)
             """append connections to the map"""
             handle_arrows(mapped_arrows_dict, query_key, sub_class.get_key(), "ConsistsOf", "consists of")
             full_task_dict["edges"].append(mapped_arrows_dict)
@@ -174,7 +176,7 @@ class MapCreator:
 
             method.set_key(key)
             """adds the method to the map"""
-            full_task_dict["vertexes"].append(mapped_task_dict)
+            full_task_dict["vertices"].append(mapped_task_dict)
             handle_arrows(mapped_arrows_dict, code.get_key(), key, "ConsistsOf", "consists of")
             """connects the arrows from method to super class"""
             full_task_dict["edges"].append(mapped_arrows_dict)
@@ -190,7 +192,7 @@ class MapCreator:
                 mapped_task_dict = {}
                 handle_task(mapped_task_dict, attribute.name, key, type="Attribute")
                 attribute.set_key(key)
-                full_task_dict["vertexes"].append(mapped_task_dict)
+                full_task_dict["vertices"].append(mapped_task_dict)
                 handle_arrows(mapped_arrows_dict, sub_class.get_key(), key, "AchievedBy", "achieved by")
                 full_task_dict["edges"].append(mapped_arrows_dict)
                 key = key - 1
@@ -222,7 +224,7 @@ class MapCreator:
                 if linked_method.get_key() == 0:
                     handle_task(mapped_task_dict, method.method_name, key, type="Method",
                                 att_names=method.params)
-                    full_task_dict["vertexes"].append(mapped_task_dict)
+                    full_task_dict["vertices"].append(mapped_task_dict)
                     handle_arrows(mapped_arrows_dict, method.get_key(), key, "ConsistsOf",
                                   "consists of", index_call=index_call)
                     full_task_dict["edges"].append(mapped_arrows_dict, index_call=index_call)
