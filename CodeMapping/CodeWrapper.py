@@ -1,9 +1,9 @@
-from CodeMapping.ClassAttribute import ClassAttribute
+from CodeMapping.Components.ClassAttribute import ClassAttribute
 from CodeMapping.Parser.utils import primitive_types
-from CodeMapping.Task import Task
+from CodeMapping.Components.Component import Component
 
 
-class CodeWrapper(Task):
+class CodeWrapper(Component):
     def __init__(self, query, text):
         super().__init__()
         self.query = query
@@ -19,11 +19,6 @@ class CodeWrapper(Task):
         self.post_id = None
 
     def __eq__(self, other):
-        """
-        equality of two queries
-        :param other:
-        :return True is 2 queries are equal, otherwise False
-        """
         if self.query == other.query:
             return True
         return False
@@ -73,32 +68,13 @@ class CodeWrapper(Task):
         self.imports_codes.append(_import)
 
 
-# ------------------------------------------------------------------------------
-
-
-
-
-# ------------------------------------------------------------------------------
-
-
-
-# ------------------------------------------------------------------------------
-
 class MultiTypeClassAttribute(ClassAttribute):
 
     def __init__(self, class_task, attribute_name, att_types, object_type):
         super().__init__(class_task, attribute_name, object_type=object_type)
         self.types = att_types
 
-
-# ------------------------------------------------------------------------------
-
-
-
-
-# ------------------------------------------------------------------------------
-
-class EnumTask(Task):
+class EnumComponent(Component):
 
     def __init__(self, enum_name, task):
         super().__init__()

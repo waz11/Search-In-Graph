@@ -1,7 +1,7 @@
-from CodeMapping.Task import Task
+from CodeMapping.Components.Component import Component
 
 
-class ClassTask(Task):
+class ClassComponent(Component):
 
     def __init__(self, class_name):
         super().__init__()

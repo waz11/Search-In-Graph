@@ -1,7 +1,7 @@
-from CodeMapping.Task import Task
+from CodeMapping.Components.Component import Component
 
 
-class ClassAttribute(Task):
+class ClassAttribute(Component):
 
     def __init__(self, class_task, attribute_name, att_type=None, object_type=None):
         super().__init__()
