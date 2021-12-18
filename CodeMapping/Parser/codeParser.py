@@ -1,6 +1,8 @@
 from pathlib import Path
 import javalang
 from CodeMapping import CodeWrapper
+from CodeMapping.ClassTask import ClassTask
+from CodeMapping.MethodTask import MethodTask
 from CodeMapping.Parser.utils import primitive_types
 
 
@@ -113,7 +115,7 @@ class codeParser:
                 current_class = current_query.get_class(class_extract.name)  # checks if the class is already mapped
 
                 if current_class is None:
-                    current_class = CodeWrapper.ClassTask(class_extract.name)
+                    current_class = ClassTask(class_extract.name)
                     current_query.add_class(current_class)
                 self.extractor_class(class_extract, current_query, parser_token_list, current_class)
 
@@ -190,7 +192,7 @@ class codeParser:
             current_method = current_class.get_class_method(method.name)  # check if method already mapped
 
             if current_method is None:
-                current_method = CodeWrapper.MethodTask(method.name, current_class)
+                current_method = MethodTask(method.name, current_class)
                 current_class.add_class_methods(current_method)
                 if self.current_parsed == "Post":  # adds the method from the post
                     current_query.add_methods(current_method)
@@ -532,7 +534,7 @@ class codeParser:
                 else:
                     called_method = method_att_class.get_class_method(expression.member)
                     if called_method is None:
-                        called_method = CodeWrapper.MethodTask(expression.member, method_att_class)
+                        called_method = MethodTask(expression.member, method_att_class)
                     if called_method not in current_method.calling_methods:
                         current_method.add_method_calls(called_method)
                     return  # TODO: change to normal if
@@ -991,7 +993,7 @@ class codeParser:
             # attribute_code = extract_att_code(field.position, parser_token_list, current_query, field.modifiers)
             ds_class = current_query.get_class(data_structure)
             if data_structure is not None and ds_class is None:
-                ds_class = CodeWrapper.ClassTask(data_structure)
+                ds_class = ClassTask(data_structure)
             """handle one object referenced objects"""
             if len(type_name) == 1:
                 attribute_class = self.add_attributes_new(current_class, declare, current_query, type_name[0],
@@ -1053,7 +1055,7 @@ class codeParser:
             class_to_add = current_query.get_class(object_type)
             """checks if the class of the variable is already mapped"""
             if class_to_add is None:
-                attribute_class = CodeWrapper.ClassTask(object_type)
+                attribute_class = ClassTask(object_type)
             else:
                 attribute_class = class_to_add
             """adds the primitive types of the class"""
@@ -1070,7 +1072,7 @@ class codeParser:
 
         """checks if the implemented class is already mapped"""
         if implement_class_new is None:
-            implement_class_new = CodeWrapper.ClassTask(implement_class.name)
+            implement_class_new = ClassTask(implement_class.name)
             current_query.add_class(implement_class_new)
 
         if implement_class_new not in current_class.Implements:
@@ -1116,7 +1118,7 @@ class codeParser:
             """skips primitive parameters"""
             if parameter.type.name in primitive_types or parameter.type.name in self.system_methods \
                     or parameter.type.name == 'T':
-                current_class = CodeWrapper.ClassTask(parameter.type.name)
+                current_class = ClassTask(parameter.type.name)
                 attribute = CodeWrapper.ClassAttribute(None, parameter.name, current_class)
                 method.add_method_attributes(attribute)
                 continue
@@ -1127,7 +1129,7 @@ class codeParser:
                 attribute = CodeWrapper.ClassAttribute(None, parameter.name, current_class)
                 method.add_method_attributes(attribute)
             else:
-                new_class = CodeWrapper.ClassTask(parameter.type.name)
+                new_class = ClassTask(parameter.type.name)
                 attribute = CodeWrapper.ClassAttribute(None, parameter.name, new_class)
                 method.add_method_attributes(attribute)
 
@@ -1144,7 +1146,7 @@ class codeParser:
         new_constructor = current_class.get_constructor()
         if new_constructor is None:
             constructor_name = constructor.name
-            new_constructor = CodeWrapper.MethodTask(constructor_name, current_class)
+            new_constructor = MethodTask(constructor_name, current_class)
             if constructor.documentation is not None:
                 new_constructor.set_documentation(constructor.documentation)
         # new_constructor.set_code(extract_specific_code(constructor.position, parser_token_list, constructor,
