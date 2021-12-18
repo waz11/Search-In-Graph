@@ -1,3 +1,5 @@
+from itertools import takewhile
+
 import javalang
 
 primitive_types = ['Boolean', 'boolean', 'char', 'byte', 'short', 'int', 'long', 'float', 'double', 'String', 'string',
