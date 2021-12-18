@@ -1,7 +1,5 @@
 from pathlib import Path
-
 import javalang
-
 from CodeMapping import CodeWrapper
 from CodeMapping.Parser.utils import primitive_types
 

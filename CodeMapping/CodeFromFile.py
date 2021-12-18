@@ -3,7 +3,6 @@ import os
 from pathlib import Path
 import re
 
-# from CodeMapping import stackoverflow_java_queries
 from CodeMapping.CodeWrapper import CodeWrapper
 from CodeMapping.MapCreator import MapCreator
 from CodeMapping.Parser.codeParser import codeParser
