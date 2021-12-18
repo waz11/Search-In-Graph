@@ -5,7 +5,7 @@ from Components.ClassAttribute import ClassAttribute
 from Parser import CodeWrapper
 from Components.ClassComponent import ClassComponent
 from Components.MethodComponent import MethodComponent
-from Parser.utils import primitive_types
+from Parser.Utils import primitive_types
 
 
 class codeParser:
@@ -27,13 +27,13 @@ class codeParser:
         """
 
         """get the java classes name"""
-        fin = open(Path( 'utils/java_classes_names.txt'), "rt")
+        fin = open(Path( 'Utils/java_classes_names.txt'), "rt")
         for line in fin:
             line = line.replace('\n', '')
             self.system_methods.append(line)
         fin.close()
         """get the java util classes name"""
-        fin = open(Path('utils/java_util_names.txt'), "rt")
+        fin = open(Path('Utils/java_util_names.txt'), "rt")
         for line in fin:
             line = line.replace('\n', '')
             self.java_util_method.append(line)

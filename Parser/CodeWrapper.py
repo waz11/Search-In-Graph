@@ -1,4 +1,4 @@
-from Parser.utils import primitive_types
+from Parser.Utils import primitive_types
 from Components.Component import Component
 
 

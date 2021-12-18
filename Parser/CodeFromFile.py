@@ -5,7 +5,7 @@ import re
 
 from Parser.CodeWrapper import CodeWrapper
 from Parser.MapCreator import MapCreator
-from Parser.codeParser import codeParser
+from Parser.CodeParser import codeParser
 
 
 class CodeFromFile:
