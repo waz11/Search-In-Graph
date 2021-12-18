@@ -469,12 +469,6 @@ class codeParser:
             raise Exception("not implemented invoke")
 
     def handle_const_calls(self, expression, method, current_query, current_method):
-        """
-        handle_const_calls Function - handle explicit cons calls
-        :param expression:
-        :param method:
-        :param current_query:
-        """
         current_class = current_query.get_class(method.name)
         if current_class is None:
             new_class = CodeWrapper.ClassTask(method.name)
@@ -485,13 +479,6 @@ class codeParser:
             current_class.add_constructors(CodeWrapper.MethodTask(current_class.get_class_name, current_class))
 
     def handle_super_const_calls(self, expression, method, current_query, current_method):
-        """
-        handle_super_const_calls Function - handles the super const calls
-        :param expression:
-        :param method:
-        :param current_query:
-        :param current_method:
-        """
         if expression.qualifier is None:
             current_class = current_method.get_method_super_class()
             if current_class is None or current_class.get_class_name() == "unknown":
@@ -503,27 +490,15 @@ class codeParser:
             raise Exception("super constructor with qualifier")
 
     def handle_self_method_calls(self, expression, method, current_query, current_method, member=None):
-        """
-        handle_self_method_calls Function - handle "this" method invocations
-        :param member:
-        :param expression:
-        :param method:
-        :param current_query:
-        :param current_method:
-        """
         if member is not None:
             expression.qualifier = member
-        """handle second calls"""
         if current_method.find_method_call(expression.member) is not None:
             return
-        """handle calls with qualifier"""
         if expression.qualifier is not "":
             qualifier_list = expression.qualifier.split('.')
             call_qualifier = qualifier_list[0]
-
             if call_qualifier in self.system_methods or call_qualifier in primitive_types:  # check system methods calls
                 return
-
             method_att = current_method.get_attribute(call_qualifier)
             if method_att is None:
                 method_att = current_method.get_method_super_class().get_specific_attribute(call_qualifier)
@@ -540,22 +515,6 @@ class codeParser:
                     if called_method not in current_method.calling_methods:
                         current_method.add_method_calls(called_method)
                     return  # TODO: change to normal if
-
-                # for sub_class in current_query.sub_classes:
-                #     called_method = sub_class.get_class_method(expression.member)
-                #     if called_method is not None:
-                #         current_method.add_method_calls(called_method)
-                #         return  # TODO: change to normal if
-            # TODO: be careful!
-            # if call_qualifier not in current_query.imports:
-            #     if call_qualifier == "workbook":
-            #         print("a")
-            #     new_class_add = CodeWrapper.ClassTask(call_qualifier)
-            #     called_method = CodeWrapper.MethodTask(expression.member, new_class_add)
-            #     new_class_add.add_class_methods(called_method)
-            #     current_query.add_class(new_class_add)
-            #     if called_method not in current_method.calling_methods:
-            #         current_method.add_method_calls(called_method)
         else:
             if expression.member == current_method.method_name:
                 if current_method not in current_method.calling_methods:
@@ -577,17 +536,8 @@ class codeParser:
 
                         if called_method not in current_method.calling_methods:
                             current_method.add_method_calls(called_method)
-                    # current_method.get_method_super_class().add_class_methods(called_method)
 
     def handle_super_method_calls(self, expression, method, current_query, current_method):
-        """
-        handle_super_method_calls Function - handle super method calls
-        :param expression:
-        :param method:
-        :param current_query:
-        :param current_method:
-        """
-
         current_class = current_method.get_method_super_class()  # get the super class
         if expression.qualifier is None:
             if current_class.Extends is not None:
@@ -624,15 +574,6 @@ class codeParser:
                 current_method.add_method_calls(super_method)
 
     def handle_method_statements(self, statement, method, current_query, current_method, parser_token_list):
-        """
-        handle_method_statements Function - handles the method's body statements
-        :param statement:
-        :param method:
-        :param current_query:
-        :param current_method:
-        :param parser_token_list:
-        """
-
         if statement is None:  # base condition
             return
 
