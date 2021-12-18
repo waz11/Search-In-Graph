@@ -2,7 +2,7 @@ from CodeMapping.CodeFromFile import CodeFromFile
 
 
 def main():
-    file_path = './files/src'
+    file_path = './files/src2'
     name = 'ron'
     output_path = './files/out'
 
