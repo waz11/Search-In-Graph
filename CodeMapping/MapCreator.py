@@ -5,25 +5,11 @@ def handle_quality(quality_dict, key):
     quality_dict["comment"] = "null"
 
 def handle_task(mapped_dict, name, key, **kwargs):
-    mapped_dict["category"] = "Task"
+    mapped_dict["category"] = "Component"
     mapped_dict["text"] = name
     mapped_dict["key"] = key
-    if "task_type" in kwargs and kwargs["task_type"]:
-        mapped_dict["TaskType"] = kwargs["task_type"]
-    if "comments" in kwargs and kwargs["comments"]:
-        mapped_dict["comment"] = kwargs["comments"]
-    if "post" in kwargs and kwargs["post"]:
-        mapped_dict["post"] = kwargs["post"]
-    if "tags" in kwargs and kwargs["tags"]:
-        mapped_dict["tags"] = kwargs["tags"]
-    if "score" in kwargs and kwargs["score"]:
-        mapped_dict["score"] = kwargs["score"]
-    elif "score" in kwargs and not kwargs["score"]:
-        mapped_dict["score"] = 0
-    if "url" in kwargs and kwargs["url"]:
-        mapped_dict["url"] = kwargs["url"]
-    if "att_names" in kwargs and kwargs["att_names"]:
-        mapped_dict["Attributes"] = kwargs["att_names"]
+    if "type" in kwargs and kwargs["type"]:
+        mapped_dict["type"] = kwargs["type"]
 
 
 def handle_arrows(mapped_arrows_dict, first_key, second_key, category, text, index_call=None):
@@ -32,9 +18,7 @@ def handle_arrows(mapped_arrows_dict, first_key, second_key, category, text, ind
     mapped_arrows_dict["routing"] = {"yb": "Normal", "oE": 1}
     mapped_arrows_dict["from"] = first_key
     mapped_arrows_dict["to"] = second_key
-    mapped_arrows_dict["refs"] = []
-    mapped_arrows_dict["ctsx"] = []
-    mapped_arrows_dict["comment"] = "null"
+
     if index_call:
         mapped_arrows_dict["number_call"] = index_call
 
@@ -48,7 +32,7 @@ class MapCreator:
         self.current_mapped_methods = []
 
     def create_dictionary(self, task):
-        full_task_dict = {"class": "go.GraphLinksModel", "nodeDataArray": [], "linkDataArray": []}
+        full_task_dict = {"vertexes": [], "edges": []}
         key = -1
 
         """ add the query task"""
@@ -114,9 +98,9 @@ class MapCreator:
             if sub_class.get_key() == 0:
 
                 handle_task(mapped_task_dict, sub_class.class_name, key, comments=sub_class.documentation,
-                            task_type="Class", att_names=sub_class.get_class_atts_names())
+                            type="Class", att_names=sub_class.get_class_atts_names())
 
-                full_task_dict["nodeDataArray"].append(mapped_task_dict)
+                full_task_dict["vertexes"].append(mapped_task_dict)
                 sub_class.set_key(key)
                 current_key = key
                 key = key - 1
@@ -125,7 +109,7 @@ class MapCreator:
             """connect the arrows from a specific method to its called methods"""
             handle_arrows(mapped_arrows_dict, code.get_key(), current_key, "ConsistsOf",
                           "consists of")
-            full_task_dict["linkDataArray"].append(mapped_arrows_dict)
+            full_task_dict["edges"].append(mapped_arrows_dict)
             self.task_dict(sub_class, key, full_task_dict, flag=True)
 
         return key, full_task_dict
@@ -135,10 +119,10 @@ class MapCreator:
         code.set_key(key)
         query_key = key
         handle_task(mapped_task_dict, code.query, key, comments=None, tags=code.tags,
-                    score=code.score, url=code.url, task_type="query", post=code.text)
+                    score=code.score, url=code.url, type="query", post=code.text)
         key = key - 1
         """append the task to the map"""
-        full_task_dict["nodeDataArray"].append(mapped_task_dict)
+        full_task_dict["vertexes"].append(mapped_task_dict)
         return key, full_task_dict, query_key
 
     def create_class_task(self, code, full_task_dict, key, query_key):
@@ -147,14 +131,14 @@ class MapCreator:
             mapped_arrows_dict = {}
             sub_class.set_key(key)
             handle_task(mapped_task_dict, sub_class.class_name, key, comments=sub_class.documentation,
-                        task_type="Class", att_names=sub_class.get_class_atts_names())
+                        type="Class", att_names=sub_class.get_class_atts_names())
 
             key = key - 1
             """append the class to the map"""
-            full_task_dict["nodeDataArray"].append(mapped_task_dict)
+            full_task_dict["vertexes"].append(mapped_task_dict)
             """append connections to the map"""
             handle_arrows(mapped_arrows_dict, query_key, sub_class.get_key(), "ConsistsOf", "consists of")
-            full_task_dict["linkDataArray"].append(mapped_arrows_dict)
+            full_task_dict["edges"].append(mapped_arrows_dict)
             self.current_mapped_classes.append(sub_class)
         return key, full_task_dict
 
@@ -164,7 +148,7 @@ class MapCreator:
             """connect the tasks of the implemented class and the main class"""
             handle_arrows(mapped_arrows_dict, code.get_key(), implement_class.get_key(), "AchievedBy",
                           "achieved by")
-            full_task_dict["linkDataArray"].append(mapped_arrows_dict)
+            full_task_dict["edges"].append(mapped_arrows_dict)
             key = key - 1
             self.current_mapped_classes.append(implement_class)
 
@@ -175,7 +159,7 @@ class MapCreator:
             mapped_arrows_dict = {}
             handle_arrows(mapped_arrows_dict, code.get_key(), code.Extends.get_key(), "AchievedBy",
                           "achieved by")
-            full_task_dict["linkDataArray"].append(mapped_arrows_dict)
+            full_task_dict["edges"].append(mapped_arrows_dict)
             key = key - 1
             self.current_mapped_classes.append(code.Extends)
 
@@ -186,14 +170,14 @@ class MapCreator:
             mapped_arrows_dict = {}
             mapped_task_dict = {}
             handle_task(mapped_task_dict, method.method_name, key, comments=method.documentation,
-                        task_type="Method", att_names=method.params)
+                        type="Method", att_names=method.params)
 
             method.set_key(key)
             """adds the method to the map"""
-            full_task_dict["nodeDataArray"].append(mapped_task_dict)
+            full_task_dict["vertexes"].append(mapped_task_dict)
             handle_arrows(mapped_arrows_dict, code.get_key(), key, "ConsistsOf", "consists of")
             """connects the arrows from method to super class"""
-            full_task_dict["linkDataArray"].append(mapped_arrows_dict)
+            full_task_dict["edges"].append(mapped_arrows_dict)
             key = key - 1
             self.current_mapped_methods.append(method)
 
@@ -204,11 +188,11 @@ class MapCreator:
             for attribute in sub_class.Attributes:
                 mapped_arrows_dict = {}
                 mapped_task_dict = {}
-                handle_task(mapped_task_dict, attribute.name, key, task_type="Attribute")
+                handle_task(mapped_task_dict, attribute.name, key, type="Attribute")
                 attribute.set_key(key)
-                full_task_dict["nodeDataArray"].append(mapped_task_dict)
+                full_task_dict["vertexes"].append(mapped_task_dict)
                 handle_arrows(mapped_arrows_dict, sub_class.get_key(), key, "AchievedBy", "achieved by")
-                full_task_dict["linkDataArray"].append(mapped_arrows_dict)
+                full_task_dict["edges"].append(mapped_arrows_dict)
                 key = key - 1
         return key, full_task_dict
 
@@ -236,12 +220,12 @@ class MapCreator:
                     continue
                 """checks if the called method is already mapped"""
                 if linked_method.get_key() == 0:
-                    handle_task(mapped_task_dict, method.method_name, key, task_type="Method",
+                    handle_task(mapped_task_dict, method.method_name, key, type="Method",
                                 att_names=method.params)
-                    full_task_dict["nodeDataArray"].append(mapped_task_dict)
+                    full_task_dict["vertexes"].append(mapped_task_dict)
                     handle_arrows(mapped_arrows_dict, method.get_key(), key, "ConsistsOf",
                                   "consists of", index_call=index_call)
-                    full_task_dict["linkDataArray"].append(mapped_arrows_dict, index_call=index_call)
+                    full_task_dict["edges"].append(mapped_arrows_dict, index_call=index_call)
                     index_call += 1
                     current_key = key
                     key = key - 1
@@ -250,7 +234,7 @@ class MapCreator:
                 """connect the arrows from a specific method to its called methods"""
                 handle_arrows(mapped_arrows_dict, method.get_key(), current_key, "ConsistsOf",
                               "consists of", index_call=index_call)
-                full_task_dict["linkDataArray"].append(mapped_arrows_dict)
+                full_task_dict["edges"].append(mapped_arrows_dict)
                 index_call += 1
 
         return key, full_task_dict
