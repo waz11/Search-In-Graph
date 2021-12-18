@@ -5,6 +5,7 @@ import javalang
 primitive_types = ['Boolean', 'boolean', 'char', 'byte', 'short', 'int', 'long', 'float', 'double', 'String', 'string',
                    'System', 'System.out', 'Scanner', 'Log']
 
+
 def extract_specific_code(position, parser_token_list, obj, current_query, modifiers=None):
     current_query.changed_code()  # notify that code has been changed
     start_index = 0
@@ -123,4 +124,3 @@ def extract_att_code(position, parser_token_list, current_query, modifiers=None)
     code = javalang.tokenizer.reformat_tokens(parser_token_list[start_index:end_index])  # get the code
 
     return code
-
