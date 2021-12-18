@@ -9,7 +9,7 @@ from CodeMapping.Parser.codeParser import codeParser
 
 
 class CodeFromFile:
-    def __init__(self, file_path, name='test', output_path=""):
+    def __init__(self, file_path, name, output_path=""):
         self.file_path = file_path
         self.directory = os.fsencode(self.file_path)
         self.name = name
