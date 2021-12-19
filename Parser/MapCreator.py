@@ -117,7 +117,7 @@ class MapCreator:
         query_key = key
 
         handle_task(mapped_task_dict, code.query, key, comments=None, tags=code.tags,
-                    score=code.score, url=code.url, type="folder", post=code.text)
+                    score=code.score, url=code.url, type="project", post=code.text)
         key += 1
         """append the task to the map"""
         full_task_dict["vertices"].append(mapped_task_dict)

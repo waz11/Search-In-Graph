@@ -11,7 +11,7 @@ def code_to_graph(project_path, output_path):
 
 
 def main():
-    # code_to_graph('Files/src', 'Files/out.json')
+    code_to_graph('Files/src', 'Files/out.json')
     code_to_graph('Files/src2','Files/out2.json')
 
 if __name__ == '__main__':
