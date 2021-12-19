@@ -135,7 +135,7 @@ class MapCreator:
             """append the class to the map"""
             full_task_dict["vertices"].append(mapped_task_dict)
             """append connections to the map"""
-            handle_arrows(mapped_arrows_dict, query_key, sub_class.get_key(), "method")
+            handle_arrows(mapped_arrows_dict, query_key, sub_class.get_key(), "class")
             full_task_dict["edges"].append(mapped_arrows_dict)
             self.current_mapped_classes.append(sub_class)
         return key, full_task_dict
