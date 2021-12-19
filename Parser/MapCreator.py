@@ -31,7 +31,7 @@ class MapCreator:
 
     def create_dictionary(self, task):
         full_task_dict = {"vertices": [], "edges": []}
-        key = 1
+        key = 0
 
         """ add the query task"""
         key, full_task_dict, query_key = self.create_query_task(task, full_task_dict, key)
@@ -101,7 +101,7 @@ class MapCreator:
                 full_task_dict["vertices"].append(mapped_task_dict)
                 sub_class.set_key(key)
                 current_key = key
-                key = key + 1
+                key += 1
             else:
                 current_key = sub_class.get_key()
             """connect the arrows from a specific method to its called methods"""
@@ -118,7 +118,7 @@ class MapCreator:
 
         handle_task(mapped_task_dict, code.query, key, comments=None, tags=code.tags,
                     score=code.score, url=code.url, type="project", post=code.text)
-        key = key + 1
+        key += 1
         """append the task to the map"""
         full_task_dict["vertices"].append(mapped_task_dict)
         return key, full_task_dict, query_key
@@ -131,7 +131,7 @@ class MapCreator:
             handle_task(mapped_task_dict, sub_class.class_name, key, comments=sub_class.documentation,
                         type="class", att_names=sub_class.get_class_atts_names())
 
-            key = key + 1
+            key += 1
             """append the class to the map"""
             full_task_dict["vertices"].append(mapped_task_dict)
             """append connections to the map"""
@@ -146,7 +146,7 @@ class MapCreator:
             """connect the tasks of the implemented class and the main class"""
             handle_arrows(mapped_arrows_dict, code.get_key(), implement_class.get_key(),"implements")
             full_task_dict["edges"].append(mapped_arrows_dict)
-            key = key + 1
+            key += 1
             self.current_mapped_classes.append(implement_class)
 
         return key, full_task_dict
@@ -156,7 +156,7 @@ class MapCreator:
             mapped_arrows_dict = {}
             handle_arrows(mapped_arrows_dict, code.get_key(), code.Extends.get_key(), "extends")
             full_task_dict["edges"].append(mapped_arrows_dict)
-            key = key + 1
+            key += 1
             self.current_mapped_classes.append(code.Extends)
 
         return key, full_task_dict
@@ -174,7 +174,7 @@ class MapCreator:
             handle_arrows(mapped_arrows_dict, code.get_key(), key, "method")
             """connects the arrows from method to super class"""
             full_task_dict["edges"].append(mapped_arrows_dict)
-            key = key + 1
+            key += 1
             self.current_mapped_methods.append(method)
 
         return key, full_task_dict
@@ -189,7 +189,7 @@ class MapCreator:
                 full_task_dict["vertices"].append(mapped_task_dict)
                 handle_arrows(mapped_arrows_dict, sub_class.get_key(), key, "AchievedBy", "achieved by")
                 full_task_dict["edges"].append(mapped_arrows_dict)
-                key = key + 1
+                key += 1
         return key, full_task_dict
 
     def get_method_task(self, method_name):
@@ -223,7 +223,7 @@ class MapCreator:
                     full_task_dict["edges"].append(mapped_arrows_dict, index_call=index_call)
                     index_call += 1
                     current_key = key
-                    key = key + 1
+                    key += 1
                 else:
                     current_key = linked_method.get_key()
                 """connect the arrows from a specific method to its called methods"""
