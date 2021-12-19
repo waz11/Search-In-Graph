@@ -1034,7 +1034,7 @@ class codeParser:
 
         """checks if the extended class is already mapped"""
         if extended_class_new is None:
-            extended_class_new = CodeWrapper.ClassTask(extended_class.name)
+            extended_class_new = ClassComponent(extended_class.name)
             current_query.add_class(extended_class_new)
 
         current_class.add_extended_class(extended_class_new)
@@ -1045,7 +1045,7 @@ class codeParser:
         :param current_method:
         """
         qualifier = current_method.get_method_super_class().Extends
-        method = CodeWrapper.MethodTask("Super Call", qualifier)
+        method = MethodTask("Super Call", qualifier)
         qualifier.add_class_methods(method)
         if method not in current_method.calling_methods:
             current_method.add_method_calls(method)
