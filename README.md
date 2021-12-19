@@ -5,9 +5,9 @@ the graph is a json file, contains two arrays: vertices and edges.
 
 ## vertex
 
-	name - name of class / method
+	name - project name / class name / method name
 	key - identify key
-	type - class / method
+	type - project / class / method
 	attributes - fields in class / arguments in method
 
 
