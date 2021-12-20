@@ -13,6 +13,6 @@ the graph is a json file, contains two arrays: vertices and edges.
 
 ## edge
 
-	type - method / implements / extends
+	type - class / method / implements / extends
 	from - source vertex
 	to - destination vertex

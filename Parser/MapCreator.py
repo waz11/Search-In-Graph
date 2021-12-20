@@ -16,7 +16,6 @@ def handle_arrows(mapped_arrows_dict, first_key, second_key, type, text=None, in
         mapped_arrows_dict["name"] = text
     mapped_arrows_dict["from"] = first_key
     mapped_arrows_dict["to"] = second_key
-
     if index_call:
         mapped_arrows_dict["number_call"] = index_call
 
@@ -37,7 +36,7 @@ class MapCreator:
         key, full_task_dict, query_key = self.create_query_task(task, full_task_dict, key)
 
         """ extract the class  """
-        key, full_task_dict = self.create_class_task(task, full_task_dict, key, query_key)
+        key, full_task_dict = self.create_class_component(task, full_task_dict, key, query_key)
 
         return self.task_dict(task, key, full_task_dict, flag=False)
 
@@ -46,48 +45,36 @@ class MapCreator:
             flag = kwargs.get("flag")
         else:
             flag = False
-        """ extract the implemented class  """
         if not flag:
             for sub_class in task.sub_classes:
-                key, full_task_dict = self.add_implemented_task(sub_class, full_task_dict, key)
+                key, full_task_dict = self.add_implemented_class(sub_class, full_task_dict, key)
         else:
-            key, full_task_dict = self.add_implemented_task(task, full_task_dict, key)
-
-        """extract the extended class """
+            key, full_task_dict = self.add_implemented_class(task, full_task_dict, key)
         if not flag:
             for sub_class in task.sub_classes:
-                key, full_task_dict = self.add_extended_task(sub_class, full_task_dict, key)
+                key, full_task_dict = self.add_extended_class(sub_class, full_task_dict, key)
         else:
-            key, full_task_dict = self.add_extended_task(task, full_task_dict, key)
-
-        """ extract the class's methods  """
+            key, full_task_dict = self.add_extended_class(task, full_task_dict, key)
         if not flag:
             for sub_class in task.sub_classes:
                 if sub_class.class_name == "Workbook":
                     print("a")
-                key, full_task_dict = self.create_method_tasks(sub_class, full_task_dict, key)
+                key, full_task_dict = self.create_method(sub_class, full_task_dict, key)
         else:
-            key, full_task_dict = self.create_method_tasks(task, full_task_dict, key)
-
-        """extract the class's attributes"""
-        # key, full_task_dict = self.create_attribute_tasks(code, full_task_dict, key)
-
-        """extract the calling methods"""
+            key, full_task_dict = self.create_method(task, full_task_dict, key)
         if not flag:
             for sub_class in task.sub_classes:
                 key, full_task_dict = self.add_calling_methods(sub_class, full_task_dict, key)
         else:
             key, full_task_dict = self.add_calling_methods(task, full_task_dict, key)
-
-        """extract the sub classes"""
         if not flag:
             for sub_class in task.sub_classes:
-                key, full_task_dict = self.add_sub_clases_task(sub_class, full_task_dict, key)
+                key, full_task_dict = self.add_sub_clases(sub_class, full_task_dict, key)
         else:
-            key, full_task_dict = self.add_sub_clases_task(task, full_task_dict, key)
+            key, full_task_dict = self.add_sub_clases(task, full_task_dict, key)
         return full_task_dict
 
-    def add_sub_clases_task(self, code, full_task_dict, key):
+    def add_sub_clases(self, code, full_task_dict, key):
         for sub_class in code.sub_classes:
             mapped_arrows_dict = {}
             mapped_task_dict = {}
@@ -119,67 +106,56 @@ class MapCreator:
         handle_task(mapped_task_dict, code.query, key, comments=None, tags=code.tags,
                     score=code.score, url=code.url, type="project", post=code.text)
         key += 1
-        """append the task to the map"""
         full_task_dict["vertices"].append(mapped_task_dict)
         return key, full_task_dict, query_key
 
-    def create_class_task(self, code, full_task_dict, key, query_key):
+    def create_class_component(self, code, full_task_dict, key, query_key):
         for sub_class in code.sub_classes:
             mapped_task_dict = {}
             mapped_arrows_dict = {}
             sub_class.set_key(key)
             handle_task(mapped_task_dict, sub_class.class_name, key, comments=sub_class.documentation,
                         type="class", att_names=sub_class.get_class_atts_names())
-
             key += 1
-            """append the class to the map"""
             full_task_dict["vertices"].append(mapped_task_dict)
-            """append connections to the map"""
             handle_arrows(mapped_arrows_dict, query_key, sub_class.get_key(), "class")
             full_task_dict["edges"].append(mapped_arrows_dict)
             self.current_mapped_classes.append(sub_class)
         return key, full_task_dict
 
-    def add_implemented_task(self, code, full_task_dict, key):
+    def add_implemented_class(self, code, full_task_dict, key):
         for implement_class in code.Implements:
             mapped_arrows_dict = {}
-            """connect the tasks of the implemented class and the main class"""
             handle_arrows(mapped_arrows_dict, code.get_key(), implement_class.get_key(),"implements")
             full_task_dict["edges"].append(mapped_arrows_dict)
             key += 1
             self.current_mapped_classes.append(implement_class)
-
         return key, full_task_dict
 
-    def add_extended_task(self, code, full_task_dict, key):
+    def add_extended_class(self, code, full_task_dict, key):
         if code.Extends is not None:
             mapped_arrows_dict = {}
             handle_arrows(mapped_arrows_dict, code.get_key(), code.Extends.get_key(), "extends")
             full_task_dict["edges"].append(mapped_arrows_dict)
             key += 1
             self.current_mapped_classes.append(code.Extends)
-
         return key, full_task_dict
 
-    def create_method_tasks(self, code, full_task_dict, key):
+    def create_method(self, code, full_task_dict, key):
         for method in code.Methods:
             mapped_arrows_dict = {}
             mapped_task_dict = {}
             handle_task(mapped_task_dict, method.method_name, key, comments=method.documentation,
                         type="method", att_names=method.params)
-
             method.set_key(key)
-            """adds the method to the map"""
             full_task_dict["vertices"].append(mapped_task_dict)
             handle_arrows(mapped_arrows_dict, code.get_key(), key, "method")
-            """connects the arrows from method to super class"""
             full_task_dict["edges"].append(mapped_arrows_dict)
             key += 1
             self.current_mapped_methods.append(method)
-
         return key, full_task_dict
 
-    def create_attribute_tasks(self, code, full_task_dict, key):
+    def create_attribute(self, code, full_task_dict, key):
         for sub_class in code.sub_classes:
             for attribute in sub_class.Attributes:
                 mapped_arrows_dict = {}
@@ -192,13 +168,13 @@ class MapCreator:
                 key += 1
         return key, full_task_dict
 
-    def get_method_task(self, method_name):
+    def get_method(self, method_name):
         for method in self.current_mapped_methods:
             if method.get_method_name() == method_name:
                 return method
         return None
 
-    def get_sub_class_task(self, class_name):
+    def get_sub_class(self, class_name):
         for sub_class in self.current_mapped_classes:
             if sub_class.get_class_name() == class_name:
                 return sub_class
@@ -211,7 +187,7 @@ class MapCreator:
                 mapped_arrows_dict = {}
                 mapped_task_dict = {}
                 "avoid system calls"
-                linked_method = self.get_method_task(calling_method.method_name)
+                linked_method = self.get_method(calling_method.method_name)
                 if linked_method is None:
                     continue
                 """checks if the called method is already mapped"""
