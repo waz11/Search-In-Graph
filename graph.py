@@ -33,6 +33,7 @@ class Graph:
         self.edge_info = {}
         self.vertices = {}
         self.edges = {}
+        self.edges2 = {}
         self.__build_graph(path)
 
     def add_vertex(self, v):
@@ -56,6 +57,7 @@ class Graph:
         source = e["from"]
         to = e["to"]
         edge = Edge(type, source, to)
+        self.edges2[(source,to)] = edge
         if source not in self.edges.keys():
             self.edges[source] = [edge]
         else:
