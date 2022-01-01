@@ -8,6 +8,9 @@ class Vertex:
         self.type = type
         self.attributes = attributes
 
+    def __str__(self):
+        return "Vertex[key:{}, name:{}, type:{}, attributes:{}]".format(self.key,self.name,self.type,self.attributes)
+
 
 class Edge:
     def __init__(self, type, source, to):
@@ -32,16 +35,17 @@ class Graph:
         name = v['name']
         type = v['type']
         attributes = []
-        if 'attributes' in v:
+        if "attributes" in v:
             attributes = v['attributes']
             vertex = Vertex(key, name, type, attributes)
         else:
-            vertex = Vertex(name, key, type)
-        self.vertices[key] = v
+            vertex = Vertex(key, name, type)
+        self.vertices[key] = vertex
 
         self.graph[key] = []
         self.vertex_info[key] = v["name"]
         self.vertex_type[key] = v["type"]
+        return vertex
 
     def add_edge(self, e):
         type = e["type"]
@@ -55,12 +59,14 @@ class Graph:
 
         self.graph[source].append(to)
         self.edge_info[(source, to)] = type
+        return edge
 
     def __build_graph(self, path):
         f = open(path)
         data = json.load(f)
         for v in data['vertices']:
-            self.add_vertex(v)
+            vertex=self.add_vertex(v)
+            print(vertex)
 
         for e in data['edges']:
             self.add_edge(e)

@@ -1,5 +1,5 @@
 import os
-from Perprocess.Parser.CodeFromFile import CodeFromFile
+from Preprocess.Parser.CodeFromFile import CodeFromFile
 
 
 def code_to_graph(project_path, output_path):

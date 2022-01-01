@@ -1,4 +1,4 @@
-from Perprocess.Components.Component import Component
+from Preprocess.Components.Component import Component
 
 
 class EnumComponent(Component):

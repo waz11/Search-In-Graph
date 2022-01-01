@@ -1,11 +1,11 @@
 from pathlib import Path
 import javalang
 
-from Perprocess.Components.ClassAttribute import ClassAttribute
-from Perprocess.Parser import CodeWrapper
-from Perprocess.Components.ClassComponent import ClassComponent
-from Perprocess.Components.MethodComponent import MethodComponent
-from Perprocess.Parser.Utils import primitive_types
+from Preprocess.Components.ClassAttribute import ClassAttribute
+from Preprocess.Parser import CodeWrapper
+from Preprocess.Components.ClassComponent import ClassComponent
+from Preprocess.Components.MethodComponent import MethodComponent
+from Preprocess.Parser.Utils import primitive_types
 
 
 class codeParser:
