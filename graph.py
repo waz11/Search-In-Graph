@@ -1,5 +1,6 @@
 import json
 
+
 class Vertex:
     def __init__(self, key, name, type, attributes=[]):
         self.key = key
@@ -7,11 +8,13 @@ class Vertex:
         self.type = type
         self.attributes = attributes
 
+
 class Edge:
     def __init__(self, type, source, to):
         self.type = type
         self.source = source
         self.to = to
+
 
 class Graph:
     def __init__(self, path):
@@ -24,38 +27,43 @@ class Graph:
 
         self.__build_graph(path)
 
+    def add_vertex(self, v):
+        key = v['key']
+        name = v['name']
+        type = v['type']
+        attributes = []
+        if 'attributes' in v:
+            attributes = v['attributes']
+            vertex = Vertex(key, name, type, attributes)
+        else:
+            vertex = Vertex(name, key, type)
+        self.vertices[key] = v
+
+        self.graph[key] = []
+        self.vertex_info[key] = v["name"]
+        self.vertex_type[key] = v["type"]
+
+    def add_edge(self, e):
+        type = e["type"]
+        source = e["from"]
+        to = e["to"]
+        edge = Edge(type, source, to)
+        if source not in self.edges.keys():
+            self.edges[source] = []
+        else:
+            self.edges[source].append(edge)
+
+        self.graph[source].append(to)
+        self.edge_info[(source, to)] = type
 
     def __build_graph(self, path):
         f = open(path)
         data = json.load(f)
         for v in data['vertices']:
-            key = v['key']
-            name = v['name']
-            type = v['type']
-            attributes = []
-            if 'attributes' in v:
-                attributes = v['attributes']
-                vertex = Vertex(key, name, type, attributes)
-            else:
-                vertex = Vertex(name, key, type)
-            self.vertices[key] = v
-
-            self.graph[key] = []
-            self.vertex_info[key] = v["name"]
-            self.vertex_type[key] = v["type"]
+            self.add_vertex(v)
 
         for e in data['edges']:
-            type = e["type"]
-            source = e["from"]
-            to = e["to"]
-            edge = Edge(type, source, to)
-            if source not in self.edges.keys():
-                self.edges[source] = []
-            else:
-                self.edges[source].append(edge)
-
-            self.graph[source].append(to)
-            self.edge_info[(source, to)] = type
+            self.add_edge(e)
         f.close()
 
         print(self.graph)
@@ -98,4 +106,4 @@ class Graph:
                 i += 1
                 if not visited[key]:
                     queue.append(key)
-                print("ID:"+str(key)+" Text: "+self.vertex_info[key])
+                print("ID:" + str(key) + " Text: " + self.vertex_info[key])
