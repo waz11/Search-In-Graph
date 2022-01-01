@@ -18,6 +18,9 @@ class Edge:
         self.source = source
         self.to = to
 
+    def __str__(self):
+        return "Edge[type:{}, source:{}, to:{}]".format(self.type,self.source,self.to)
+
 
 class Graph:
     def __init__(self, path):
