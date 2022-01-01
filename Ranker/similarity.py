@@ -1,5 +1,5 @@
 from nltk.corpus import wordnet
-from matrix import Matrix
+from Ranker.matrix import Matrix
 
 
 def similarity_names(name1, name2):

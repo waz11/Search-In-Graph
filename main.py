@@ -1,6 +1,7 @@
 import os
 from Preprocess.Parser.CodeFromFile import CodeFromFile
 from graph import Graph
+from searcher import Searcher
 
 
 def code_to_graph(project_path, output_path):
@@ -11,8 +12,10 @@ def code_to_graph(project_path, output_path):
 
 
 def main():
-    g = Graph('Preprocess/Files/out.json')
-    g.draw()
+    graph = Graph('Preprocess/Files/out.json')
+    # graph.draw()
+    query = []
+    searcher = Searcher(graph, query)
 
 
 if __name__ == '__main__':
