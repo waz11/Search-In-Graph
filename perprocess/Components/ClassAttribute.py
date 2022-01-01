@@ -1,4 +1,4 @@
-from Components.Component import Component
+from perprocess.Components.Component import Component
 
 
 class ClassAttribute(Component):

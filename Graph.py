@@ -22,10 +22,10 @@ class Graph:
             self.edge_info[(edge["from"], edge["to"])] = edge["type"]
         f.close()
 
-        print(self.graph)
-        print(self.vertex_info)
-        print(self.vertex_type)
-        print(self.edge_info)
+        # print(self.graph)
+        # print(self.vertex_info)
+        # print(self.vertex_type)
+        # print(self.edge_info)
 
     def num_of_vertices(self):
         return len(self.vertex_info)
@@ -33,14 +33,14 @@ class Graph:
     def neighbors(self, key):
         return self.graph[key]
 
-    def arc_type(self, from_node, to_node):
+    def edge_type(self, from_node, to_node):
         return self.edge_info[(from_node, to_node)]
 
     def vertex_text(self, key):
         return self.vertex_info[key]
 
     def get_first_node(self):
-        return self.vertex_info[-1]
+        return self.vertex_info[0]
 
     def get_type(self, id):
         return self.vertex_type[id]
@@ -48,7 +48,7 @@ class Graph:
     def bfs(self):
         print(str(self.vertex_info))
         print(str(self.graph))
-        queue = [-1]
+        queue = [0]
         visited = {}
         for key in self.graph:
             visited[key] = False
@@ -59,10 +59,7 @@ class Graph:
             print("My neighbor:")
             i = 0
             for key in self.graph[vertex]:
-                count = count + len(key.split())
                 i += 1
-            #     if not visited[key]:
-            #         queue.append(key)
-            #     print("ID:"+str(key)+" Text: "+self.vertex_info[key])
-            # print("--------------------------------------------------")
-        print("AVG " + count / i)
+                if not visited[key]:
+                    queue.append(key)
+                print("ID:"+str(key)+" Text: "+self.vertex_info[key])

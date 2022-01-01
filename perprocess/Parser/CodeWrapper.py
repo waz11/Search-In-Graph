@@ -1,5 +1,5 @@
-from Parser.Utils import primitive_types
-from Components.Component import Component
+from perprocess.Parser.Utils import primitive_types
+from perprocess.Components.Component import Component
 
 
 class CodeWrapper(Component):

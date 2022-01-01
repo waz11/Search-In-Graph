@@ -1,4 +1,4 @@
-from Components.ClassAttribute import ClassAttribute
+from perprocess.Components.ClassAttribute import ClassAttribute
 
 
 class MultiTypeClassAttribute(ClassAttribute):
