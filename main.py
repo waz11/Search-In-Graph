@@ -12,6 +12,8 @@ def code_to_graph(project_path, output_path):
 
 def main():
     g = Graph('Preprocess/Files/out.json')
+    g.draw()
+
 
 
 if __name__ == '__main__':

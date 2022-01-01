@@ -1,5 +1,8 @@
 import json
-
+import networkx as nx
+import numpy as np
+import matplotlib.pyplot as plt
+import pylab
 
 class Vertex:
     def __init__(self, key, name, type, attributes=[]):
@@ -54,7 +57,7 @@ class Graph:
         to = e["to"]
         edge = Edge(type, source, to)
         if source not in self.edges.keys():
-            self.edges[source] = []
+            self.edges[source] = [edge]
         else:
             self.edges[source].append(edge)
         self.graph[source].append(to)
@@ -66,17 +69,33 @@ class Graph:
         data = json.load(f)
         for v in data['vertices']:
             vertex = self.add_vertex(v)
-            print(vertex)
-
         for e in data['edges']:
             edge = self.add_edge(e)
-            print(edge)
         f.close()
 
-        print(self.graph)
-        print(self.vertex_info)
-        print(self.vertex_type)
-        print(self.edge_info)
+        # print(self.graph)
+        # print(self.vertex_info)
+        # print(self.vertex_type)
+        # print(self.edge_info)
+
+
+    def draw(self):
+        G = nx.DiGraph()
+        ed = []
+        for e in self.edges.values():
+            for element in e:
+                v1 = self.vertices[element.source].name
+                v2 = self.vertices[element.to].name
+                ed.append((v1,v2))
+        G.add_edges_from(ed)
+        pos = nx.spring_layout(G)
+        nx.draw_networkx_nodes(G, pos, cmap=plt.get_cmap('jet'),node_size=600)
+        nx.draw_networkx_labels(G, pos, font_size=8, font_color='k')
+        nx.draw_networkx_edges(G, pos,  edge_color='r', arrows=True)
+        nx.draw_networkx_edges(G, pos,  arrows=False)
+
+        plt.show()
+
 
     def num_of_vertices(self):
         return len(self.vertex_info)

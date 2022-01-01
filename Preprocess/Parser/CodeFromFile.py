@@ -7,7 +7,6 @@ from Preprocess.Parser.CodeWrapper import CodeWrapper
 from Preprocess.Parser.MapCreator import MapCreator
 from Preprocess.Parser.CodeParser import codeParser
 
-
 class CodeFromFile:
     def __init__(self, file_path, name, output_path=""):
         self.file_path = file_path
