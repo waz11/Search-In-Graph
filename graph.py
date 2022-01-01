@@ -1,8 +1,6 @@
 import json
 import networkx as nx
-import numpy as np
 import matplotlib.pyplot as plt
-import pylab
 from Ranker.similarity import sim_edges, sim_vertics
 
 class Vertex:
