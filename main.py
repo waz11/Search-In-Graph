@@ -1,6 +1,6 @@
 import os
-from perprocess.Parser.CodeFromFile import CodeFromFile
-from Graph import Graph
+from Perprocess.Parser.CodeFromFile import CodeFromFile
+from graph import Graph
 
 
 def code_to_graph(project_path, output_path):
@@ -11,12 +11,7 @@ def code_to_graph(project_path, output_path):
 
 
 def main():
-    # code_to_graph('Files/src', 'Files/out.json')
-    # code_to_graph('Files/src2','Files/out2.json')
-    # code_to_graph('Files/src3', 'Files/out3.json')
-
-    g = Graph('perprocess/Files/out.json')
-    print(g.bfs())
+    g = Graph('Perprocess/Files/out.json')
 
 
 if __name__ == '__main__':

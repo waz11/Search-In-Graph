@@ -2,7 +2,6 @@ import json
 
 
 class Graph:
-
     def __init__(self, path):
         self.graph = {}
         self.vertex_info = {}
