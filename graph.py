@@ -3,6 +3,7 @@ import networkx as nx
 import numpy as np
 import matplotlib.pyplot as plt
 import pylab
+from Ranker.similarity import sim_edges, sim_vertics
 
 class Vertex:
     def __init__(self, key, name, type, attributes=[]):
@@ -10,6 +11,9 @@ class Vertex:
         self.name = name
         self.type = type
         self.attributes = attributes
+
+    def sim(self, other_vertex):
+        return sim_vertics(self, other_vertex)
 
     def __str__(self):
         return "[key:{}, name:{}, type:{}, attributes:{}]".format(self.key,self.name,self.type,self.attributes)
@@ -20,6 +24,9 @@ class Edge:
         self.type = type
         self.source = source
         self.to = to
+
+    def sim(self, other_edge):
+        return sim_edges(self, other_edge)
 
     def __str__(self):
         return "({},{}):{}".format(self.source, self.to, self.type)
