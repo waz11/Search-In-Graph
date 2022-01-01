@@ -1,5 +1,17 @@
 import json
 
+class Vertex:
+    def __init__(self, key, name, type, attributes=[]):
+        self.key = key
+        self.name = name
+        self.type = type
+        self.attributes = attributes
+
+class Edge:
+    def __init__(self, type, source, to):
+        self.type = type
+        self.source = source
+        self.to = to
 
 class Graph:
     def __init__(self, path):
@@ -7,24 +19,49 @@ class Graph:
         self.vertex_info = {}
         self.vertex_type = {}
         self.edge_info = {}
+        self.vertices = {}
+        self.edges = {}
+
         self.__build_graph(path)
+
 
     def __build_graph(self, path):
         f = open(path)
         data = json.load(f)
-        for node in data['vertices']:
-            self.graph[node["key"]] = []
-            self.vertex_info[node["key"]] = node["name"]
-            self.vertex_type[node["key"]] = node["type"]
-        for edge in data['edges']:
-            self.graph[edge["from"]].append(edge["to"])
-            self.edge_info[(edge["from"], edge["to"])] = edge["type"]
+        for v in data['vertices']:
+            key = v['key']
+            name = v['name']
+            type = v['type']
+            attributes = []
+            if 'attributes' in v:
+                attributes = v['attributes']
+                vertex = Vertex(key, name, type, attributes)
+            else:
+                vertex = Vertex(name, key, type)
+            self.vertices[key] = v
+
+            self.graph[key] = []
+            self.vertex_info[key] = v["name"]
+            self.vertex_type[key] = v["type"]
+
+        for e in data['edges']:
+            type = e["type"]
+            source = e["from"]
+            to = e["to"]
+            edge = Edge(type, source, to)
+            if source not in self.edges.keys():
+                self.edges[source] = []
+            else:
+                self.edges[source].append(edge)
+
+            self.graph[source].append(to)
+            self.edge_info[(source, to)] = type
         f.close()
 
-        # print(self.graph)
-        # print(self.vertex_info)
-        # print(self.vertex_type)
-        # print(self.edge_info)
+        print(self.graph)
+        print(self.vertex_info)
+        print(self.vertex_type)
+        print(self.edge_info)
 
     def num_of_vertices(self):
         return len(self.vertex_info)
