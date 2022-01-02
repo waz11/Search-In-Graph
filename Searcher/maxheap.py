@@ -1,5 +1,9 @@
 import sys
 
+from Graph.edge import Edge
+from Graph.vertex import Vertex
+
+
 class Element:
     def __init__(self, rank, element=''):
         self.rank = rank
@@ -57,9 +61,9 @@ class MaxHeap:
 
     def Print(self):
         for i in range(1, (self.size // 2) + 1):
-            print(" PARENT : " + str(self.Heap[i]) +
-                  " LEFT CHILD : " + str(self.Heap[2 * i]) +
-                  " RIGHT CHILD : " + str(self.Heap[2 * i + 1]))
+            print("PARENT : " + str(self.Heap[i].element) +
+                  " LEFT CHILD : " + str(self.Heap[2 * i].element) +
+                  " RIGHT CHILD : " + str(self.Heap[2 * i + 1].element))
 
     def extractMax(self):
         popped = self.Heap[self.FRONT]
@@ -71,12 +75,12 @@ class MaxHeap:
 
 if __name__ == "__main__":
     maxHeap = MaxHeap(15)
-    e1 = Element(3)
-    e2 = Element(2)
-    e3 = Element(5)
-    maxHeap.insert(e1)
-    maxHeap.insert(e3)
-    maxHeap.insert(e2)
+    v1 = Vertex(1,'','')
+    v2 = Vertex(1, '', '')
+    maxHeap.insert(3, Edge(1,v1,v2))
+    print(maxHeap.size)
+    maxHeap.extractMax()
+    print(maxHeap.size)
 
     maxHeap.Print()
     print("The Max val is " + str(maxHeap.extractMax().rank))

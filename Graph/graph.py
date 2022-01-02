@@ -70,16 +70,16 @@ class Graph:
 
 
 def main():
-    g = Graph("../Files/json graphs/out2.json")
+    g = Graph("../Files/json graphs/out1.json")
     g.draw()
     print(str(g.num_of_vertices()))
     print(str(g.num_of_edges()))
     for v in g.vertices.values():
         print(v)
-    # print()
-    # for list in g.edges.values():
-    #     for e in list:
-    #         print(e)
+    print()
+    for list in g.edges.values():
+        for e in list:
+            print(e)
 
 
 if __name__ == '__main__':
