@@ -8,6 +8,7 @@ class Tokenizer:
 
     def __init__(self, content):
         self.p = PorterStemmer()
+        self.content = content
         self.tokens :set = {}
         self.synonyms :set = {}
         self.__add_tokens(content)
@@ -27,6 +28,7 @@ class Tokenizer:
                     word = self.p.stem(word)
                 if not tmp.__contains__(word):
                     tmp.append(word)
+
         if len(ret) > 0:
             self.tokens = set(ret)
 
@@ -41,12 +43,12 @@ class Tokenizer:
             for syn in wordnet.synsets(token):
                 for l in syn.lemmas():
                     synonyms.append(l.name())
-        if len(synonyms) != 0:
-            self.synonyms = set(synonyms)
+        synonyms.append(self.content)
+        self.synonyms = set(synonyms)
 
 
 def main():
-    t = Tokenizer("")
+    t = Tokenizer("Iterable")
     print(t.tokens)
     print(t.synonyms)
 
