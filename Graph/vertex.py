@@ -7,7 +7,6 @@ class Vertex:
         self.name :string = name
         self.type :string = type
         self.attributes :list = attributes
-
         self.edges :dict = {}
         self.neighbors :set = set()
 
@@ -15,8 +14,6 @@ class Vertex:
         self.edges[edge.to.key] = edge
         self.neighbors.add(edge.to)
 
-    def get_neighbors(self):
-        return self.neighbors
 
     def __str__(self):
         return "[key:{}, name:{}, type:{}, attributes:{}]".format(self.key, self.name, self.type, self.attributes)

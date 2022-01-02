@@ -1,7 +1,6 @@
 import json
 import networkx as nx
 from matplotlib import pyplot as plt
-
 from Graph.edge import Edge
 from Graph.vertex import Vertex
 
@@ -12,7 +11,6 @@ class Graph:
         self.edges :dict = {}
 
         self.__graph_builder(path_to_json_file)
-
 
     def __graph_builder(self, path):
         f = open(path)
@@ -61,35 +59,26 @@ class Graph:
         plt.show()
 
     def num_of_vertices(self):
-        return len(len(self.vertices))
+        return len(self.vertices)
+
+    def num_of_edges(self):
+        return len(self.edges)
 
     def get_root(self):
         return self.vertices[0]
 
-    # def bfs(self):
-    #     queue = [0]
-    #     visited = {}
-    #     for key in self.Graph:
-    #         visited[key] = False
-    #     while queue:
-    #         vertex = queue.pop(0)
-    #         visited[vertex] = True
-    #         print("ID:" + str(vertex) + " Text: " + self.vertex_info[vertex])
-    #         print("My neighbor:")
-    #         i = 0
-    #         for key in self.Graph[vertex]:
-    #             i += 1
-    #             if not visited[key]:
-    #                 queue.append(key)
-    #             print("ID:" + str(key) + " Text: " + self.vertex_info[key])
 
 def main():
     g = Graph("../Files/json graphs/out1.json")
-    # g.draw()
-    root = g.get_root()
-    for n in root.neighbors:
-        print(n)
-
+    g.draw()
+    print(str(g.num_of_vertices()))
+    print(str(g.num_of_edges()))
+    for v in g.vertices.values():
+        print(v)
+    print()
+    for list in g.edges.values():
+        for e in list:
+            print(e)
 
 
 if __name__ == '__main__':
