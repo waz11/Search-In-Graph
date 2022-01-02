@@ -1,6 +1,6 @@
 # Part I : converting of code to graph
 
-input: path to code folder
+input: path to code folder/n\n
 output: graph in json file
 
 the graph is a json file, contains two arrays: vertices and edges.
