@@ -1,5 +1,4 @@
 import re
-
 from gensim.parsing import PorterStemmer
 from gensim.parsing.preprocessing import remove_stopwords
 from nltk.corpus import wordnet

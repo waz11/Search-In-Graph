@@ -1,5 +1,4 @@
 import string
-
 from Parser.tokenizer import Tokenizer
 
 
