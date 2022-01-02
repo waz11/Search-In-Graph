@@ -3,7 +3,7 @@ from Searcher.searcher import Searcher
 
 
 def main():
-    graph = Graph('Preprocess/Files/out.json')
+    graph = Graph('Preprocess/Files/out1.json')
     graph.draw()
     query = []
     searcher = Searcher(graph, query)

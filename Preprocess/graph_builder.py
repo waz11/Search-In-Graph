@@ -14,7 +14,7 @@ def code_to_graph(project_path, output_path, project_name=''):
 
 
 def main():
-    code_to_graph('Files/src', 'Files/out.json','iterable list practice')
+    code_to_graph('Files/src', 'Files/out1.json','iterable list practice')
     # code_to_graph('Files/src2','Files/out2.json')
     # code_to_graph('Files/src3', 'Files/out3.json')
 
