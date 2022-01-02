@@ -1,9 +1,11 @@
 import os
+import string
+
 from Preprocess.Parser.CodeFromFile import CodeFromFile
 
 
 def code_to_graph(project_path, output_path, project_name=''):
-    folder_name = os.path.basename(project_path)
+    folder_name :string= os.path.basename(project_path)
     if project_name is '':
         project_name = folder_name
     code_from_file = CodeFromFile(project_path,project_name, output_path)
