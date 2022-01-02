@@ -37,7 +37,6 @@ class Graph:
     def draw(self):
         G = nx.DiGraph()
         ed = []
-        print(len(self.edges))
         for edges_list in self.edges.values():
             for edge in edges_list:
                 v1 = edge.source.name
