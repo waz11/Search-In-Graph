@@ -1,14 +1,12 @@
 import string
-
 from Ranker.similarity import sim_edges
-from graph.vertex import Vertex
 
 
 class Edge:
     def __init__(self, type, source, to):
         self.type :string = type
-        self.source :Vertex = source
-        self.to :Vertex = to
+        self.source  = source
+        self.to  = to
 
     def sim(self, other_edge):
         return sim_edges(self, other_edge)

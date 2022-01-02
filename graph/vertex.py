@@ -1,15 +1,14 @@
 import string
-
 from Ranker.similarity import sim_vertics
 
 
 class Vertex:
-    def __init__(self, key, name, type, attributes=[]):
+    def __init__(self, key:int, name:string, type:string, attributes:list=[]):
         self.key :int = key
         self.name :string = name
         self.type :string = type
         self.attributes :list = attributes
-        self.edges :dict = dict()
+        self.edges :dict = {}
         self.neighbors :set = set()
 
     def add_edge(self, edge):

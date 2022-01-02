@@ -8,7 +8,6 @@ from graph.vertex import Vertex
 
 class Graph:
     def __init__(self, path_to_json_file):
-        self.graph = {}
         self.vertices = dict()
         self.edges :dict = {}
         self.__build_graph(path_to_json_file)
@@ -52,40 +51,25 @@ class Graph:
         nx.draw_networkx_edges(G, pos,  arrows=False)
         plt.show()
 
-
     def num_of_vertices(self):
         return len(len(self.vertices))
 
-    def neighbors(self, key):
-        return self.vertices[key].get_neighbors
-
-    def edge_type(self, from_node, to_node):
-        return self.edge_info[(from_node, to_node)]
-
-    def vertex_text(self, key):
-        return self.vertex_info[key]
-
     def get_first_node(self):
-        return self.vertex_info[0]
+        return self.vertices[0]
 
-    def get_type(self, id):
-        return self.vertex_type[id]
-
-    def bfs(self):
-        print(str(self.vertex_info))
-        print(str(self.graph))
-        queue = [0]
-        visited = {}
-        for key in self.graph:
-            visited[key] = False
-        while queue:
-            vertex = queue.pop(0)
-            visited[vertex] = True
-            print("ID:" + str(vertex) + " Text: " + self.vertex_info[vertex])
-            print("My neighbor:")
-            i = 0
-            for key in self.graph[vertex]:
-                i += 1
-                if not visited[key]:
-                    queue.append(key)
-                print("ID:" + str(key) + " Text: " + self.vertex_info[key])
+    # def bfs(self):
+    #     queue = [0]
+    #     visited = {}
+    #     for key in self.graph:
+    #         visited[key] = False
+    #     while queue:
+    #         vertex = queue.pop(0)
+    #         visited[vertex] = True
+    #         print("ID:" + str(vertex) + " Text: " + self.vertex_info[vertex])
+    #         print("My neighbor:")
+    #         i = 0
+    #         for key in self.graph[vertex]:
+    #             i += 1
+    #             if not visited[key]:
+    #                 queue.append(key)
+    #             print("ID:" + str(key) + " Text: " + self.vertex_info[key])

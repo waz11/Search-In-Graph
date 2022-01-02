@@ -14,8 +14,8 @@ def code_to_graph(project_path, output_path):
 def main():
     graph = Graph('Preprocess/Files/out.json')
     graph.draw()
-    # query = []
-    # searcher = Searcher(graph, query)
+    query = []
+    searcher = Searcher(graph, query)
 
 
 if __name__ == '__main__':
