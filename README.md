@@ -1,4 +1,4 @@
-# converting source code to graph:
+# Part I : converting of source code to graph
 
 the graph is a json file, contains two arrays: vertices and edges.
 
