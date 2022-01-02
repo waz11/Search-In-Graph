@@ -1,7 +1,5 @@
 import string
-
 from Graph.vertex import Vertex
-from Ranker.similarity import sim_edges
 
 
 class Edge:
