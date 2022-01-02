@@ -18,3 +18,14 @@ the graph is a json file, contains two arrays: vertices and edges.
 	to - destination vertex
 
 # Part II : code graph search engine
+
+## query
+
+	
+## graph object
+
+
+## searcher
+
+
+## ranker
