@@ -2,8 +2,8 @@ import json
 import networkx as nx
 from matplotlib import pyplot as plt
 
-from graph.edge import Edge
-from graph.vertex import Vertex
+from Graph.edge import Edge
+from Graph.vertex import Vertex
 
 
 class Graph:
@@ -60,7 +60,7 @@ class Graph:
     # def bfs(self):
     #     queue = [0]
     #     visited = {}
-    #     for key in self.graph:
+    #     for key in self.Graph:
     #         visited[key] = False
     #     while queue:
     #         vertex = queue.pop(0)
@@ -68,7 +68,7 @@ class Graph:
     #         print("ID:" + str(vertex) + " Text: " + self.vertex_info[vertex])
     #         print("My neighbor:")
     #         i = 0
-    #         for key in self.graph[vertex]:
+    #         for key in self.Graph[vertex]:
     #             i += 1
     #             if not visited[key]:
     #                 queue.append(key)

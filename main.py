@@ -1,5 +1,5 @@
-from graph.graph import Graph
-from searcher import Searcher
+from Graph.graph import Graph
+from Searcher.searcher import Searcher
 
 
 def main():
