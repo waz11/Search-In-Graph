@@ -11,20 +11,29 @@ class Graph:
         self.vertices = dict()
         self.edges :dict = {}
 
-        self.__build_graph(path_to_json_file)
+        self.__graph_builder(path_to_json_file)
 
-    def __build_graph(self, path):
+
+    def __graph_builder(self, path):
         f = open(path)
         data = json.load(f)
-        for v in data['vertices']:
+        f.close()
+        vertices :json = data['vertices']
+        edges :json = data['edges']
+        self.__vertices_builder(vertices)
+        self.__edges_builder(edges)
+        # f.close()
+
+    def __vertices_builder(self, vertices:json):
+        for v in vertices:
             if "attributes" in v:
-                vertex = Vertex(v['key'], v['name'], v['type'],v['attributes'])
+                vertex = Vertex(v['key'], v['name'], v['type'], v['attributes'])
             else:
                 vertex = Vertex(v['key'], v['name'], v['type'], [])
             self.vertices[vertex.key] = vertex
 
-
-        for e in data['edges']:
+    def __edges_builder(self, edges:json):
+        for e in edges:
             source = self.vertices[e["from"]]
             dest = self.vertices[e["to"]]
             edge = Edge(e["type"], source, dest)
@@ -33,7 +42,6 @@ class Graph:
                 self.edges[source] = [edge]
             else:
                 self.edges[source].append(edge)
-        f.close()
 
 
     def draw(self):
@@ -79,12 +87,9 @@ def main():
     g = Graph("../Files/json graphs/out1.json")
     # g.draw()
     root = g.get_root()
+    for n in root.neighbors:
+        print(n)
 
-    # for n in root.neighbors:
-    #     print(n)
-
-    for e in root.edges:
-        print(e)
 
 
 if __name__ == '__main__':
