@@ -1,6 +1,6 @@
 import string
 from Ranker.similarity import sim_vertics
-from Parser.tokenizer import get_tokens
+from Parser.tokenizer import Tokenizer
 
 
 class Vertex:
@@ -11,7 +11,7 @@ class Vertex:
         self.attributes :list = attributes
         self.edges :dict = {}
         self.neighbors :set = set()
-        self.labels = get_tokens(name)
+        self.labels = Tokenizer().get_tokens(name)
 
     def add_edge(self, edge):
         self.edges[edge.to] = edge
