@@ -7,8 +7,8 @@ def buildGraph(path):
 
 def main():
     buildGraph('Files/json graphs/out1.json')
-    buildGraph('Files/json graphs/out2.json')
-    buildGraph('Files/json graphs/out3.json')
+    # buildGraph('Files/json graphs/out2.json')
+    # buildGraph('Files/json graphs/out3.json')
     query = []
     # searcher = Searcher(graph, query)
 

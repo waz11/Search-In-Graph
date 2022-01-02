@@ -21,6 +21,7 @@ class Graph:
             else:
                 vertex = Vertex(v['key'], v['name'], v['type'], [])
             self.vertices[vertex.key] = vertex
+            print(vertex)
 
         for e in data['edges']:
             source = self.vertices[e["from"]]
