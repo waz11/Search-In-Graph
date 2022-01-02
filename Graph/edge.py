@@ -8,8 +8,5 @@ class Edge:
         self.source  = source
         self.to  = to
 
-    def sim(self, other_edge):
-        return sim_edges(self, other_edge)
-
     def __str__(self):
         return "({},{}):{}".format(self.source.key, self.to.key, self.type)

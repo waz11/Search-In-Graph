@@ -8,13 +8,12 @@ class Tokenizer:
 
     def __init__(self, content):
         self.p = PorterStemmer()
-        self.content = content
         self.tokens :set = {}
-        self.synonyms :set = {}
-        self.__add_tokens(content)
-        self.__add_synonyms()
+        # self.synonyms :set = {}
+        self.get_tokens(content)
+        # self.__add_synonyms()
 
-    def __add_tokens(self, content, rm_stopwords=False, stem=False):
+    def get_tokens(self, content, rm_stopwords=False, stem=False):
         words = re.split('[^A-Za-z]+', content)
         ret = []
         for word in words:
@@ -28,29 +27,28 @@ class Tokenizer:
                     word = self.p.stem(word)
                 if not tmp.__contains__(word):
                     tmp.append(word)
-
+        ret = tmp
         if len(ret) > 0:
             self.tokens = set(ret)
-
 
     def __camel_case_split(self, word):
         matches = re.finditer('.+?(?:(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])|$)', word)
         return [m.group(0).lower() for m in matches]
 
-    def __add_synonyms(self):
-        synonyms = []
-        for token in self.tokens:
-            for syn in wordnet.synsets(token):
-                for l in syn.lemmas():
-                    synonyms.append(l.name())
-        synonyms.append(self.content)
-        self.synonyms = set(synonyms)
+    # def __add_synonyms(self):
+    #     synonyms = []
+    #     for token in self.tokens:
+    #         for syn in wordnet.synsets(token):
+    #             for l in syn.lemmas():
+    #                 synonyms.append(l.name())
+    #     synonyms.append(self.content)
+    #     self.synonyms = set(synonyms)
 
 
 def main():
-    t = Tokenizer("Iterable")
+    t = Tokenizer("list_iterable")
     print(t.tokens)
-    print(t.synonyms)
+    # print(t.synonyms)
 
 
 

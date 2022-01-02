@@ -11,7 +11,7 @@ class Vertex:
         self.attributes :list = attributes
         self.edges :dict = {}
         self.neighbors :set = set()
-        self.labels = Tokenizer(name).synonyms
+        # self.labels = Tokenizer(name).synonyms
 
     def add_edge(self, edge):
         self.edges[edge.to] = edge
@@ -19,9 +19,6 @@ class Vertex:
 
     def get_neighbors(self):
         return self.neighbors
-
-    def sim(self, other_vertex):
-        return sim_vertics(self.tokens, other_vertex.tokens)
 
     def __str__(self):
         return "[key:{}, name:{}, type:{}, attributes:{}, labels:{}]".format(self.key, self.name, self.type, self.attributes, self.labels)
