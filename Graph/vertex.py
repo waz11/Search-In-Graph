@@ -1,5 +1,7 @@
 import string
 
+from Parser.tokenizer import Tokenizer
+
 
 class Vertex:
     def __init__(self, key:int, name:string, type:string, attributes:list=[]):
@@ -9,6 +11,7 @@ class Vertex:
         self.attributes :list = attributes
         self.edges :dict = {}
         self.neighbors :set = set()
+        self.tokens = Tokenizer(name).tokens
 
     def add_edge(self, edge):
         self.edges[edge.to.key] = edge
