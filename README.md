@@ -1,4 +1,4 @@
-# converting source code to graph:
+# Part I : converting of source code to graph
 
 the graph is a json file, contains two arrays: vertices and edges.
 
@@ -16,3 +16,15 @@ the graph is a json file, contains two arrays: vertices and edges.
 	type - class / method / implements / extends
 	from - source vertex
 	to - destination vertex
+
+# Part II : code graph search engine
+
+## query
+
+## parser
+
+## graph object
+
+## searcher
+
+## ranker
