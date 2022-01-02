@@ -11,7 +11,7 @@ class Vertex:
         self.attributes :list = attributes
         self.edges :dict = {}
         self.neighbors :set = set()
-        self.tokens = Tokenizer(name).tokens
+        self.tokens = Tokenizer(name).tokens #added the tokens here for time complexity consideration
 
     def add_edge(self, edge):
         self.edges[edge.to.key] = edge
@@ -19,4 +19,4 @@ class Vertex:
 
 
     def __str__(self):
-        return "[key:{}, name:{}, type:{}, attributes:{}]".format(self.key, self.name, self.type, self.attributes)
+        return "[key:{}, name:{}, type:{}, attributes:{}, tokens:{}]".format(self.key, self.name, self.type, self.attributes, self.tokens)
