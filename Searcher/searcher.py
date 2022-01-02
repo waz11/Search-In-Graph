@@ -1,6 +1,9 @@
+from Searcher.maxheap import MaxHeap
+
+
 class Searcher:
     def __init__(self, graph, query):
-        self.ordered_similar_nodes= []
+        self.ordered_similar_nodes = MaxHeap()
         pass
 
 
