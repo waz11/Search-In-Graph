@@ -21,11 +21,10 @@ the graph is a json file, contains two arrays: vertices and edges.
 
 ## query
 
-	
+## parser
+
 ## graph object
 
-
 ## searcher
-
 
 ## ranker
