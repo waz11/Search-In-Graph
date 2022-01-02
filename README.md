@@ -1,7 +1,9 @@
 # Part I : converting of code to graph
 
-the graph is a json file, contains two arrays: vertices and edges.
+input: path to code folder
+output: graph in json file
 
+the graph is a json file, contains two arrays: vertices and edges.
 
 ## vertex
 
