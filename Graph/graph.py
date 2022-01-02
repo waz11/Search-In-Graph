@@ -10,6 +10,7 @@ class Graph:
     def __init__(self, path_to_json_file):
         self.vertices = dict()
         self.edges :dict = {}
+
         self.__build_graph(path_to_json_file)
 
     def __build_graph(self, path):
@@ -21,7 +22,7 @@ class Graph:
             else:
                 vertex = Vertex(v['key'], v['name'], v['type'], [])
             self.vertices[vertex.key] = vertex
-            print(vertex)
+
 
         for e in data['edges']:
             source = self.vertices[e["from"]]
@@ -54,7 +55,7 @@ class Graph:
     def num_of_vertices(self):
         return len(len(self.vertices))
 
-    def get_first_node(self):
+    def get_root(self):
         return self.vertices[0]
 
     # def bfs(self):
@@ -73,3 +74,18 @@ class Graph:
     #             if not visited[key]:
     #                 queue.append(key)
     #             print("ID:" + str(key) + " Text: " + self.vertex_info[key])
+
+def main():
+    g = Graph("../Files/json graphs/out1.json")
+    # g.draw()
+    root = g.get_root()
+
+    # for n in root.neighbors:
+    #     print(n)
+
+    for e in root.edges:
+        print(e)
+
+
+if __name__ == '__main__':
+    main()
