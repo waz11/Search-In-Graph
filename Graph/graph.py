@@ -20,7 +20,8 @@ class Graph:
         edges :json = data['edges']
         self.__vertices_builder(vertices)
         self.__edges_builder(edges)
-        # f.close()
+        self.vertices[0].name = "PROJECT-DIRECTORY"
+
 
     def __vertices_builder(self, vertices:json):
         for v in vertices:
