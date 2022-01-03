@@ -14,7 +14,7 @@ class Graph:
 
         self.__graph_builder(path_to_json_file)
 
-    def __graph_builder(self, path):
+    def __graph_builder(self, path) -> None:
         f = open(path)
         data :json = json.load(f)
         f.close()
@@ -25,7 +25,7 @@ class Graph:
         self.vertices[0].name = "PROJECT-DIRECTORY"
 
 
-    def __vertices_builder(self, vertices:json):
+    def __vertices_builder(self, vertices:json) -> None:
         for v in vertices:
             if "attributes" in v:
                 vertex = Vertex(v['key'], v['name'], v['type'], v['attributes'])
@@ -33,7 +33,7 @@ class Graph:
                 vertex = Vertex(v['key'], v['name'], v['type'], [])
             self.vertices[vertex.key] = vertex
 
-    def __edges_builder(self, edges:json):
+    def __edges_builder(self, edges:json) -> None:
         for e in edges:
             source = self.vertices[e["from"]]
             dest = self.vertices[e["to"]]
@@ -45,7 +45,7 @@ class Graph:
                 self.edges[source].append(edge)
 
 
-    def draw(self):
+    def draw(self) -> None:
         G = nx.DiGraph()
         ed = []
         for edges_list in self.edges.values():
@@ -61,13 +61,13 @@ class Graph:
         nx.draw_networkx_edges(G, pos,  arrows=False)
         plt.show()
 
-    def num_of_vertices(self):
+    def num_of_vertices(self) -> int:
         return len(self.vertices)
 
-    def num_of_edges(self):
+    def num_of_edges(self) -> int:
         return len(self.edges)
 
-    def get_root(self):
+    def get_root(self) -> Vertex:
         return self.vertices[0]
 
 

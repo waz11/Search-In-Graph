@@ -13,10 +13,10 @@ class Matrix:
         self.Similarity_matrix_edge['class']['implements'] = 0.5
         self.Similarity_matrix_edge['class']['extends'] = 0.5
 
-    def vertex_matrix(self, type1, type2):
+    def vertex_matrix(self, type1, type2) -> int:
         return self.Similarity_matrix_vertex[type1][type2]
 
-    def edge_matrix(self, type1, type2):
+    def edge_matrix(self, type1, type2) -> int:
         return self.Similarity_matrix_edge[type1][type2]
 
 

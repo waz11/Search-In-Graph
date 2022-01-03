@@ -17,25 +17,25 @@ class MaxHeap:
         self.Heap[0] = Element(sys.maxsize)
         self.FRONT = 1
 
-    def parent(self, pos):
+    def parent(self, pos) -> int:
         return pos // 2
 
-    def leftChild(self, pos):
+    def leftChild(self, pos) -> int:
         return 2 * pos
 
-    def rightChild(self, pos):
+    def rightChild(self, pos) -> int:
         return (2 * pos) + 1
 
-    def isLeaf(self, pos):
+    def isLeaf(self, pos) -> bool:
         if pos >= (self.size // 2) and pos <= self.size:
             return True
         return False
 
-    def swap(self, fpos, spos):
+    def swap(self, fpos, spos) -> None:
         self.Heap[fpos], self.Heap[spos] = (self.Heap[spos],
                                             self.Heap[fpos])
 
-    def maxHeapify(self, pos):
+    def maxHeapify(self, pos) -> None:
         if not self.isLeaf(pos):
             if (self.Heap[pos].rank < self.Heap[self.leftChild(pos)].rank or
                     self.Heap[pos].rank < self.Heap[self.rightChild(pos)].rank):
@@ -48,7 +48,7 @@ class MaxHeap:
                     self.maxHeapify(self.rightChild(pos))
 
 
-    def insert(self, rank, component):
+    def insert(self, rank, component) -> None:
         element = Element(rank, component)
         if self.size >= self.maxsize:
             return
@@ -59,13 +59,13 @@ class MaxHeap:
             self.swap(current, self.parent(current))
             current = self.parent(current)
 
-    def Print(self):
+    def Print(self) -> None:
         for i in range(1, (self.size // 2) + 1):
             print("PARENT : " + str(self.Heap[i].element) +
                   " LEFT CHILD : " + str(self.Heap[2 * i].element) +
                   " RIGHT CHILD : " + str(self.Heap[2 * i + 1].element))
 
-    def extractMax(self):
+    def extractMax(self) -> Element:
         popped = self.Heap[self.FRONT]
         self.Heap[self.FRONT] = self.Heap[self.size]
         self.size -= 1

@@ -12,7 +12,7 @@ class Vertex:
         self.neighbors :set = set()
         self.tokens = Tokenizer(name).tokens #added the tokens here for time complexity consideration
 
-    def add_edge(self, edge):
+    def add_edge(self, edge) -> None:
         self.edges[edge.to.key] = edge
         self.neighbors.add(edge.to)
 

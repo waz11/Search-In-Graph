@@ -12,7 +12,7 @@ class Tokenizer:
         self.get_tokens(content)
         # self.__add_synonyms()
 
-    def get_tokens(self, content, rm_stopwords=False, stem=False):
+    def get_tokens(self, content, rm_stopwords=False, stem=False) -> None:
         words = re.split('[^A-Za-z]+', content)
         ret = []
         for word in words:
@@ -30,7 +30,7 @@ class Tokenizer:
         if len(ret) > 0:
             self.tokens = set(ret)
 
-    def __camel_case_split(self, word):
+    def __camel_case_split(self, word) -> list:
         matches = re.finditer('.+?(?:(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])|$)', word)
         return [m.group(0).lower() for m in matches]
 
