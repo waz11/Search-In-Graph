@@ -19,7 +19,8 @@ class Query:
         self.parse()
         self.toJson()
         self.vertices = {}
-        self.graph = Graph().graph_builder_from_json_file('../Files/query.json')
+        self.graph = Graph()
+        self.graph.graph_builder_from_json_file('../Files/query.json')
 
     def get_uniqe_key(self) -> int:
         self.key += 1
@@ -96,6 +97,9 @@ class Query:
         self.json["edges"] = edges
         save_json_to_file(self.json, '../Files/query.json')
 
+    def __str__(self):
+        return str(self.content)
+
 
 def main():
     q1 = "class c2 extends class c1"
@@ -104,6 +108,7 @@ def main():
     q = q1+','+q2+','+q3
 
     query = Query(q)
+    print(query)
     # print(query.json)
     # query.graph
     # save_json_to_file(query.json, 'query.json')
