@@ -21,6 +21,7 @@ the graph is a json file, contains two arrays: vertices and edges.
 	to - destination vertex
 
 graph as image:
+
 ![out1](https://user-images.githubusercontent.com/62445178/147928341-7997bc83-7ea9-49bc-96e3-015d96e1939d.png)
 
 
