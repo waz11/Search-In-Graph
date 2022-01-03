@@ -28,20 +28,21 @@ def parse_vertices(vertices):
     for v in vertices:
         new_v = {}
         type = v["type"]
-        if type is "class":
+        # print(type)
+        if type == "class":
             new_v["category"] = "Task"
-        elif type is "method":
+        elif type == "method":
             new_v["category"] = "Quality"
         # new_v["category"] = v["type"]
         new_v["text"] = v["name"]
-        new_v["fill"] = "#ffffff"
-        new_v["stroke"] = "#000000"
-        new_v["strokeWidth"] = 1
+        # new_v["fill"] = "#ffffff"
+        # new_v["stroke"] = "#000000"
+        # new_v["strokeWidth"] = 1
         new_v["key"] = v["key"]
-        new_v["loc"] = ""
-        new_v["refs"] = []
-        new_v["ctxs"] = []
-        new_v["comment"] = ''
+        # new_v["loc"] = ""
+        # new_v["refs"] = []
+        # new_v["ctxs"] = []
+        # new_v["comment"] = ''
         new_vertices.append(new_v)
     return new_vertices
 
@@ -52,24 +53,24 @@ def parse_edges(edges):
         type = e["type"]
         new_e["category"] = e["type"]
         new_e["text"] = ''
-        if type is "extends":
+        if type == "extends":
             new_e["category"] = "ExtendedBy"
             new_e["text"] = 'extends'
-        elif type is "extends":
+        elif type == "implements":
             new_e["category"] = "ExtendedBy"
             new_e["text"] = 'implements'
-        elif type is "method":
+        elif type == "method":
             new_e["category"] = "Contribution"
             new_e["text"] = 'method'
             new_e["curve"] = {"yb":"Bezier", "oE":9}
             new_e["curviness"] = 60
         new_e["routing"] = {"yb": "Normal", "oE": 1}
-        new_e["points"] = ''
+        # new_e["points"] = ''
         new_e["from"] = e["from"]
         new_e["to"] = e["to"]
-        new_e["refs"] = []
-        new_e["ctxs"] = []
-        new_e["comment"] = ''
+        # new_e["refs"] = []
+        # new_e["ctxs"] = []
+        # new_e["comment"] = ''
         new_edges.append(new_e)
     return new_edges
 

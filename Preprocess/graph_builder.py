@@ -62,8 +62,8 @@ def save_to_file(json_object,output_path):
 
 def main():
     code_to_graph('../Files/codes/src1', '../Files/json graphs/out1.json','iterable list practice')
-    code_to_graph('../Files/codes/src2','../Files/json graphs/out2.json')
-    code_to_graph('../Files/codes/src3','../Files/json graphs/out3.json')
+    # code_to_graph('../Files/codes/src2','../Files/json graphs/out2.json')
+    # code_to_graph('../Files/codes/src3','../Files/json graphs/out3.json')
 
 if __name__ == '__main__':
     main()
