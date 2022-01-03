@@ -4,21 +4,24 @@ import json
 # and import the output file
 
 def main():
-    create_json_file_for_viewer('../Files/json graphs/out1.json', '../Files/json graphs for viewer/out1.json')
+    create_json_file_for_viewer('../Files/json graphs/out1.json')
     # create_json_file_for_viewer('../Files/json graphs/out2.json', '../Files/json graphs for viewer/out2.json')
     # create_json_file_for_viewer('../Files/json graphs/out3.json', '../Files/json graphs for viewer/out3.json')
 
-def create_json_file_for_viewer(json_file, output_path):
+def create_json_file_for_viewer(json_file):
     f = open(json_file)
     data = json.load(f)
     f.close()
+
     vertices = parse_vertices(data["vertices"])
     edges = parse_edges(data["edges"])
+
+    project_name = json_file.split('/')[-1]
     j2 = {}
     j2["class"] = "go.GraphLinksModel"
     j2["nodeDataArray"] = vertices
     j2["linkDataArray"] = edges
-    save_to_file(j2,output_path)
+    save_to_file(j2, '../Files/json graphs for viewer/'+project_name)
 
 def parse_vertices(vertices):
     new_vertices = []
