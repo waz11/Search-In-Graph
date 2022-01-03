@@ -68,14 +68,13 @@ class Graph:
         return self.vertices[0]
 
     def print_vertices(self):
-        for list in self.edges.values():
-            for e in list:
-                print(e)
+        for vertex in self.vertices.values():
+            print(vertex)
 
     def print_edges(self):
         for list in self.edges.values():
-            for e in list:
-                print(e)
+            for edge in list:
+                print(edge)
 
 
 def main():
