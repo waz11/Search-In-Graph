@@ -33,6 +33,7 @@ def connect_between_classes(json_file):
 
     for v in vertices:
         key = v["key"]
+        attributes_types = set()
         if "attributes" in v:
             attributes = v["attributes"]
             for attr in attributes:
@@ -40,11 +41,12 @@ def connect_between_classes(json_file):
                 if obj in map.keys():
                     new_edge = {}
                     to = map[obj]
-                    print(obj," ",to)
                     new_edge["type"] = "contains"
                     new_edge["from"] = key
                     new_edge["to"] = to
-                    new_edges.append(new_edge)
+                    if not to in attributes_types:
+                        attributes_types.add(to)
+                        new_edges.append(new_edge)
     edges = data["edges"]
     edges= edges + new_edges
     new_json = {}

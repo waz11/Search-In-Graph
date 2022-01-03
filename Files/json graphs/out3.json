@@ -1079,37 +1079,12 @@
         {
             "type": "contains",
             "from": 3,
-            "to": 5
-        },
-        {
-            "type": "contains",
-            "from": 3,
-            "to": 5
-        },
-        {
-            "type": "contains",
-            "from": 3,
             "to": 6
-        },
-        {
-            "type": "contains",
-            "from": 3,
-            "to": 5
-        },
-        {
-            "type": "contains",
-            "from": 3,
-            "to": 5
         },
         {
             "type": "contains",
             "from": 6,
             "to": 5
-        },
-        {
-            "type": "contains",
-            "from": 9,
-            "to": 6
         },
         {
             "type": "contains",
@@ -1163,18 +1138,8 @@
         },
         {
             "type": "contains",
-            "from": 16,
-            "to": 5
-        },
-        {
-            "type": "contains",
             "from": 17,
             "to": 6
-        },
-        {
-            "type": "contains",
-            "from": 17,
-            "to": 5
         },
         {
             "type": "contains",

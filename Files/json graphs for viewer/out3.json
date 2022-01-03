@@ -2,7 +2,6 @@
     "class": "go.GraphLinksModel",
     "nodeDataArray": [
         {
-            "category": "project",
             "text": "src3",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -14,7 +13,6 @@
             "comment": ""
         },
         {
-            "category": "class",
             "text": "AES1",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -26,7 +24,6 @@
             "comment": ""
         },
         {
-            "category": "class",
             "text": "AES2",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -38,7 +35,6 @@
             "comment": ""
         },
         {
-            "category": "class",
             "text": "Attack",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -50,7 +46,6 @@
             "comment": ""
         },
         {
-            "category": "class",
             "text": "Bases",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -62,7 +57,6 @@
             "comment": ""
         },
         {
-            "category": "class",
             "text": "Block",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -74,7 +68,6 @@
             "comment": ""
         },
         {
-            "category": "class",
             "text": "BlockList",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -86,7 +79,6 @@
             "comment": ""
         },
         {
-            "category": "class",
             "text": "Main",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -98,7 +90,6 @@
             "comment": ""
         },
         {
-            "category": "class",
             "text": "Test",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -110,7 +101,6 @@
             "comment": ""
         },
         {
-            "category": "class",
             "text": "Test_AES2",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -122,7 +112,6 @@
             "comment": ""
         },
         {
-            "category": "class",
             "text": "Test_attack",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -134,7 +123,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "enc",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -146,7 +134,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "dec",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -158,7 +145,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "addRoundKey",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -170,7 +156,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "enc",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -182,7 +167,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "dec",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -194,7 +178,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "Attack",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -206,7 +189,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "breakAES2",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -218,7 +200,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "enc",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -230,7 +211,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "dec",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -242,7 +222,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "byteToHex",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -254,7 +233,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "hexToByte",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -266,7 +244,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "xorHexes",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -278,7 +255,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "printHexAsByte",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -290,7 +266,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "printBytes",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -302,7 +277,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "printBytesDetails",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -314,7 +288,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "printAsChars",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -326,7 +299,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "printByte",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -338,7 +310,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "toDigit",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -350,7 +321,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "Block",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -362,7 +332,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "Block",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -374,7 +343,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "getRows",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -386,7 +354,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "getCols",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -398,7 +365,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "getSize",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -410,7 +376,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "add",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -422,7 +387,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "swap",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -434,7 +398,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "xor",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -446,7 +409,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "isFull",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -458,7 +420,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "equals",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -470,7 +431,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "writeToBytesFile",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -482,7 +442,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "print",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -494,7 +453,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "printBytesDetails",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -506,7 +464,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "getValue",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -518,7 +475,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "swapValues",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -530,7 +486,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "increaseIndex",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -542,7 +497,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "blockToBytes",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -554,7 +508,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "BlockList",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -566,7 +519,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "BlockList",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -578,7 +530,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "BlockList",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -590,7 +541,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "getBlock",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -602,7 +552,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "getSize",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -614,7 +563,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "addBlock",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -626,7 +574,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "xor",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -638,7 +585,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "swap",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -650,7 +596,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "isEquals",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -662,7 +607,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "print",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -674,7 +618,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "printChars",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -686,7 +629,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "printBytesDetails",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -698,7 +640,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "writeToBytesFile",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -710,7 +651,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "clearFile",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -722,7 +662,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "main",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -734,7 +673,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "test",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -746,7 +684,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "run",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -758,7 +695,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "Test_AES2",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -770,7 +706,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "run",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -782,7 +717,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "isEquals",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -794,7 +728,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "printEnc",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -806,7 +739,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "printDec",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -818,7 +750,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "read",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -830,7 +761,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "printFile",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -842,7 +772,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "Test_attack",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -854,7 +783,6 @@
             "comment": ""
         },
         {
-            "category": "method",
             "text": "run",
             "fill": "#ffffff",
             "stroke": "#000000",
@@ -2346,63 +2274,7 @@
             },
             "points": "",
             "from": 3,
-            "to": 5,
-            "refs": [],
-            "ctxs": [],
-            "comment": ""
-        },
-        {
-            "category": "contains",
-            "text": "",
-            "routing": {
-                "yb": "Normal",
-                "oE": 1
-            },
-            "points": "",
-            "from": 3,
-            "to": 5,
-            "refs": [],
-            "ctxs": [],
-            "comment": ""
-        },
-        {
-            "category": "contains",
-            "text": "",
-            "routing": {
-                "yb": "Normal",
-                "oE": 1
-            },
-            "points": "",
-            "from": 3,
             "to": 6,
-            "refs": [],
-            "ctxs": [],
-            "comment": ""
-        },
-        {
-            "category": "contains",
-            "text": "",
-            "routing": {
-                "yb": "Normal",
-                "oE": 1
-            },
-            "points": "",
-            "from": 3,
-            "to": 5,
-            "refs": [],
-            "ctxs": [],
-            "comment": ""
-        },
-        {
-            "category": "contains",
-            "text": "",
-            "routing": {
-                "yb": "Normal",
-                "oE": 1
-            },
-            "points": "",
-            "from": 3,
-            "to": 5,
             "refs": [],
             "ctxs": [],
             "comment": ""
@@ -2417,20 +2289,6 @@
             "points": "",
             "from": 6,
             "to": 5,
-            "refs": [],
-            "ctxs": [],
-            "comment": ""
-        },
-        {
-            "category": "contains",
-            "text": "",
-            "routing": {
-                "yb": "Normal",
-                "oE": 1
-            },
-            "points": "",
-            "from": 9,
-            "to": 6,
             "refs": [],
             "ctxs": [],
             "comment": ""
@@ -2583,36 +2441,8 @@
                 "oE": 1
             },
             "points": "",
-            "from": 16,
-            "to": 5,
-            "refs": [],
-            "ctxs": [],
-            "comment": ""
-        },
-        {
-            "category": "contains",
-            "text": "",
-            "routing": {
-                "yb": "Normal",
-                "oE": 1
-            },
-            "points": "",
             "from": 17,
             "to": 6,
-            "refs": [],
-            "ctxs": [],
-            "comment": ""
-        },
-        {
-            "category": "contains",
-            "text": "",
-            "routing": {
-                "yb": "Normal",
-                "oE": 1
-            },
-            "points": "",
-            "from": 17,
-            "to": 5,
             "refs": [],
             "ctxs": [],
             "comment": ""

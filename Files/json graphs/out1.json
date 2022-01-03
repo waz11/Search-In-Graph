@@ -330,11 +330,6 @@
         },
         {
             "type": "contains",
-            "from": 1,
-            "to": 7
-        },
-        {
-            "type": "contains",
             "from": 3,
             "to": 1
         },
