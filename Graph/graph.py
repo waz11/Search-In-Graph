@@ -13,6 +13,10 @@ class Graph:
         self.vertices :dict = {}
         self.edges :dict = {}
 
+    def build(self, vertices, edges):
+        self.vertices = vertices
+        self.edges = edges
+
     def graph_builder_from_json_file(self, path) -> None:
         data :json = read_json_file(path)
         vertices :json = data['vertices']
