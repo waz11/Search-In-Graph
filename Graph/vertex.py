@@ -17,10 +17,15 @@ class Vertex:
         self.edges[edge.to.key] = edge
         self.neighbors.add(edge.to)
 
-    def json(self) -> json:
+    def toJson(self) -> json:
         j = {}
-
+        j["name"] = self.name
+        j["key"] = self.key
+        j["type"] = self.type
+        if len(self.attributes) > 0:
+            j["attributes"] = self.attributes
+        return j
 
 
     def __str__(self):
-        return "[key:{}, name:{}, type:{}, attributes:{}, tokens:{}]".format(self.key, self.name, self.type, self.attributes, self.tokens)
+        return "[key:{}, name:{}, type:{}, attributes:{}]".format(self.key, self.name, self.type, self.attributes)

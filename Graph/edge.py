@@ -8,5 +8,12 @@ class Edge:
         self.source :Vertex = source
         self.to :Vertex = to
 
+    def toJson(self):
+        j = {}
+        j["type"] = self.type
+        j["from"] = self.source.key
+        j["to"] = self.to.key
+        return j
+
     def __str__(self):
         return "({},{}):{}".format(self.source.key, self.to.key, self.type)

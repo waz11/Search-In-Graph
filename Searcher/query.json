@@ -2,14 +2,25 @@
     "vertices": [
         {
             "name": "c1",
+            "key": 0,
+            "type": "class"
+        },
+        {
+            "name": "class",
             "key": 1,
             "type": "class"
         },
         {
-            "name": "m5",
-            "key": 0,
-            "type": "method"
+            "name": "c2",
+            "key": 2,
+            "type": "class"
         }
     ],
-    "edges": []
+    "edges": [
+        {
+            "type": "extends",
+            "from": 1,
+            "to": 0
+        }
+    ]
 }
