@@ -10,7 +10,7 @@ def code_to_graph(project_path, output_path, project_name=''):
         project_name = folder_name
     code_from_file = CodeFromFile(project_path,project_name, output_path)
     code_from_file.concat_files()
-    code_from_file.test_new_file()
+    # code_from_file.test_new_file()
 
 
 def main():
