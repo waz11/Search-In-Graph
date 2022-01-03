@@ -1,5 +1,7 @@
 import json
 
+# go to: http://khmap.ise.bgu.ac.il/map/
+# and import the output file
 
 def main():
     create_json_file_for_viewer('Files/json graphs/out1.json', 'Files/json graphs for viewer/out1.json')
