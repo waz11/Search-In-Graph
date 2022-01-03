@@ -9,14 +9,14 @@ from Graph.vertex import Vertex
 
 class Graph:
     def __init__(self, path_to_json_file):
-        self.vertices = dict()
+        self.vertices :dict = {}
         self.edges :dict = {}
 
         self.__graph_builder(path_to_json_file)
 
     def __graph_builder(self, path):
         f = open(path)
-        data = json.load(f)
+        data :json = json.load(f)
         f.close()
         vertices :json = data['vertices']
         edges :json = data['edges']
