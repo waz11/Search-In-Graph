@@ -17,9 +17,7 @@ the graph is a json file, contains two arrays: vertices and edges.
 	to - destination vertex
 
 ### graph as image:
-
-![1-IterableList](https://user-images.githubusercontent.com/62445178/147954001-30b32bd9-c87c-4e82-ad6c-f7778c51eeec.png)
-
+![(Unsaved File)](https://user-images.githubusercontent.com/62445178/147954326-a32f7106-72d2-466e-a859-b1c6d663f3b7.png)
 
 
 
