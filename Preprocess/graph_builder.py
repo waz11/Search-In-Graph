@@ -13,10 +13,12 @@ def code_to_graph(project_path, output_path, project_name=''):
     # code_from_file.test_new_file()
 
 
+
+
 def main():
-    code_to_graph('../Files/codes/src', '../Files/json graphs/out1.json','iterable list practice')
+    # code_to_graph('../Files/codes/src', '../Files/json graphs/out1.json','iterable list practice')
     code_to_graph('../Files/codes/src2','../Files/json graphs/out2.json')
-    code_to_graph('../Files/codes/src3','../Files/json graphs/out3.json')
+    # code_to_graph('../Files/codes/src3','../Files/json graphs/out3.json')
 
 
 if __name__ == '__main__':
