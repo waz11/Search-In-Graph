@@ -12,7 +12,7 @@ the graph is a json file, contains two arrays: vertices and edges.
 	type - project / class / method
 	attributes - fields in class / arguments in method
 ## edge
-	type - class / method / implements / extends
+	type - class / method / implements / extends / contains(=argument)
 	from - source vertex
 	to - destination vertex
 
