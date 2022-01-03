@@ -3,6 +3,7 @@ import os
 import string
 
 from Preprocess.Parser.CodeFromFile import CodeFromFile
+from Preprocess.create_json_file_for_viewer import create_json_file_for_viewer
 
 
 def code_to_graph(project_path, output_path, project_name=''):
