@@ -31,12 +31,15 @@ def parse_vertices(vertices):
         # print(type)
         if type == "class":
             new_v["category"] = "Task"
+            new_v["strokeWidth"] = 2
         elif type == "method":
             new_v["category"] = "Quality"
+            new_v["stroke"] = "rgb(255, 0, 0"
+            new_v["strokeWidth"] = 1
         # new_v["category"] = v["type"]
         new_v["text"] = v["name"]
         # new_v["fill"] = "#ffffff"
-        # new_v["stroke"] = "#000000"
+        # new_v["stroke"] = "rgb(255, 0, 0"
         # new_v["strokeWidth"] = 1
         new_v["key"] = v["key"]
         # new_v["loc"] = ""
@@ -62,9 +65,9 @@ def parse_edges(edges):
         elif type == "method":
             new_e["category"] = "Contribution"
             new_e["text"] = 'method'
-            new_e["curve"] = {"yb":"Bezier", "oE":9}
-            new_e["curviness"] = 60
-        new_e["routing"] = {"yb": "Normal", "oE": 1}
+            # new_e["curve"] = {"yb":"Bezier", "oE":9}
+            # new_e["curviness"] = 60
+        # new_e["routing"] = {"yb": "Normal", "oE": 1}
         # new_e["points"] = ''
         new_e["from"] = e["from"]
         new_e["to"] = e["to"]
