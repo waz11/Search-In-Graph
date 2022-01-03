@@ -30,7 +30,7 @@ function: code_to_graph(project_path,project_name, output_path)
 
 2. optional: graph viewer
 
-go to: http://khmap.ise.bgu.ac.il/map
+with BGU vpn, go to: http://khmap.ise.bgu.ac.il/map
 
 and import the output file from the folder: Files/json graphs for viewer
 
