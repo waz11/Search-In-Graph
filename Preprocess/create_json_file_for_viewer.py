@@ -4,7 +4,9 @@ import json
 # and import the output file
 
 def main():
-    create_json_file_for_viewer('Files/json graphs/out3.json', 'Files/json graphs for viewer/out3.json')
+    create_json_file_for_viewer('../Files/json graphs/out1.json', '../Files/json graphs for viewer/out1.json')
+    # create_json_file_for_viewer('../Files/json graphs/out2.json', '../Files/json graphs for viewer/out2.json')
+    # create_json_file_for_viewer('../Files/json graphs/out3.json', '../Files/json graphs for viewer/out3.json')
 
 def create_json_file_for_viewer(json_file, output_path):
     f = open(json_file)
