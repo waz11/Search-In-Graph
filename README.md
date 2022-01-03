@@ -18,7 +18,8 @@ the graph is a json file, contains two arrays: vertices and edges.
 
 ### graph as image:
 
-![out1](https://user-images.githubusercontent.com/62445178/147928341-7997bc83-7ea9-49bc-96e3-015d96e1939d.png)
+![1-IterableList](https://user-images.githubusercontent.com/62445178/147954001-30b32bd9-c87c-4e82-ad6c-f7778c51eeec.png)
+
 
 
 
