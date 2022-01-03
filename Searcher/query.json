@@ -1,0 +1,15 @@
+{
+    "vertices": [
+        {
+            "name": "c1",
+            "key": 1,
+            "type": "class"
+        },
+        {
+            "name": "m5",
+            "key": 0,
+            "type": "method"
+        }
+    ],
+    "edges": []
+}

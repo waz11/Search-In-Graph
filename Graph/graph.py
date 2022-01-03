@@ -9,22 +9,20 @@ from Utils.json_functions import read_json_file
 
 
 class Graph:
-    def __init__(self, path_to_json_file):
+    def __init__(self):
         self.vertices :dict = {}
         self.edges :dict = {}
 
-        self.__graph_builder(path_to_json_file)
-
-    def __graph_builder(self, path) -> None:
+    def graph_builder_from_json_file(self, path) -> None:
         data :json = read_json_file(path)
         vertices :json = data['vertices']
         edges :json = data['edges']
-        self.__vertices_builder(vertices)
-        self.__edges_builder(edges)
+        self.__vertices_builder_fron_json_obj(vertices)
+        self.__edges_builder_fron_json_obj(edges)
         self.vertices[0].name = "PROJECT-DIRECTORY"
 
 
-    def __vertices_builder(self, vertices:json) -> None:
+    def __vertices_builder_fron_json_obj(self, vertices:json) -> None:
         for v in vertices:
             if "attributes" in v:
                 vertex = Vertex(v['key'], v['name'], v['type'], v['attributes'])
@@ -32,7 +30,7 @@ class Graph:
                 vertex = Vertex(v['key'], v['name'], v['type'], [])
             self.vertices[vertex.key] = vertex
 
-    def __edges_builder(self, edges:json) -> None:
+    def __edges_builder_fron_json_obj(self, edges:json) -> None:
         for e in edges:
             source = self.vertices[e["from"]]
             dest = self.vertices[e["to"]]
@@ -69,18 +67,26 @@ class Graph:
     def get_root(self) -> Vertex:
         return self.vertices[0]
 
+    def print_vertices(self):
+        for list in self.edges.values():
+            for e in list:
+                print(e)
+
+    def print_edges(self):
+        for list in self.edges.values():
+            for e in list:
+                print(e)
+
 
 def main():
-    g = Graph("../Files/json graphs/out1.json")
-    g.draw()
-    print(str(g.num_of_vertices()))
-    print(str(g.num_of_edges()))
-    for v in g.vertices.values():
-        print(v)
+    g1 = Graph()
+    g1.graph_builder_from_json_file('../Files/json graphs/src1.json')
+    g1.draw()
+    print(str(g1.num_of_vertices()))
+    print(str(g1.num_of_edges()))
+    g1.print_vertices()
     print()
-    for list in g.edges.values():
-        for e in list:
-            print(e)
+    g1.print_edges()
 
 
 if __name__ == '__main__':
