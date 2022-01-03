@@ -5,6 +5,7 @@ import networkx as nx
 from matplotlib import pyplot as plt
 from Graph.edge import Edge
 from Graph.vertex import Vertex
+from Utils.json_functions import read_json_file
 
 
 class Graph:
@@ -15,9 +16,7 @@ class Graph:
         self.__graph_builder(path_to_json_file)
 
     def __graph_builder(self, path) -> None:
-        f = open(path)
-        data :json = json.load(f)
-        f.close()
+        data :json = read_json_file(path)
         vertices :json = data['vertices']
         edges :json = data['edges']
         self.__vertices_builder(vertices)

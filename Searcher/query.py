@@ -79,13 +79,12 @@ class Query:
 
 
 def main():
-    # query = "c1 extends c2,
-    # c3 implements c4,
-    # m1 gets f1 and f2 and f3,
-    # c5 with m2 and m3 and m4,
-    # c6 contains c7"
-    query = "c3 implements c4"
-    q = Query(query)
+    q1 = "c1 extends c2"
+    q2 = "c3 implements c4"
+    q3 = "m1 gets f1 and f2 and f3"
+    q4 =  "c5 with m2 and m3 and m4"
+    q5 = "c6 contains c7"
+    q = Query(q1)
     q.parse()
     q.build()
 

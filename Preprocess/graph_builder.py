@@ -4,6 +4,7 @@ import string
 
 from Preprocess.Parser.CodeFromFile import CodeFromFile
 from Preprocess.create_json_file_for_viewer import create_json_file_for_viewer
+from Utils.json_functions import save_json_to_file, read_json_file
 
 
 def code_to_graph(project_path, output_path, project_name=''):
@@ -17,9 +18,7 @@ def code_to_graph(project_path, output_path, project_name=''):
     create_json_file_for_viewer(output_path)
 
 def connect_between_classes(json_file):
-    f = open(json_file)
-    data = json.load(f)
-    f.close()
+    data = read_json_file(json_file)
     map = {}
     vertices = data["vertices"]
     new_edges = []
@@ -52,12 +51,12 @@ def connect_between_classes(json_file):
     new_json = {}
     new_json["vertices"] = vertices
     new_json["edges"] = edges
-    save_to_file(new_json,json_file)
+    save_json_to_file(new_json, json_file)
 
 
-def save_to_file(json_object,output_path):
-    with open(output_path, 'w', encoding='utf-8') as f:
-        json.dump(json_object, f, ensure_ascii=False, indent=4)
+# def save_to_file(json_object,output_path):
+#     with open(output_path, 'w', encoding='utf-8') as f:
+#         json.dump(json_object, f, ensure_ascii=False, indent=4)
 
 
 def main():
