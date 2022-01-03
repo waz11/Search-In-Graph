@@ -1,4 +1,6 @@
 import json
+import string
+
 import networkx as nx
 from matplotlib import pyplot as plt
 from Graph.edge import Edge
@@ -48,8 +50,8 @@ class Graph:
         ed = []
         for edges_list in self.edges.values():
             for edge in edges_list:
-                v1 = edge.source.name
-                v2 = edge.to.name
+                v1 :string = edge.source.name
+                v2 :string = edge.to.name
                 ed.append((v1,v2))
         G.add_edges_from(ed)
         pos = nx.spring_layout(G)
