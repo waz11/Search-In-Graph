@@ -13,9 +13,6 @@ class Graph:
         self.vertices :dict = {}
         self.edges :dict = {}
 
-    def build(self, vertices, edges):
-        self.vertices = vertices
-        self.edges = edges
 
     def graph_builder_from_json_file(self, path) -> None:
         data :json = read_json_file(path)
@@ -23,7 +20,7 @@ class Graph:
         edges :json = data['edges']
         self.__vertices_builder_fron_json_obj(vertices)
         self.__edges_builder_fron_json_obj(edges)
-        self.vertices[0].name = "PROJECT-DIRECTORY"
+        # self.vertices[0].name = "PROJECT-DIRECTORY"
 
 
     def __vertices_builder_fron_json_obj(self, vertices:json) -> None:
@@ -84,6 +81,7 @@ class Graph:
 def main():
     g1 = Graph()
     g1.graph_builder_from_json_file('../Files/json graphs/src1.json')
+    # g1.graph_builder_from_json_file('../Files/query.json')
     g1.draw()
     print(str(g1.num_of_vertices()))
     print(str(g1.num_of_edges()))
