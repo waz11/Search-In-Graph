@@ -23,7 +23,7 @@ the graph is a json file, contains two arrays: vertices and edges.
 
 
 
-# Part II : code graph search engine
+# Part II : search in graph
 
 ## query
 
