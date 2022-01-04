@@ -27,7 +27,8 @@ class codeParser:
         """
 
         """get the java classes name"""
-        fin = open(Path( 'Utils/java_classes_names.txt'), "rt")
+        fin = open(Path('Utils/java_classes_names.txt'), "rt")
+        # fin = open(Path('Utils/java_classes_names.txt'), "rt")
         for line in fin:
             line = line.replace('\n', '')
             self.system_methods.append(line)

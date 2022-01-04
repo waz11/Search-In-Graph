@@ -26,7 +26,8 @@ def main():
     v1 = Vertex(1,"yellow","class")
     v2 = Vertex(1, "blue", "method")
     ranker = Ranker()
-    ranker.get_rank(v1,v2)
+    rank = ranker.get_rank(v1,v2)
+    print(rank)
 
 
 if __name__ == '__main__':
