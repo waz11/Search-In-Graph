@@ -6,20 +6,16 @@ from Searcher.query import Query
 
 class Searcher:
     def __init__(self, graph, query):
+        self.graph = graph
         self.query = query
         self.ordered_similar_nodes = MaxHeap()
-        self.query_graph = query.graph
-        self.graph = graph
 
 
     def calculate_similarity(self):
-        for vertex1 in self.query.graph.__vertices.values():
-            print('v1:',vertex1)
-            for vertex2 in self.graph.__vertices.values():
-                print(vertex2)
-                sim = sim_vertics(vertex1,vertex1)
-                # print(sim)
-                # self.ordered_similar_nodes.insert(sim, vertex2)
+        for vertex1 in self.query.graph.get_vertex():
+            for vertex2 in self.graph.get_vertex():
+                sim = sim_vertics(vertex1,vertex2)
+                self.ordered_similar_nodes.insert(sim, vertex2)
 
 
 # first_similar_node -> next_similar_node -> greedy_algorithm_recursive
@@ -30,13 +26,13 @@ class Searcher:
 
 
 def main():
-    query = "class list implements class iterable"
-    q = Query(query)
-    g = Graph()
-    g.loading_graph_file('../Files/json graphs/src1.json')
-    # searcher = Searcher(g,q)
-    # searcher.greedy_algorithm_recursive()
-
+    query = Query("class list implements class iterable,class list contains class node")
+    graph = Graph('../Files/json graphs/src1.json')
+    searcher = Searcher(graph, query)
+    searcher.calculate_similarity()
+    # graph.print_vertices()
+    # for v in graph.get_vertex():
+    #    print(v)
 
 if __name__ == '__main__':
     main()

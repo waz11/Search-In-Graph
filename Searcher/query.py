@@ -23,7 +23,7 @@ class Query:
         self.__vertices :list = self.__build_vertices_list()
         self.__edges :list = self.__build_edges_list()
         self.graph = Graph(vertices=self.__vertices, edges=self.__edges)
-        self.graph.draw()
+        # self.graph.draw()
 
     def build_json_obj(self):
         self.__parse()
