@@ -9,19 +9,25 @@ from Utils.json_functions import read_json_file
 
 
 class Graph:
-    def __init__(self):
+    def __init__(self, json_path:string='', vertices:list=[], edges:list=[]):
         self.vertices :dict = {}
         self.edges :dict = {}
+        if len(json_path) > 0:
+            self.__loading_graph_file(json_path)
+        else:
+            self.__build(vertices, edges)
 
 
-    def loading_gaph_from_json_file(self, path) -> None:
+    def __loading_graph_file(self, path) -> None:
         data :json = read_json_file(path)
-        vertices :json = data['vertices']
-        edges :json = data['edges']
-        self.__vertices_builder_fron_json_obj(vertices)
-        self.__edges_builder_fron_json_obj(edges)
+        vertices :list = data['vertices']
+        edges :list = data['edges']
+        self.__build(vertices, edges)
         # self.vertices[0].name = "PROJECT-DIRECTORY"
 
+    def __build(self, vertices: list, edges: list):
+        self.__vertices_builder_fron_json_obj(vertices)
+        self.__edges_builder_fron_json_obj(edges)
 
     def __vertices_builder_fron_json_obj(self, vertices:json) -> None:
         for v in vertices:
@@ -79,8 +85,7 @@ class Graph:
 
 
 def main():
-    g1 = Graph()
-    g1.loading_gaph_from_json_file('../Files/json graphs/src1.json')
+    g1 = Graph('../Files/json graphs/src1.json')
     # g1.graph_builder_from_json_file('../Files/query.json')
     g1.draw()
     print(str(g1.num_of_vertices()))

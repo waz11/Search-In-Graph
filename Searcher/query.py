@@ -8,19 +8,26 @@ from Utils.json_functions import save_json_to_file
 
 class Query:
 
-    def __init__(self, query):
-        self.content = query.split(',')
+    def __init__(self, content):
+        self.content = content.split(',')
+
         self.key = 0
         self.classes_vertex = {}
         self.methods_vertex = {}
         self.edges = {}
+
         self.special_words = set(["extends", "implements", "method","class","contains"])
-        self.json = {}
+
         self.parse()
-        self.toJson()
+        self.json = self.toJson()
+
+
+        # self.toJson()
         self.vertices = {}
-        self.graph = Graph()
-        self.graph.loading_gaph_from_json_file('../Files/query.json')
+
+
+    def build_json_obj(self):
+        self.parse()
 
     def get_uniqe_key(self) -> int:
         self.key += 1
@@ -28,35 +35,34 @@ class Query:
 
     def parse(self):
         q = self.content
-        self.create_vertex("QUERY",0,'query')
+        self.__create_vertex("QUERY",0,'query')
         for sentence in q:
             words = list(sentence.split(' '))
             for i, word in enumerate(words):
                 if word in self.special_words:
-                    # print(word)
                     if word=='class':
-                        self.create_vertex(words[i + 1], "class")
+                        self.__create_vertex(words[i + 1], "class")
                     if word =='method':
-                        self.create_vertex(words[i + 1], "method")
+                        self.__create_vertex(words[i + 1], "method")
                     if word=='extends':
-                        vertex1 = self.create_vertex(words[i-1],"class")
-                        vertex2 = self.create_vertex(words[i+2],"class")
-                        self.create_edge("extends", vertex2, vertex1)
+                        vertex1 = self.__create_vertex(words[i-1],"class")
+                        vertex2 = self.__create_vertex(words[i+2],"class")
+                        self.__create_edge("extends", vertex2, vertex1)
                     if word=='implements':
-                        vertex1 = self.create_vertex(words[i-1],"class")
-                        vertex2 = self.create_vertex(words[i+2],"class")
-                        self.create_edge("implements", vertex2, vertex1)
+                        vertex1 = self.__create_vertex(words[i-1],"class")
+                        vertex2 = self.__create_vertex(words[i+2],"class")
+                        self.__create_edge("implements", vertex2, vertex1)
                     if word=='contains':
                         if words[i-2] == 'class':
-                            vertex1 = self.create_vertex(words[i-1], "class")
+                            vertex1 = self.__create_vertex(words[i-1], "class")
                         else:
-                            vertex1 = self.create_vertex(words[i - 1], "method")
+                            vertex1 = self.__create_vertex(words[i - 1], "method")
                         if words[i+1]== 'method':
-                            vertex2 = self.create_vertex(words[i + 2], "method")
-                            self.create_edge("method",vertex1,vertex2)
+                            vertex2 = self.__create_vertex(words[i + 2], "method")
+                            self.__create_edge("method",vertex1,vertex2)
 
 
-    def create_vertex(self, name:string, type:string, attributes:list=[]) -> Vertex:
+    def __create_vertex(self, name:string, type:string, attributes:list=[]) -> Vertex:
         if type == 'class':
             if name not in self.classes_vertex.keys():
                 vertex = Vertex(self.get_uniqe_key(),name,"class",attributes)
@@ -68,7 +74,7 @@ class Query:
                 self.methods_vertex[name] = vertex
             return self.methods_vertex[name]
 
-    def create_edge(self, type, source, to):
+    def __create_edge(self, type, source, to):
         edge = Edge(type, source, to)
         if source not in self.edges.keys():
             self.edges[source] = [edge]
@@ -90,12 +96,13 @@ class Query:
                 edges.append(e.toJson())
         return edges
 
-    def toJson(self):
+    def toJson(self, out_path):
         vertices = self.build_vertices_list()
         edges = self.build_edges_list()
-        self.json["vertices"] = vertices
-        self.json["edges"] = edges
-        save_json_to_file(self.json, '../Files/query.json')
+        json = {}
+        json["vertices"] = vertices
+        json["edges"] = edges
+        save_json_to_file(json, '../Files/query.json')
 
     def __str__(self):
         return str(self.content)
@@ -107,7 +114,7 @@ def main():
     q3 = "class c1 contains method m1"
     q = q1+','+q2+','+q3
 
-    query = Query(q)
+    query = Query("class list implements class iterable,class list contains class node")
     print(query)
     # print(query.json)
     # query.graph

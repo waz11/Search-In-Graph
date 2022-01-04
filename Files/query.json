@@ -9,6 +9,11 @@
             "name": "iterable",
             "key": 2,
             "type": "class"
+        },
+        {
+            "name": "node",
+            "key": 3,
+            "type": "class"
         }
     ],
     "edges": [

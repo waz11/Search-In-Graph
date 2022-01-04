@@ -33,9 +33,9 @@ def main():
     query = "class list implements class iterable"
     q = Query(query)
     g = Graph()
-    g.loading_gaph_from_json_file('../Files/json graphs/src1.json')
-    searcher = Searcher(g,q)
-    searcher.greedy_algorithm_recursive()
+    g.loading_graph_file('../Files/json graphs/src1.json')
+    # searcher = Searcher(g,q)
+    # searcher.greedy_algorithm_recursive()
 
 
 if __name__ == '__main__':
