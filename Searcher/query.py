@@ -18,25 +18,25 @@ class Query:
         self.__classes_vertex = {}
         self.__methods_vertex = {}
         self.__edges_map = {}
-        self.parse()
+        self.__parse()
 
         # objects for graph builder:
-        self.vertices :list = self.__build_vertices_list()
-        self.edges :list = self.__build_edges_list()
-        self.graph = Graph(vertices=self.vertices, edges=self.edges)
+        self.__vertices :list = self.__build_vertices_list()
+        self.__edges :list = self.__build_edges_list()
+        self.graph = Graph(vertices=self.__vertices, edges=self.__edges)
         self.graph.draw()
 
-
-
     def build_json_obj(self):
-        self.parse()
+        self.__parse()
 
     def get_uniqe_key(self) -> int:
         self.key += 1
         return self.key
 
+    def __str__(self):
+        return str(self.content)
 
-    def parse(self):
+    def __parse(self):
         q = self.content
         self.__create_vertex("QUERY",0,'query')
         for sentence in q:
@@ -66,9 +66,8 @@ class Query:
                         elif words[i+1]== 'class':
                             vertex2 = self.__create_vertex(words[i + 2], "class")
                             self.__create_edge("contains",vertex1,vertex2)
-        self.vertices = self.__build_vertices_list()
-        self.edges = self.__build_edges_list()
-
+        self.__vertices = self.__build_vertices_list()
+        self.__edges = self.__build_edges_list()
 
     def __create_vertex(self, name:string, type:string, attributes:list=[]) -> Vertex:
         if type == 'class':
@@ -104,18 +103,6 @@ class Query:
                 edges.append(e.toJson())
         return edges
 
-    def toJson(self, out_path):
-        vertices = self.__build_vertices_list()
-        edges = self.__build_edges_list()
-        json = {}
-        json["vertices"] = vertices
-        json["edges"] = edges
-        save_json_to_file(json, '../Files/query.json')
-
-    def __str__(self):
-        return str(self.content)
-
-
 def main():
     q1 = "class c2 extends class c1"
     q2 = "class c2 implements class c3"
@@ -123,19 +110,7 @@ def main():
     q = q1+','+q2+','+q3
 
     query = Query("class list implements class iterable,class list contains class node")
-    print(query)
-    # print(query.json)
-    # query.graph
-    # save_json_to_file(query.json, 'query.json')
-
-
-    # key = 0
-    # for i,v in enumerate(q):
-    #     if v == "extends":
-    #         create_vertex(name=q[i-1], key=key, type="class")
-    #         key+=1
-    #         create_vertex(name=q[i+1], key=key, type="class")
-    #         key+=1
+    query.graph.
 
 
 if __name__ == '__main__':

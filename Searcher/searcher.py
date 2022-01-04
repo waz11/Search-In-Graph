@@ -13,9 +13,9 @@ class Searcher:
 
 
     def calculate_similarity(self):
-        for vertex1 in self.query.graph.vertices.values():
+        for vertex1 in self.query.graph.__vertices.values():
             print('v1:',vertex1)
-            for vertex2 in self.graph.vertices.values():
+            for vertex2 in self.graph.__vertices.values():
                 print(vertex2)
                 sim = sim_vertics(vertex1,vertex1)
                 # print(sim)

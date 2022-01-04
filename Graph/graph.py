@@ -10,8 +10,8 @@ from Utils.json_functions import read_json_file
 
 class Graph:
     def __init__(self, json_path:string='', vertices:list=[], edges:list=[]):
-        self.vertices :dict = {}
-        self.edges :dict = {}
+        self.__vertices :dict = {}
+        self.__edges :dict = {}
         if len(json_path) > 0:
             self.__loading_graph_file(json_path)
         else:
@@ -35,24 +35,24 @@ class Graph:
                 vertex = Vertex(v['key'], v['name'], v['type'], v['attributes'])
             else:
                 vertex = Vertex(v['key'], v['name'], v['type'], [])
-            self.vertices[vertex.key] = vertex
+            self.__vertices[vertex.key] = vertex
 
     def __edges_builder_fron_json_obj(self, edges:json) -> None:
         for e in edges:
-            source = self.vertices[e["from"]]
-            dest = self.vertices[e["to"]]
+            source = self.__vertices[e["from"]]
+            dest = self.__vertices[e["to"]]
             edge = Edge(e["type"], source, dest)
-            self.vertices[source.key].add_edge(edge)
-            if source not in self.edges.keys():
-                self.edges[source] = [edge]
+            self.__vertices[source.key].add_edge(edge)
+            if source not in self.__edges.keys():
+                self.__edges[source] = [edge]
             else:
-                self.edges[source].append(edge)
+                self.__edges[source].append(edge)
 
 
     def draw(self) -> None:
         G = nx.DiGraph()
         ed = []
-        for edges_list in self.edges.values():
+        for edges_list in self.__edges.values():
             for edge in edges_list:
                 v1 :string = edge.source.name
                 v2 :string = edge.to.name
@@ -66,33 +66,47 @@ class Graph:
         plt.show()
 
     def num_of_vertices(self) -> int:
-        return len(self.vertices)
+        return len(self.__vertices)
 
     def num_of_edges(self) -> int:
-        return len(self.edges)
+        return len(self.__edges)
 
     def get_root(self) -> Vertex:
-        return self.vertices[0]
+        return self.__vertices[0]
 
     def print_vertices(self) -> None:
-        for vertex in self.vertices.values():
+        for vertex in self.__vertices.values():
             print(vertex)
 
     def print_edges(self) -> None:
-        for list in self.edges.values():
+        for list in self.__edges.values():
             for edge in list:
                 print(edge)
+
+    def get_vertex(self) ->list:
+        list = []
+        for vertex in self.__vertices.values():
+            list.append(vertex)
+        return list
+
+    def get_edges(self) ->list:
+        list = []
+        for l in self.__edges.values():
+            for edge in l:
+                list.append(edge)
+        return list
 
 
 def main():
     g1 = Graph('../Files/json graphs/src1.json')
-    # g1.graph_builder_from_json_file('../Files/query.json')
-    g1.draw()
-    print(str(g1.num_of_vertices()))
-    print(str(g1.num_of_edges()))
-    g1.print_vertices()
-    print()
-    g1.print_edges()
+    # # g1.graph_builder_from_json_file('../Files/query.json')
+    # g1.draw()
+    # print(str(g1.num_of_vertices()))
+    # print(str(g1.num_of_edges()))
+    # g1.print_vertices()
+    # print()
+    # g1.print_edges()
+
 
 
 if __name__ == '__main__':

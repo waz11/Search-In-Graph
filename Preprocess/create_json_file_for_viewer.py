@@ -2,60 +2,57 @@ import json
 
 # go to: http://khmap.ise.bgu.ac.il/map/
 # and import the output file
+
+from Graph.graph import Graph
 from Utils.json_functions import read_json_file, save_json_to_file
 
 
 def main():
-    create_json_file_for_viewer('../Files/json graphs/src1.json')
-    create_json_file_for_viewer('../Files/json graphs/src2.json')
-    create_json_file_for_viewer('../Files/json graphs/src3.json')
+    g = Graph('../Files/json graphs/src1.json')
+    create_json_file_for_viewer(g.get_vertex(), g.get_edges(), 'src1')
 
-def create_json_file_for_viewer(json_file):
-    data = read_json_file(json_file)
-    vertices = parse_vertices(data["vertices"])
-    edges = parse_edges(data["edges"])
-    project_name = json_file.split('/')[-1]
-    j2 = {}
-    j2["class"] = "go.GraphLinksModel"
-    j2["nodeDataArray"] = vertices
-    j2["linkDataArray"] = edges
-    save_json_to_file(j2, '../Files/json graphs for viewer/'+project_name)
+def create_json_file_for_viewer(vertices:list=[], edges:list=[],graph_name='src'):
+    vertices = __parse_vertices(vertices)
+    edges = __parse_edges(edges)
+    json = {}
+    json["class"] = "go.GraphLinksModel"
+    json["nodeDataArray"] = vertices
+    json["linkDataArray"] = edges
+    save_json_to_file(json, '../Files/json graphs for viewer/'+graph_name+'.json')
 
-def parse_vertices(vertices):
+def __parse_vertices(vertices):
     new_vertices = []
     for v in vertices:
         new_v = {}
-        type = v["type"]
-        if type == "class":
+        if v.type == "class":
             new_v["category"] = "Task"
             new_v["strokeWidth"] = 2
-        elif type == "method":
+        elif v.type == "method":
             new_v["category"] = "Quality"
             new_v["stroke"] = "rgb(255, 0, 0"
             new_v["strokeWidth"] = 1
-        new_v["text"] = v["name"]
-        new_v["key"] = v["key"]
+        new_v["text"] = v.name
+        new_v["key"] = v.key
         new_vertices.append(new_v)
     return new_vertices
 
-def parse_edges(edges):
+def __parse_edges(edges):
     new_edges = []
     for e in edges:
         new_e = {}
-        type = e["type"]
-        new_e["category"] = e["type"]
+        new_e["category"] = e.type
         new_e["text"] = ''
-        if type == "extends":
+        if e.type == "extends":
             new_e["category"] = "ExtendedBy"
             new_e["text"] = 'extends'
-        elif type == "implements":
+        elif e.type == "implements":
             new_e["category"] = "ExtendedBy"
             new_e["text"] = 'implements'
-        elif type == "method":
+        elif e.type == "method":
             new_e["category"] = "Contribution"
             new_e["text"] = 'method'
-        new_e["from"] = e["from"]
-        new_e["to"] = e["to"]
+        new_e["from"] = e.source.key
+        new_e["to"] = e.to.key
         new_edges.append(new_e)
     return new_edges
 
