@@ -12,7 +12,7 @@ def main():
     create_json_file_for_viewer(g, 'src1')
 
 def create_json_file_for_viewer(graph:Graph,graph_name='src'):
-    vertices = __parse_vertices(graph.get_vertex())
+    vertices = __parse_vertices(graph.get_vertices())
     edges = __parse_edges(graph.get_edges())
     json = {}
     json["class"] = "go.GraphLinksModel"

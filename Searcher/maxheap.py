@@ -75,12 +75,17 @@ class MaxHeap:
 
 if __name__ == "__main__":
     maxHeap = MaxHeap(15)
-    v1 = Vertex(1,'','')
-    v2 = Vertex(1, '', '')
-    maxHeap.insert(3, Edge(1,v1,v2))
+    v1 = Vertex(1,'list','class')
+    v2 = Vertex(2, 'linkedlist', 'class')
+    maxHeap.insert(3, v1)
+    maxHeap.insert(1, v2)
+    maxHeap.insert(3, v1)
+    maxHeap.insert(1, v2)
+    maxHeap.insert(3, v1)
+    maxHeap.insert(1, v2)
+
     print(maxHeap.size)
-    maxHeap.extractMax()
-    print(maxHeap.size)
+
 
     maxHeap.Print()
     print("The Max val is " + str(maxHeap.extractMax().rank))

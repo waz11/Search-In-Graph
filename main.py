@@ -12,9 +12,8 @@ def main():
     # [1] Preprocess:
     # a. code to graph in json file:
     code_to_graph_in_json_file('Files/codes/src1', 'Project 1')
-    # b. load graph from json file to Graph object
+    # b. load graph from json file to Graph objec    # graph_code.loading_graph_file('Files/json graphs/src1.json')t
     # graph_code = Graph()
-    # graph_code.loading_graph_file('Files/json graphs/src1.json')
 
     # buildGraph('Files/json graphs/out1.json')
     # buildGraph('Files/json graphs/out2.json')

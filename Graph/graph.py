@@ -83,7 +83,7 @@ class Graph:
             for edge in list:
                 print(edge)
 
-    def get_vertex(self) ->list:
+    def get_vertices(self) ->list:
         list = []
         for vertex in self.__vertices.values():
             list.append(vertex)
@@ -96,9 +96,28 @@ class Graph:
                 list.append(edge)
         return list
 
+    def list_to_json(self, list):
+        json = []
+        for element in list:
+            json.append(element.toJson)
+
+    def toJson(self):
+        json = {}
+        vertices = []
+        for vertex in self.get_vertices():
+            vertices.append(vertex.toJson())
+        edges = []
+        for edge in self.get_edges():
+            edges.append(edge.toJson())
+        json["vertices"] = vertices
+        json["edges"] = edges
+        print(json)
+
+
 
 def main():
     g1 = Graph('../Files/json graphs/src1.json')
+    g1.toJson()
     # # g1.graph_builder_from_json_file('../Files/query.json')
     # g1.draw()`
     # print(str(g1.num_of_vertices()))
