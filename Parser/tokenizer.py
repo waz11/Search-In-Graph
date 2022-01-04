@@ -5,14 +5,13 @@ from nltk.corpus import wordnet
 
 class Tokenizer:
 
-    def __init__(self, content):
+    def __init__(self):
         self.p = PorterStemmer()
-        self.tokens :set = {}
         # self.synonyms :set = {}
-        self.get_tokens(content)
         # self.__add_synonyms()
 
-    def get_tokens(self, content, rm_stopwords=False, stem=False) -> None:
+    def get_tokens(self, content, rm_stopwords=False, stem=False) -> set:
+        tokens: set = {}
         words = re.split('[^A-Za-z]+', content)
         ret = []
         for word in words:
@@ -28,7 +27,8 @@ class Tokenizer:
                     tmp.append(word)
         ret = tmp
         if len(ret) > 0:
-            self.tokens = set(ret)
+            tokens = set(ret)
+        return tokens
 
     def __camel_case_split(self, word) -> list:
         matches = re.finditer('.+?(?:(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])|$)', word)

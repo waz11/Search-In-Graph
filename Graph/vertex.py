@@ -11,7 +11,7 @@ class Vertex:
         self.attributes :list = attributes
         self.edges :dict = {}
         self.neighbors :set = set()
-        self.tokens = Tokenizer(name).tokens #added the tokens here for time complexity consideration
+        self.tokens = Tokenizer().get_tokens(name) #added the tokens here for time complexity consideration
 
     def add_edge(self, edge) -> None:
         self.edges[edge.to.key] = edge
