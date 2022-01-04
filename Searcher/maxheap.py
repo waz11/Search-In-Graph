@@ -65,12 +65,12 @@ class MaxHeap:
                   " LEFT CHILD : " + str(self.Heap[2 * i].element) +
                   " RIGHT CHILD : " + str(self.Heap[2 * i + 1].element))
 
-    def extractMax(self) -> Element:
+    def extractMax(self) -> (Element, float):
         popped = self.Heap[self.FRONT]
         self.Heap[self.FRONT] = self.Heap[self.size]
         self.size -= 1
         self.maxHeapify(self.FRONT)
-        return popped
+        return popped.element, popped.rank
 
 
 if __name__ == "__main__":

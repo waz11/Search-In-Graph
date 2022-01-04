@@ -100,7 +100,7 @@ class Graph:
 def main():
     g1 = Graph('../Files/json graphs/src1.json')
     # # g1.graph_builder_from_json_file('../Files/query.json')
-    # g1.draw()
+    # g1.draw()`
     # print(str(g1.num_of_vertices()))
     # print(str(g1.num_of_edges()))
     # g1.print_vertices()
