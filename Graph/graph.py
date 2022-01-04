@@ -25,7 +25,7 @@ class Graph:
         self.__build(vertices, edges)
         # self.vertices[0].name = "PROJECT-DIRECTORY"
 
-    def __build(self, vertices: list, edges: list):
+    def __build(self, vertices: list, edges: list) -> None:
         self.__vertices_builder_fron_json_obj(vertices)
         self.__edges_builder_fron_json_obj(edges)
 
@@ -74,11 +74,11 @@ class Graph:
     def get_root(self) -> Vertex:
         return self.vertices[0]
 
-    def print_vertices(self):
+    def print_vertices(self) -> None:
         for vertex in self.vertices.values():
             print(vertex)
 
-    def print_edges(self):
+    def print_edges(self) -> None:
         for list in self.edges.values():
             for edge in list:
                 print(edge)

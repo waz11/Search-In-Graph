@@ -8,22 +8,24 @@ from Utils.json_functions import save_json_to_file
 
 class Query:
 
-    def __init__(self, content):
-        self.content = content.split(',')
+    def __init__(self, query):
+        self.query = query
 
+        # objects for parser:
+        self.content = query.split(',')
+        self.special_words = set(["extends", "implements", "method", "class", "contains"])
         self.key = 0
-        self.classes_vertex = {}
-        self.methods_vertex = {}
-        self.edges = {}
-
-        self.special_words = set(["extends", "implements", "method","class","contains"])
-
+        self.__classes_vertex = {}
+        self.__methods_vertex = {}
+        self.__edges_map = {}
         self.parse()
-        self.json = self.toJson()
 
+        # objects for graph builder:
+        self.vertices :list = self.__build_vertices_list()
+        self.edges :list = self.__build_edges_list()
+        self.graph = Graph(vertices=self.vertices, edges=self.edges)
+        self.graph.draw()
 
-        # self.toJson()
-        self.vertices = {}
 
 
     def build_json_obj(self):
@@ -32,6 +34,7 @@ class Query:
     def get_uniqe_key(self) -> int:
         self.key += 1
         return self.key
+
 
     def parse(self):
         q = self.content
@@ -60,45 +63,50 @@ class Query:
                         if words[i+1]== 'method':
                             vertex2 = self.__create_vertex(words[i + 2], "method")
                             self.__create_edge("method",vertex1,vertex2)
+                        elif words[i+1]== 'class':
+                            vertex2 = self.__create_vertex(words[i + 2], "class")
+                            self.__create_edge("contains",vertex1,vertex2)
+        self.vertices = self.__build_vertices_list()
+        self.edges = self.__build_edges_list()
 
 
     def __create_vertex(self, name:string, type:string, attributes:list=[]) -> Vertex:
         if type == 'class':
-            if name not in self.classes_vertex.keys():
+            if name not in self.__classes_vertex.keys():
                 vertex = Vertex(self.get_uniqe_key(),name,"class",attributes)
-                self.classes_vertex[name] = vertex
-            return self.classes_vertex[name]
+                self.__classes_vertex[name] = vertex
+            return self.__classes_vertex[name]
         if type == 'method':
-            if name not in self.methods_vertex.keys():
+            if name not in self.__methods_vertex.keys():
                 vertex = Vertex(self.get_uniqe_key(), name, "method", attributes)
-                self.methods_vertex[name] = vertex
-            return self.methods_vertex[name]
+                self.__methods_vertex[name] = vertex
+            return self.__methods_vertex[name]
 
     def __create_edge(self, type, source, to):
         edge = Edge(type, source, to)
-        if source not in self.edges.keys():
-            self.edges[source] = [edge]
+        if source not in self.__edges_map.keys():
+            self.__edges_map[source] = [edge]
         else:
-            self.edges[source].append(edge)
+            self.__edges_map[source].append(edge)
 
-    def build_vertices_list(self):
+    def __build_vertices_list(self):
         vertices = []
-        for v in self.classes_vertex.values():
+        for v in self.__classes_vertex.values():
             vertices.append(v.toJson())
-        for v in self.methods_vertex.values():
+        for v in self.__methods_vertex.values():
             vertices.append(v.toJson())
         return vertices
 
-    def build_edges_list(self):
+    def __build_edges_list(self):
         edges = []
-        for list in self.edges.values():
+        for list in self.__edges_map.values():
             for e in list:
                 edges.append(e.toJson())
         return edges
 
     def toJson(self, out_path):
-        vertices = self.build_vertices_list()
-        edges = self.build_edges_list()
+        vertices = self.__build_vertices_list()
+        edges = self.__build_edges_list()
         json = {}
         json["vertices"] = vertices
         json["edges"] = edges
