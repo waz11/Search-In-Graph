@@ -18,12 +18,12 @@ the graph is a json file, contains two arrays: vertices and edges.\
 1. build json file (into: Files/json graphs) contains graph from java project:\
 path: Preprocess/graph_builder.py\
 function: code_to_graph_in_json_file(project_path, project_name='')\
-output: new json file in: Files/json graphs\
+output: new json file in: Files/json graphs
 
 2. graphviewer - (optional):\
 path: Preprocess/create_json_file_for_viewer.py\
 function: create_json_file_for_viewer(json_file)\
-with BGU vpn, go to: http://khmap.ise.bgu.ac.il/map and import the output file\
+with BGU vpn, go to: http://khmap.ise.bgu.ac.il/map and import the output file
 
 3. searcher\
 path: Searcher/searcher.py\
@@ -32,7 +32,7 @@ load graph to searcher:\
 graph = Graph()\
 graph.loading_graph_From_json_file(path)\
 query = Query(query_text)\
-searcher(graph,query)\
+searcher(graph,query)
 
 
 
