@@ -14,7 +14,7 @@ class Graph:
         self.__edges :dict = {}
         if len(json_path) > 0:
             self.__loading_graph_file(json_path)
-        else:
+        elif len(vertices)>0 or len(edges)>0:
             self.__build(vertices, edges)
 
 
@@ -74,6 +74,12 @@ class Graph:
     def get_root(self) -> Vertex:
         return self.__vertices[0]
 
+    def add_vertex(self,vertex:Vertex) -> None:
+        self.__vertices[vertex.id] = vertex
+
+    def add_edge(self,edge:Edge) -> None:
+        self.__edges[edge.source] = edge
+
     def print_vertices(self) -> None:
         for vertex in self.__vertices.values():
             print(vertex)
@@ -111,7 +117,7 @@ class Graph:
             edges.append(edge.toJson())
         json["vertices"] = vertices
         json["edges"] = edges
-        print(json)
+        # print(json)
 
 
 
