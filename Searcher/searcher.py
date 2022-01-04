@@ -10,6 +10,7 @@ class Searcher:
         self.query = query
         self.heap = MaxHeap(graph.num_of_vertices() * query.graph.num_of_vertices())
         self.ranker = Ranker()
+        self.results :list = []
 
     def class_based_similarity(self):
         pass
