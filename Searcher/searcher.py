@@ -23,7 +23,7 @@ class Searcher:
         for vertex1 in self.query.graph.get_vertices():
             for vertex2 in self.graph.get_vertices():
                 sim = self.ranker.get_rank(vertex1, vertex2)
-                # print(sim)
+                print(sim)
                 self.heap.insert(sim, vertex2)
 
 # first_similar_node -> next_similar_node -> greedy_algorithm_recursive

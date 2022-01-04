@@ -12,7 +12,7 @@ class Ranker:
         for word1 in vertex1.tokens:
             for word2 in vertex2.tokens:
                 rank += self.__single_pair_word_sim(word1, word2)
-                print(word1, word2, rank)
+                # print(word1, word2, rank)
         rank /= max(len(vertex1.tokens), len(vertex2.tokens))
         return rank
 
