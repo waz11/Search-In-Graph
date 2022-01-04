@@ -8,8 +8,9 @@ from Utils.json_functions import read_json_file, save_json_to_file
 
 
 def main():
-    g = Graph('../Files/json graphs/src1.json')
-    create_json_file_for_viewer(g, 'src1')
+    g = Graph('../Files/json graphs/src3.json')
+    create_json_file_for_viewer(g, 'src3')
+    # create_json_file_for_viewer(g, 'src2')
 
 def create_json_file_for_viewer(graph:Graph,graph_name='src'):
     vertices = __parse_vertices(graph.get_vertices())

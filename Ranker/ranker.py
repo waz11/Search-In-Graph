@@ -23,8 +23,8 @@ class Ranker:
 
 
 def main():
-    v1 = Vertex(1,"yellow","class")
-    v2 = Vertex(1, "blue", "method")
+    v1 = Vertex(1,"listIterator","class")
+    v2 = Vertex(1, "list iterator", "method")
     ranker = Ranker()
     rank = ranker.get_rank(v1,v2)
     print(rank)

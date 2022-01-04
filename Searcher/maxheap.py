@@ -10,7 +10,7 @@ class Element:
         self.element = element
 
 class MaxHeap:
-    def __init__(self, maxsize=20):
+    def __init__(self, maxsize=3):
         self.maxsize = maxsize
         self.size = 0
         self.Heap = [Element(0)] * (self.maxsize + 1)
@@ -70,22 +70,20 @@ class MaxHeap:
         self.Heap[self.FRONT] = self.Heap[self.size]
         self.size -= 1
         self.maxHeapify(self.FRONT)
-        return popped.element, popped.rank
+        return popped
 
 
 if __name__ == "__main__":
-    maxHeap = MaxHeap(15)
+    maxHeap = MaxHeap(200)
     v1 = Vertex(1,'list','class')
     v2 = Vertex(2, 'linkedlist', 'class')
     maxHeap.insert(3, v1)
     maxHeap.insert(1, v2)
-    maxHeap.insert(3, v1)
-    maxHeap.insert(1, v2)
-    maxHeap.insert(3, v1)
-    maxHeap.insert(1, v2)
-
-    print(maxHeap.size)
-
-
+    maxHeap.insert(5, v1)
+    maxHeap.insert(4, v2)
+    maxHeap.insert(2, v1)
+    maxHeap.insert(90, v2)
+    # print(maxHeap.size)
     maxHeap.Print()
-    print("The Max val is " + str(maxHeap.extractMax().rank))
+    element = maxHeap.extractMax()
+    print("The Max val is ", element.rank, element.element)
