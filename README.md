@@ -52,4 +52,4 @@ query as graph:\
 ## searcher
 
 ## ranker
-
+semantic similarity - with semach library, for more details go to: https://gsi-upm.github.io/sematch/
