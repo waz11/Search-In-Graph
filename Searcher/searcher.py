@@ -11,7 +11,6 @@ class Searcher:
         self.heap = MaxHeap(graph.num_of_vertices() * query.graph.num_of_vertices())
         self.ranker = Ranker()
 
-
     def class_based_similarity(self):
         pass
 
