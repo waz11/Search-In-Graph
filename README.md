@@ -41,6 +41,11 @@ searcher(graph,query)
 
 ## query
 
+query: class list implements class iterable,class list contains class node\
+graph:
+![query1](https://user-images.githubusercontent.com/62445178/148056668-61379d48-9b40-4419-ae4a-f3c919d67483.png)
+
+
 ## parser
 
 ## graph object
