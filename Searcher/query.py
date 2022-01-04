@@ -3,8 +3,7 @@ import string
 from Graph.edge import Edge
 from Graph.graph import Graph
 from Graph.vertex import Vertex
-from Utils.json_functions import save_json_to_file
-
+from Preprocess.create_json_file_for_viewer import create_json_file_for_viewer
 
 class Query:
 
@@ -50,11 +49,11 @@ class Query:
                     if word=='extends':
                         vertex1 = self.__create_vertex(words[i-1],"class")
                         vertex2 = self.__create_vertex(words[i+2],"class")
-                        self.__create_edge("extends", vertex2, vertex1)
+                        self.__create_edge("extends", vertex1, vertex2)
                     if word=='implements':
                         vertex1 = self.__create_vertex(words[i-1],"class")
                         vertex2 = self.__create_vertex(words[i+2],"class")
-                        self.__create_edge("implements", vertex2, vertex1)
+                        self.__create_edge("implements", vertex1, vertex2)
                     if word=='contains':
                         if words[i-2] == 'class':
                             vertex1 = self.__create_vertex(words[i-1], "class")
@@ -110,7 +109,10 @@ def main():
     q = q1+','+q2+','+q3
 
     query = Query("class list implements class iterable,class list contains class node")
-    query.graph.
+    query.graph.print_vertices()
+    query.graph.print_edges()
+
+    create_json_file_for_viewer(query.graph, 'query')
 
 
 if __name__ == '__main__':

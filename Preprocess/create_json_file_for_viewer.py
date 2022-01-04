@@ -9,11 +9,11 @@ from Utils.json_functions import read_json_file, save_json_to_file
 
 def main():
     g = Graph('../Files/json graphs/src1.json')
-    create_json_file_for_viewer(g.get_vertex(), g.get_edges(), 'src1')
+    create_json_file_for_viewer(g, 'src1')
 
-def create_json_file_for_viewer(vertices:list=[], edges:list=[],graph_name='src'):
-    vertices = __parse_vertices(vertices)
-    edges = __parse_edges(edges)
+def create_json_file_for_viewer(graph:Graph,graph_name='src'):
+    vertices = __parse_vertices(graph.get_vertex())
+    edges = __parse_edges(graph.get_edges())
     json = {}
     json["class"] = "go.GraphLinksModel"
     json["nodeDataArray"] = vertices
@@ -51,6 +51,11 @@ def __parse_edges(edges):
         elif e.type == "method":
             new_e["category"] = "Contribution"
             new_e["text"] = 'method'
+        elif e.type == "contains":
+            new_e["category"] = "ConsistsOf"
+            new_e["text"] = 'contains'
+
+
         new_e["from"] = e.source.key
         new_e["to"] = e.to.key
         new_edges.append(new_e)
