@@ -20,7 +20,7 @@ class Query:
         self.toJson()
         self.vertices = {}
         self.graph = Graph()
-        self.graph.graph_builder_from_json_file('../Files/query.json')
+        self.graph.loading_gaph_from_json_file('../Files/query.json')
 
     def get_uniqe_key(self) -> int:
         self.key += 1

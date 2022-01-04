@@ -2,14 +2,11 @@ import os
 import string
 from Preprocess.Parser.CodeFromFile import CodeFromFile
 
-
 # building graph from java project to json file
-
 def code_to_graph(project_path, project_name=''):
     folder_name :string= os.path.basename(project_path)
     if project_name is '':
         project_name = folder_name
-
     output_path = '../Files/json graphs/'+folder_name+'.json'
     CodeFromFile(project_path,project_name, output_path)
 

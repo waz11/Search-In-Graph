@@ -2,6 +2,7 @@ from nltk.corpus import wordnet
 from Ranker.matrix import Matrix
 
 
+
 def similarity_names(name1, name2) -> int:
     syn1 = wordnet.synsets(name1)[0]
     print(syn1)

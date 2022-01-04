@@ -2,6 +2,8 @@ class Matrix:
 
     def __init__(self):
         self.Similarity_matrix_vertex = {}
+        self.Similarity_matrix_vertex['class']['project'] = 0
+        self.Similarity_matrix_vertex['project']['class'] = 0
         self.Similarity_matrix_vertex['class']['class'] = 1
         self.Similarity_matrix_vertex['class']['method'] = 0.5
         self.Similarity_matrix_vertex['method']['method'] = 1

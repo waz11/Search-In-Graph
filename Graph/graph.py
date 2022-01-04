@@ -14,7 +14,7 @@ class Graph:
         self.edges :dict = {}
 
 
-    def graph_builder_from_json_file(self, path) -> None:
+    def loading_gaph_from_json_file(self, path) -> None:
         data :json = read_json_file(path)
         vertices :json = data['vertices']
         edges :json = data['edges']
@@ -80,7 +80,7 @@ class Graph:
 
 def main():
     g1 = Graph()
-    g1.graph_builder_from_json_file('../Files/json graphs/src1.json')
+    g1.loading_gaph_from_json_file('../Files/json graphs/src1.json')
     # g1.graph_builder_from_json_file('../Files/query.json')
     g1.draw()
     print(str(g1.num_of_vertices()))
