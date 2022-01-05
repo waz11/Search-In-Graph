@@ -132,8 +132,8 @@ class Graph:
         return self.vertices[key]
 
 def main():
-    g1 = Graph('../Files/json graphs/src1.json')
-    g1.toJson()
+    # g1 = Graph('../Files/json graphs/src1.json')
+    # g1.toJson()
     # # g1.graph_builder_from_json_file('../Files/query.json')
     # g1.draw()`
     # print(str(g1.num_of_vertices()))
@@ -141,6 +141,10 @@ def main():
     # g1.print_vertices()
     # print()
     # g1.print_edges()
+
+    g = Graph()
+    g.add_vertex(Vertex(1,"ron","class"))
+    g.draw()
 
 
 
