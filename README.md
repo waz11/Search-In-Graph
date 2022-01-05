@@ -49,8 +49,10 @@ query as graph:\
 So far, the parser deals only with some patterns of syntax in query, as described below:\
 	- "**class** <ins>class_name</ins> **extends class** <ins>class_name</ins>"\
 	- "**class** <ins>class_name</ins> **implements class** <ins>class_name</ins>"\
+	- "**class** <ins>class_name</ins> **contains class** <ins>class_name</ins>"\
 	- "**class** <ins>class_name</ins> **contains method** <ins>method_name</ins>"\
-	- "**class** <ins>class_name</ins> **contains field** <ins>field_name</ins>"
+	- "**class** <ins>class_name</ins> **contains field** <ins>field_name</ins>"\
+	- "**method** <ins>method_name</ins>" **contains field** <ins>field_name</ins>"
 
 ## graph object
 
@@ -64,5 +66,5 @@ semantic similarity - with semach library, for more details go to: https://gsi-u
 	- [x] parsing java code to graph
 	- [x] parsing query to graph
 	- [x] ranker
-	- [] searcher
+	- [ ] searcher
 
