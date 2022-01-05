@@ -11,7 +11,7 @@ the graph is a json file, contains two arrays: vertices and edges.\
 	type - class / method / implements / extends / contains(=argument)
 	from - source vertex
 	to - destination vertex
-### graph as image:
+### graph illustration:
 ![(Unsaved File)](https://user-images.githubusercontent.com/62445178/147954326-a32f7106-72d2-466e-a859-b1c6d663f3b7.png)
 
 ## Instruction:
