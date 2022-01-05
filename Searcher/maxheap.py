@@ -48,7 +48,8 @@ class MaxHeap:
                     self.maxHeapify(self.rightChild(pos))
 
 
-    def insert(self, rank, component) -> None:
+    def insert(self, rank, component=None) -> None:
+        print("inserted", self.size, rank, component)
         element = Element(rank, component)
         if self.size >= self.maxsize:
             return
@@ -74,17 +75,15 @@ class MaxHeap:
 
 
 if __name__ == "__main__":
-    maxHeap = MaxHeap(200)
-    v1 = Vertex(1,'list','class')
-    v2 = Vertex(2, 'linkedlist', 'class')
-    maxHeap.insert(3, v1)
-    maxHeap.insert(1, v2)
-    maxHeap.insert(5, v1)
-    maxHeap.insert(4, v2)
-    maxHeap.insert(2, v1)
-    maxHeap.insert(90, v2)
+    maxHeap = MaxHeap(7)
+    maxHeap.insert(1)
+    maxHeap.insert(2)
+    maxHeap.insert(2)
+
     # print(maxHeap.size)
     maxHeap.Print()
+    element = maxHeap.extractMax()
+    print("The Max val is ", element.rank, element.element)
     element = maxHeap.extractMax()
     print("The Max val is ", element.rank, element.element)
     element = maxHeap.extractMax()
