@@ -16,10 +16,11 @@ class Result:
         return self.rank
 
     def __str__(self):
-        str = ''
+        s = ''
         for vertex in self.graph.get_vertices():
-            str+=vertex.name+' '
-        return str
+            s+=str(vertex)+' '
+        return s
+        # return str(self.graph.get_vertices())
 
 
 def main():
