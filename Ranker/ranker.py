@@ -1,7 +1,7 @@
 from Graph.vertex import Vertex
-from Parser.tokenizer import Tokenizer
 from Ranker.matrix import Matrix
 from Ranker.sematch.semantic.similarity import WordNetSimilarity
+
 
 class Ranker:
     def __init__(self):
@@ -16,16 +16,15 @@ class Ranker:
         rank /= max(len(vertex1.tokens), len(vertex2.tokens))
         return rank
 
-
     def __single_pair_word_sim(self, word1, word2):
         wns = WordNetSimilarity()
-        if word1==word2:
-            sim=1
+        if word1 == word2:
+            sim = 1
         else:
             sim = wns.word_similarity(word1, word2)
         return sim
 
-    def __type_sim(self,type1, typ2):
+    def __type_sim(self, type1, typ2):
         m = Matrix()
         return m.vertex_matrix(type1, typ2)
 
@@ -35,13 +34,15 @@ class Ranker:
         return (word_sim + type_sim) / 2
 
 
-
 def main():
-    v1 = Vertex(1,"listIterator","class")
-    v2 = Vertex(1, "list iterator", "method")
+    v1 = Vertex(1, "listIterator", "class")
+    v2 = Vertex(1, "list iterator", "class")
+    v3 = Vertex(1, "list iterator", "method")
     ranker = Ranker()
-    sim = ranker.get_rank(v1,v2)
-    print(sim)
+    sim1 = ranker.get_rank(v1, v2)
+    sim2 = ranker.get_rank(v1, v3)
+    print(sim1, sim2)
+
 
 if __name__ == '__main__':
     main()
