@@ -75,7 +75,7 @@ class Graph:
         return self.__vertices[0]
 
     def add_vertex(self,vertex:Vertex) -> None:
-        self.__vertices[vertex.id] = vertex
+        self.__vertices[vertex.key] = vertex
 
     def add_edge(self,edge:Edge) -> None:
         self.__edges[edge.source] = edge
@@ -119,7 +119,8 @@ class Graph:
         json["edges"] = edges
         return json
 
-
+    def get_vertex(self,key):
+        return self.vertices[key]
 
 def main():
     g1 = Graph('../Files/json graphs/src1.json')
