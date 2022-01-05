@@ -10,12 +10,14 @@ from Utils.json_functions import read_json_file
 
 class Graph:
     def __init__(self, json_path:string='', vertices:list=[], edges:list=[]):
-        self.__vertices :dict = {}
+        self.__vertices :dict = {} #key:vertex
         self.__edges :dict = {}
         if len(json_path) > 0:
             self.__loading_graph_file(json_path)
         elif len(vertices)>0 or len(edges)>0:
             self.__build(vertices, edges)
+        self.__classes_vertices_names = set()
+        self.__methods_vertices_names = set()
 
 
     def __loading_graph_file(self, path) -> None:
@@ -75,7 +77,14 @@ class Graph:
         return self.__vertices[0]
 
     def add_vertex(self,vertex:Vertex) -> None:
-        self.__vertices[vertex.key] = vertex
+        if vertex.key not in self.__vertices.keys():
+            if (vertex.type == "class") and (vertex.name not in self.__classes_vertices_names):
+                self.__vertices[vertex.key] = vertex
+                self.__classes_vertices_names.add(vertex.name)
+            elif (vertex.type == "method") and (vertex.name not in self.__methods_vertices_names):
+                self.__vertices[vertex.key] = vertex
+                self.__methods_vertices_names.add(vertex.name)
+
 
     def add_edge(self,edge:Edge) -> None:
         self.__edges[edge.source] = edge

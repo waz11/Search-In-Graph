@@ -12,7 +12,7 @@ class Searcher:
         self.query = query
         self.heap = MaxHeap(graph.num_of_vertices() * query.graph.num_of_vertices())
         self.ranker = Ranker()
-        self.results :list = []
+        self.results = MaxHeap()
         # self.similarities = {}
         self.similarities = {(1, 0): 0.05631370309339764, (1, 1): 1.0, (1, 2): 0.5, (1, 3): 0.6805555555555556, (1, 4): 0.5, (1, 5): 0.75, (1, 6): 0.5555555555555556, (1, 7): 0.6097727137234901, (1, 11): 0.75, (1, 12): 0.25, (1, 13): 0.3012596570051089, (1, 14): 0.3490199519692301, (1, 15): 0.3039324782817448, (1, 16): 0.4305555555555556, (1, 17): 0.27562982850255446, (1, 18): 0.25, (1, 19): 0.5, (1, 20): 0.27562982850255446, (1, 21): 0.25, (1, 22): 0.44813320144815283, (1, 23): 0.3055555555555556, (1, 24): 0.35977271372349007, (1, 25): 0.30553452859346225, (1, 26): 0.26885943649970134, (1, 27): 0.30884308642903857, (2, 0): 0.0, (2, 1): 0.5, (2, 2): 1.0, (2, 3): 0.5, (2, 4): 0.5, (2, 5): 0.5, (2, 6): 0.5, (2, 7): 0.5, (2, 11): 0.25, (2, 12): 0.25, (2, 13): 0.25, (2, 14): 0.25, (2, 15): 0.25, (2, 16): 0.25, (2, 17): 0.25, (2, 18): 0.25, (2, 19): 0.25, (2, 20): 0.25, (2, 21): 0.25, (2, 22): 0.25, (2, 23): 0.25, (2, 24): 0.25, (2, 25): 0.25, (2, 26): 0.25, (2, 27): 0.25, (3, 0): 0.051259657005108906, (3, 1): 0.6097727137234901, (3, 2): 0.5, (3, 3): 0.6004313363236333, (3, 4): 0.5, (3, 5): 0.554886356861745, (3, 6): 0.6286006380653804, (3, 7): 1.0, (3, 11): 0.35977271372349007, (3, 12): 0.25, (3, 13): 0.29703808016013306, (3, 14): 0.42516351262743685, (3, 15): 0.4266461500770891, (3, 16): 0.3504313363236334, (3, 17): 0.32397875137774945, (3, 18): 0.25, (3, 19): 0.30488635686174503, (3, 20): 0.32397875137774945, (3, 21): 0.25, (3, 22): 0.3322587599936632, (3, 23): 0.3786006380653803, (3, 24): 0.75, (3, 25): 0.3070289967419445, (3, 26): 0.2676911125768552, (3, 27): 0.30276415435889864}
 
@@ -22,7 +22,6 @@ class Searcher:
 
     def class_relationship_based_similarity(self, threshold, k):
         pass
-
 
     def calculate_similarity(self):
         for vertex1 in self.query.graph.get_vertices():
@@ -46,21 +45,24 @@ class Searcher:
             vertices[vertex] = max_sim
         return vertices
 
-
-# first_similar_node -> next_similar_node -> greedy_algorithm_recursive
     def search(self):
         first_vertices = self.get_first_nodes()
-        first_vertex = list(first_vertices.keys())[0]
-        result = Result()
-        result.add_vertex(first_vertex, 1)
-        visited = set()
-        visited.add(first_vertex.key)
-        # print(result)
-        self.greedy_algorithm_recursive(result,2,0,visited)
-        return result
+        for vertex in first_vertices:
+            result = Result()
+            result.add_vertex(vertex, 1)
+            visited = set()
+            visited.add(vertex.key)
+            self.greedy_algorithm_recursive(result,1,0,visited)
+            self.results.insert(result.get_rank(), result)
 
+
+    def get_results(self):
+        while self.results.size > 0:
+            element = self.results.extractMax()
+            print(element.rank, element.element)
 
     def greedy_algorithm_recursive(self, result,k, th, visited:set):
+        print(result)
         if k==0:
             return result
         max_sim = 0
@@ -93,6 +95,8 @@ def main():
     # searcher.calculate_similarity()
     searcher.search()
     # print(searcher.similarities[1,1])
+    searcher.get_results()
+
 
 
 if __name__ == '__main__':
