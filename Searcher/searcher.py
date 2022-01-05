@@ -51,11 +51,13 @@ class Searcher:
     def search(self):
         first_vertices = self.get_first_nodes()
         first_vertex = list(first_vertices.keys())[0]
-        res = Result()
-        res.add_vertex(first_vertex, 1)
+        result = Result()
+        result.add_vertex(first_vertex, 1)
         visited = set()
         visited.add(first_vertex.key)
-        self.greedy_algorithm_recursive(res,2,0,visited)
+        # print(result)
+        self.greedy_algorithm_recursive(result,2,0,visited)
+        return result
 
 
     def greedy_algorithm_recursive(self, result,k, th, visited:set):
@@ -66,14 +68,15 @@ class Searcher:
         for vertex1 in self.query.graph.get_vertices():
             for vertex2 in result.graph.get_vertices():
                 for neighbor in vertex2.neighbors:
-                    if vertex2.key not in visited:
+                    if neighbor.key not in visited:
                         sim = self.similarities[vertex1.key, neighbor.key]
                         if sim > max_sim:
                             max_sim = sim
                             vertex = neighbor
-        # print(vertex)
         result.add_vertex(vertex)
         visited.add(vertex.key)
+        if vertex is None:
+            return result
         self.greedy_algorithm_recursive(result, k-1, 0, visited)
 
     def get_top(self,n):
