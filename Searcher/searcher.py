@@ -105,14 +105,11 @@ class Searcher:
 
 
 def main():
-    # query = Query("class list implements class iterable,class list contains class node")
-    query = Query("class list")
+    query = Query("class list implements class iterable,class list contains class node")
     graph = Graph('../Files/json graphs/src1.json')
     searcher = Searcher(graph, query)
     searcher.search()
     searcher.get_results()
-
-
 
 
 
