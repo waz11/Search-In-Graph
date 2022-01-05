@@ -4,16 +4,13 @@ from Graph.vertex import Vertex
 
 class Result:
 
-    def __init__(self, graph=Graph(), rank=0.0):
+    def __init__(self, graph=Graph()):
         self.graph = graph
-        self.rank = rank
+        self.rank = 0.0
 
-    def add_vertex(self, vertex:Vertex, rank=0):
+    def add_vertex(self, vertex:Vertex, rank):
         self.graph.add_vertex(vertex)
         self.rank += rank
-
-    def increase_rank(self, n):
-        self.rank += n
 
     def get_rank(self):
         return self.rank

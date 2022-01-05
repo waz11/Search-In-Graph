@@ -29,7 +29,7 @@ class Searcher:
                 sim = self.ranker.get_rank(vertex1, vertex2)
                 self.heap.insert(sim, vertex2)
                 self.similarities[vertex1.key, vertex2.key] = sim
-        print(self.similarities)
+        # print(self.similarities)
 
 
     def get_first_nodes(self):
@@ -48,32 +48,40 @@ class Searcher:
 
     def search(self):
         first_vertices = self.get_first_nodes()
+
+        first_vetex = list(first_vertices.keys())[0]
+        print(first_vetex)
         result = Result()
-        first_vetex = list(first_vertices.keys())[1]
-        # print(first_vetex)
-        result.add_vertex(first_vetex, 1)
+        result.add_vertex(first_vetex, first_vertices[first_vetex])
         visited = set()
         visited.add(first_vetex.key)
-        self.greedy_algorithm_recursive(result,2,0,visited)
-        self.results.insert(result.get_rank() / self.query.graph.num_of_vertices(), result)
+        r :Result = self.greedy_algorithm_recursive(result,2,0,visited)
+        print(type(r))
+        # print(r.get_rank())
+        # self.results.insert(r.get_rank() / self.query.graph.num_of_vertices(), result)
 
+        # print(result)
+        result = Result()
+        # print(result)
 
-        # for vertex in first_vertices:
+        # for vertex in first_vertices.keys():
+        #     rank = first_vertices[vertex]
         #     result = Result()
-        #     result.add_vertex(vertex, 1)
+        #     result.add_vertex(vertex, rank)
         #     visited = set()
         #     visited.add(vertex.key)
-        #     self.greedy_algorithm_recursive(result,1,0,visited)
-        #     self.results.insert(result.get_rank(), result)
+        #     result = self.greedy_algorithm_recursive(result,2,0,visited)
+        #     self.results.insert(result.get_rank() / self.query.graph.num_of_vertices(), result)
+        #     # print("ron", result, result.get_rank() / self.query.graph.num_of_vertices())
 
 
     def get_results(self):
         while self.results.size > 0:
             element = self.results.extractMax()
-            print(element.rank, element.element)
+            # print(element.rank, element.element)
 
-    def greedy_algorithm_recursive(self, result,k, th, visited:set):
-        print(result)
+    def greedy_algorithm_recursive(self, result:Result,k, th, visited:set) -> Result:
+        # print(result)
         if k==0:
             return result
         max_sim = 0
@@ -88,7 +96,7 @@ class Searcher:
                             vertex = neighbor
         if vertex is None:
             return result
-        result.add_vertex(vertex)
+        result.add_vertex(vertex, max_sim)
         visited.add(vertex.key)
         self.greedy_algorithm_recursive(result, k-1, 0, visited)
 
@@ -106,8 +114,7 @@ def main():
     # searcher.calculate_similarity()
     searcher.search()
     # print(searcher.similarities[1,1])
-    searcher.get_results()
-
+    # searcher.get_results()
 
 
 if __name__ == '__main__':

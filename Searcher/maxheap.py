@@ -87,3 +87,5 @@ if __name__ == "__main__":
     maxHeap.Print()
     element = maxHeap.extractMax()
     print("The Max val is ", element.rank, element.element)
+    element = maxHeap.extractMax()
+    print("The Max val is ", element.rank, element.element)
