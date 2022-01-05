@@ -10,7 +10,7 @@ class Element:
         self.element = element
 
 class MaxHeap:
-    def __init__(self, maxsize=3):
+    def __init__(self, maxsize=10):
         self.maxsize = maxsize
         self.size = 0
         self.Heap = [Element(0)] * (self.maxsize + 1)

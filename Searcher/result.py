@@ -4,8 +4,8 @@ from Graph.vertex import Vertex
 
 class Result:
 
-    def __init__(self, graph=Graph()):
-        self.graph = graph
+    def __init__(self):
+        self.graph = Graph()
         self.rank = 0.0
 
     def add_vertex(self, vertex:Vertex, rank):

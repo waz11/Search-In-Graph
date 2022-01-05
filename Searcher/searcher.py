@@ -48,37 +48,34 @@ class Searcher:
 
     def search(self):
         first_vertices = self.get_first_nodes()
+        self.results = MaxHeap(len(first_vertices)*2+1)
 
-        first_vetex = list(first_vertices.keys())[0]
-        print(first_vetex)
-        result = Result()
-        result.add_vertex(first_vetex, first_vertices[first_vetex])
-        visited = set()
-        visited.add(first_vetex.key)
-        r :Result = self.greedy_algorithm_recursive(result,2,0,visited)
-        print(type(r))
-        # print(r.get_rank())
-        # self.results.insert(r.get_rank() / self.query.graph.num_of_vertices(), result)
+        # first_vetex = list(first_vertices.keys())[0]
+        # print(first_vetex)
+        # result = Result()
+        # result.add_vertex(first_vetex, first_vertices[first_vetex])
+        # visited = set()
+        # visited.add(first_vetex.key)
+        # self.greedy_algorithm_recursive(result,2,0,visited)
+        # # self.results.insert(r.get_rank() / self.query.graph.num_of_vertices(), result)
+        # print(result.get_rank(), result)
+        # result = Result()
+        # print(result.get_rank(), result)
 
-        # print(result)
-        result = Result()
-        # print(result)
-
-        # for vertex in first_vertices.keys():
-        #     rank = first_vertices[vertex]
-        #     result = Result()
-        #     result.add_vertex(vertex, rank)
-        #     visited = set()
-        #     visited.add(vertex.key)
-        #     result = self.greedy_algorithm_recursive(result,2,0,visited)
-        #     self.results.insert(result.get_rank() / self.query.graph.num_of_vertices(), result)
-        #     # print("ron", result, result.get_rank() / self.query.graph.num_of_vertices())
+        for vertex in first_vertices.keys():
+            rank = first_vertices[vertex]
+            result = Result()
+            result.add_vertex(vertex, rank)
+            visited = set()
+            visited.add(vertex.key)
+            self.greedy_algorithm_recursive(result,2,0,visited)
+            self.results.insert(result.get_rank() / self.query.graph.num_of_vertices(), result)
 
 
     def get_results(self):
         while self.results.size > 0:
             element = self.results.extractMax()
-            # print(element.rank, element.element)
+            print(element.rank, element.element)
 
     def greedy_algorithm_recursive(self, result:Result,k, th, visited:set) -> Result:
         # print(result)
@@ -114,7 +111,7 @@ def main():
     # searcher.calculate_similarity()
     searcher.search()
     # print(searcher.similarities[1,1])
-    # searcher.get_results()
+    searcher.get_results()
 
 
 if __name__ == '__main__':
