@@ -47,10 +47,10 @@ query as graph:\
 
 ## parser
 So far, the parser deals only with some patterns of syntax in query, as described below:\
-	- "**class** <ins>c2</ins> **extends class** <ins>c1</ins>"\
-	- "**class** <ins>c2</ins> **implements class** <ins>c3</ins>"\
-	- "**class** <ins>c1</ins> **contains method** <ins>m1</ins>"\
-	- "**class** <ins>c1</ins> **contains field** <ins>f1</ins>"\
+	- "**class** <ins>class_name</ins> **extends class** <ins>class_name</ins>"\
+	- "**class** <ins>class_name</ins> **implements class** <ins>class_name</ins>"\
+	- "**class** <ins>class_name</ins> **contains method** <ins>method_name</ins>"\
+	- "**class** <ins>class_name</ins> **contains field** <ins>field_name</ins>"
 
 ## graph object
 
