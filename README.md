@@ -1,4 +1,6 @@
 # Part I : converting of code to graph
+
+## graph object
 input: path to code folder\
 output: graph in json file\
 the graph is a json file, contains two arrays: vertices and edges.\
@@ -54,7 +56,6 @@ query as graph:\
 	- **class** <ins>[class_name]</ins> **contains field** <ins>[field_name]</ins>\
 	- **method** <ins>method_name</ins> **contains field** <ins>[field_name]</ins>
 
-## graph object
 
 ## searcher
 
