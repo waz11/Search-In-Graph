@@ -46,7 +46,7 @@ query as graph:\
 
 
 ## parser
-<ins>So far, the parser deals only with some patterns of syntax in query, as described below:<ins>\
+**So far, the parser deals only with some patterns of syntax in query, as described below:**\
 	- **class** <ins>[class_name]</ins> **extends class** <ins>[class_name]</ins>\
 	- **class** <ins>[class_name]</ins> **implements class** <ins>[class_name]</ins>\
 	- **class** <ins>[class_name]</ins> **contains class** <ins>[class_name]</ins>\
