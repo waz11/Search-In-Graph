@@ -71,7 +71,6 @@ class Searcher:
             self.greedy_algorithm_recursive(result,2,0,visited)
             self.results.insert(result.get_rank() / self.query.graph.num_of_vertices(), result)
 
-
     def get_results(self):
         while self.results.size > 0:
             element = self.results.extractMax()
