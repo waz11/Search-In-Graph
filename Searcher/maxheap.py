@@ -49,7 +49,6 @@ class MaxHeap:
 
 
     def insert(self, rank, component=None) -> None:
-        print("inserted", self.size, rank, component)
         element = Element(rank, component)
         if self.size >= self.maxsize:
             return
