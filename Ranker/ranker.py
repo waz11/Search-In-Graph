@@ -29,10 +29,11 @@ class Ranker:
         return m.vertex_matrix(type1, typ2)
 
     def get_rank(self, vertex1, vertex2):
-        word_sim = self.__words_sim(vertex1, vertex2)
-        type_sim = self.__type_sim(vertex1.type, vertex2.type)
-        return (word_sim + type_sim) / 2
-
+        sim = word_sim = self.__words_sim(vertex1, vertex2)
+        if len(vertex1.type) > 0 and len(vertex2.type) > 0:
+            type_sim = self.__type_sim(vertex1.type, vertex2.type)
+            sim = (word_sim + type_sim) / 2
+        return sim
 
 def main():
     v1 = Vertex(1, "listIterator", "class")

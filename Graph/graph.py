@@ -117,7 +117,7 @@ class Graph:
             edges.append(edge.toJson())
         json["vertices"] = vertices
         json["edges"] = edges
-        # print(json)
+        return json
 
 
 
