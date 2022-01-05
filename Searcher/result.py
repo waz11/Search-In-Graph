@@ -16,10 +16,7 @@ class Result:
         self.rank += n
 
     def get_rank(self):
-        rank = 0
-        if self.graph.num_of_vertices() > 0:
-            rank = self.rank / self.graph.num_of_vertices()
-        return rank
+        return self.rank
 
     def __str__(self):
         str = ''

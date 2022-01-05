@@ -42,18 +42,29 @@ class Searcher:
                 if sim>max_sim:
                     max_sim=sim
                     vertex = vertex2
-            vertices[vertex] = max_sim
+            if(vertex not in vertices.keys() or vertices[vertex] < max_sim):
+                vertices[vertex] = max_sim
         return vertices
 
     def search(self):
         first_vertices = self.get_first_nodes()
-        for vertex in first_vertices:
-            result = Result()
-            result.add_vertex(vertex, 1)
-            visited = set()
-            visited.add(vertex.key)
-            self.greedy_algorithm_recursive(result,1,0,visited)
-            self.results.insert(result.get_rank(), result)
+        result = Result()
+        first_vetex = list(first_vertices.keys())[1]
+        # print(first_vetex)
+        result.add_vertex(first_vetex, 1)
+        visited = set()
+        visited.add(first_vetex.key)
+        self.greedy_algorithm_recursive(result,2,0,visited)
+        self.results.insert(result.get_rank() / self.query.graph.num_of_vertices(), result)
+
+
+        # for vertex in first_vertices:
+        #     result = Result()
+        #     result.add_vertex(vertex, 1)
+        #     visited = set()
+        #     visited.add(vertex.key)
+        #     self.greedy_algorithm_recursive(result,1,0,visited)
+        #     self.results.insert(result.get_rank(), result)
 
 
     def get_results(self):
@@ -75,10 +86,10 @@ class Searcher:
                         if sim > max_sim:
                             max_sim = sim
                             vertex = neighbor
-        result.add_vertex(vertex)
-        visited.add(vertex.key)
         if vertex is None:
             return result
+        result.add_vertex(vertex)
+        visited.add(vertex.key)
         self.greedy_algorithm_recursive(result, k-1, 0, visited)
 
     def get_top(self,n):
