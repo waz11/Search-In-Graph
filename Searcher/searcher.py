@@ -46,17 +46,6 @@ class Searcher:
         self.__calculate_similarities()
         first_vertices = self.__get_first_nodes()
         self.results = MaxHeap(len(first_vertices)*2+1)
-
-        # # TESING:
-        # vertex = list(first_vertices)[0]
-        # result = Result()
-        # result.add_vertex(vertex, 1)
-        # visited = set()
-        # visited.add(vertex.key)
-        # self.__greedy_algorithm_recursive(result, 2, threshold, visited)
-        # print(result.graph.toJson())
-        # # END
-
         for vertex in first_vertices.keys():
             rank = first_vertices[vertex]
             result = Result()
@@ -66,6 +55,15 @@ class Searcher:
             self.__greedy_algorithm_recursive(result, 2, threshold, visited)
             rank = result.get_rank() / self.query.graph.num_of_vertices()
             self.results.insert(rank, result)
+        # # TESING:
+        # vertex = list(first_vertices)[0]
+        # result = Result()
+        # result.add_vertex(vertex, 1)
+        # visited = set()
+        # visited.add(vertex.key)
+        # self.__greedy_algorithm_recursive(result, 2, threshold, visited)
+        # print(result.graph.toJson())
+        # # END
 
     def get_results(self):
         while self.results.size > 0:
