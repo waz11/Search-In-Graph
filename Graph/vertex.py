@@ -1,5 +1,6 @@
 import json
 import string
+
 from Parser.tokenizer import Tokenizer
 
 
@@ -16,6 +17,9 @@ class Vertex:
     def add_edge(self, edge) -> None:
         self.edges[edge.to.key] = edge
         self.neighbors.add(edge.to)
+
+    def add_neibors(self,vertex):
+        self.neighbors.add(vertex)
 
     def toJson(self) -> json:
         j = {}

@@ -43,27 +43,38 @@ class Searcher:
         return vertices
 
     def search(self, k=2, threshold = 1):
-        self.__calculate_similarity()
+        # self.__calculate_similarity()
         first_vertices = self.__get_first_nodes()
         self.results = MaxHeap(len(first_vertices)*2+1)
-        for vertex in first_vertices.keys():
-            rank = first_vertices[vertex]
-            result = Result()
-            result.add_vertex(vertex, rank)
-            visited = set()
-            visited.add(vertex.key)
-            self.__greedy_algorithm_recursive(result, 2, threshold, visited)
-            self.results.insert(result.get_rank() / self.query.graph.num_of_vertices(), result)
+
+        vertex = list(first_vertices)[0]
+        result = Result()
+        result.add_vertex(vertex, 1)
+        visited = set()
+        visited.add(vertex.key)
+        self.__greedy_algorithm_recursive(result, 2, threshold, visited)
+        print(result)
+
+
+        # for vertex in first_vertices.keys():
+        #     rank = first_vertices[vertex]
+        #     result = Result()
+        #     result.add_vertex(vertex, rank)
+        #     visited = set()
+        #     visited.add(vertex.key)
+        #     self.__greedy_algorithm_recursive(result, 2, threshold, visited)
+        #     self.results.insert(result.get_rank() / self.query.graph.num_of_vertices(), result)
 
     def get_results(self):
         while self.results.size > 0:
             element = self.results.extractMax()
-            print(element.rank, element.element)
+            print(element.rank, element.element.graph)
 
     def __greedy_algorithm_recursive(self, result:Result, k, th, visited:set) -> Result:
         if k==0:
             return result
         max_sim = 0
+        edge = None
         vertex = None
         for vertex1 in self.query.graph.get_vertices():
             for vertex2 in result.graph.get_vertices():
@@ -73,10 +84,12 @@ class Searcher:
                         if sim > max_sim:
                             max_sim = sim
                             vertex = neighbor
+                            edge = self.graph.get_edge(vertex2.key, vertex.key)
+
         if vertex is None:
             return result
         result.add_vertex(vertex, max_sim)
-        result.add_edge()
+        result.add_edge(edge)
         visited.add(vertex.key)
         self.__greedy_algorithm_recursive(result, k - 1, 0, visited)
 
@@ -93,6 +106,9 @@ def main():
     searcher = Searcher(graph, query)
     searcher.search()
     searcher.get_results()
+
+    # print(graph.edges)
+    # print(graph.get_edge(2,7))
 
 
 if __name__ == '__main__':
