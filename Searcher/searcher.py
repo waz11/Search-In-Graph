@@ -53,7 +53,8 @@ class Searcher:
         visited = set()
         visited.add(vertex.key)
         self.__greedy_algorithm_recursive(result, 2, threshold, visited)
-        print(result)
+        # print(result)
+        print(result.graph.toJson())
 
 
         # for vertex in first_vertices.keys():

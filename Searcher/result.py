@@ -22,8 +22,9 @@ class Result:
         s = ''
         for vertex in self.graph.get_vertices():
             s+=str(vertex)+' '
+        for edge in self.graph.get_edges():
+            s+=str(edge)+' '
         return s
-        # return str(self.graph.get_vertices())
 
 
 def main():
