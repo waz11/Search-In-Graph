@@ -76,6 +76,7 @@ class Searcher:
         if vertex is None:
             return result
         result.add_vertex(vertex, max_sim)
+        result.add_edge()
         visited.add(vertex.key)
         self.__greedy_algorithm_recursive(result, k - 1, 0, visited)
 

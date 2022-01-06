@@ -12,6 +12,9 @@ class Result:
         self.graph.add_vertex(vertex)
         self.rank += rank
 
+    def add_edge(self, edge):
+        self.graph.add_edge()
+
     def get_rank(self):
         return self.rank
 

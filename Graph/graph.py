@@ -11,12 +11,12 @@ class Graph:
     def __init__(self, json_path:string='', vertices:list=[], edges:list=[]):
         self.__vertices :dict = {} #key:vertex
         self.__edges :dict = {}
+        self.__classes_names = set()
+        self.__methods_names = set()
         if len(json_path) > 0:
             self.__loading_graph_file(json_path)
         elif len(vertices)>0 or len(edges)>0:
             self.__build(vertices, edges)
-        self.__classes_vertices_names = set()
-        self.__methods_vertices_names = set()
 
 
     def __loading_graph_file(self, path) -> None:
@@ -36,19 +36,37 @@ class Graph:
                 vertex = Vertex(v['key'], v['name'], v['type'], v['attributes'])
             else:
                 vertex = Vertex(v['key'], v['name'], v['type'], [])
+            # self.__vertices[vertex.key] = vertex
+            self.add_vertex(vertex)
+
+
+    def add_vertex(self,vertex:Vertex) -> None:
+        # if vertex.key not in self.__vertices.keys():
+        if (vertex.type == "class") and (vertex.name not in self.__classes_names):
             self.__vertices[vertex.key] = vertex
+            self.__classes_names.add(vertex.name)
+        elif (vertex.type == "method") and (vertex.name not in self.__methods_names):
+            self.__vertices[vertex.key] = vertex
+            self.__methods_names.add(vertex.name)
+        else:
+            self.__vertices[vertex.key] = vertex
+
+
 
     def __edges_builder_fron_json_obj(self, edges:json) -> None:
         for e in edges:
-            source = self.__vertices[e["from"]]
-            dest = self.__vertices[e["to"]]
-            edge = Edge(e["type"], source, dest)
-            self.__vertices[source.key].add_edge(edge)
-            if source not in self.__edges.keys():
-                self.__edges[source] = [edge]
-            else:
-                self.__edges[source].append(edge)
+            source = self.__vertices[e['from']]
+            to = self.__vertices[e['to']]
+            edge = Edge(e["type"], source, to)
+            self.add_edge(edge)
 
+    def add_edge(self,edge:Edge) -> None:
+        # self.__vertices[edge.source.key].add_edge(edge)
+        # if (edge.source.key in self.__vertices.keys()) and (edge.to.key in self.__vertices.keys()):
+        if edge.source not in self.__edges.keys():
+            self.__edges[edge.source] = [edge]
+        else:
+            self.__edges[edge.source].append(edge)
 
     def draw(self) -> None:
         G = nx.DiGraph()
@@ -75,19 +93,6 @@ class Graph:
     def get_root(self) -> Vertex:
         return self.__vertices[0]
 
-    def add_vertex(self,vertex:Vertex) -> None:
-        if vertex.key not in self.__vertices.keys():
-            if (vertex.type == "class") and (vertex.name not in self.__classes_vertices_names):
-                self.__vertices[vertex.key] = vertex
-                self.__classes_vertices_names.add(vertex.name)
-            elif (vertex.type == "method") and (vertex.name not in self.__methods_vertices_names):
-                self.__vertices[vertex.key] = vertex
-                self.__methods_vertices_names.add(vertex.name)
-
-
-    def add_edge(self,edge:Edge) -> None:
-        self.__edges[edge.source] = edge
-
     def print_vertices(self) -> None:
         for vertex in self.__vertices.values():
             print(vertex)
@@ -110,6 +115,7 @@ class Graph:
                 list.append(edge)
         return list
 
+
     def list_to_json(self, list):
         json = []
         for element in list:
@@ -122,6 +128,7 @@ class Graph:
             vertices.append(vertex.toJson())
         edges = []
         for edge in self.get_edges():
+            print(edge)
             edges.append(edge.toJson())
         json["vertices"] = vertices
         json["edges"] = edges
@@ -131,20 +138,14 @@ class Graph:
         return self.vertices[key]
 
 def main():
-    # g1 = Graph('../Files/json graphs/src1.json')
-    # g1.toJson()
-    # # g1.graph_builder_from_json_file('../Files/query.json')
-    # g1.draw()`
-    # print(str(g1.num_of_vertices()))
-    # print(str(g1.num_of_edges()))
-    # g1.print_vertices()
-    # print()
-    # g1.print_edges()
-
-    g = Graph()
-    g.add_vertex(Vertex(1,"ron","class"))
-    g.draw()
-
+    g1 = Graph('../Files/json graphs/src1.json')
+    g1.toJson()
+    g1.draw()
+    print(str(g1.num_of_vertices()))
+    print(str(g1.num_of_edges()))
+    g1.print_vertices()
+    print()
+    g1.print_edges()
 
 
 if __name__ == '__main__':
