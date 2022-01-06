@@ -47,29 +47,30 @@ class Searcher:
         first_vertices = self.__get_first_nodes()
         self.results = MaxHeap(len(first_vertices)*2+1)
 
-        vertex = list(first_vertices)[0]
-        result = Result()
-        result.add_vertex(vertex, 1)
-        visited = set()
-        visited.add(vertex.key)
-        self.__greedy_algorithm_recursive(result, 2, threshold, visited)
-        # print(result)
-        print(result.graph.toJson())
+        # # TESING:
+        # vertex = list(first_vertices)[0]
+        # result = Result()
+        # result.add_vertex(vertex, 1)
+        # visited = set()
+        # visited.add(vertex.key)
+        # self.__greedy_algorithm_recursive(result, 2, threshold, visited)
+        # print(result.graph.toJson())
+        # # END
 
-
-        # for vertex in first_vertices.keys():
-        #     rank = first_vertices[vertex]
-        #     result = Result()
-        #     result.add_vertex(vertex, rank)
-        #     visited = set()
-        #     visited.add(vertex.key)
-        #     self.__greedy_algorithm_recursive(result, 2, threshold, visited)
-        #     self.results.insert(result.get_rank() / self.query.graph.num_of_vertices(), result)
+        for vertex in first_vertices.keys():
+            rank = first_vertices[vertex]
+            result = Result()
+            result.add_vertex(vertex, rank)
+            visited = set()
+            visited.add(vertex.key)
+            self.__greedy_algorithm_recursive(result, 2, threshold, visited)
+            rank = result.get_rank() / self.query.graph.num_of_vertices()
+            self.results.insert(rank, result)
 
     def get_results(self):
         while self.results.size > 0:
             element = self.results.extractMax()
-            print(element.rank, element.element.graph)
+            print(element.rank, element.element.graph.toJson())
 
     def __greedy_algorithm_recursive(self, result:Result, k, th, visited:set) -> Result:
         if k==0:
