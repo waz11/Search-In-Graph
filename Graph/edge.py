@@ -8,7 +8,7 @@ class Edge():
         self.source :Vertex = source
         self.to :Vertex = to
 
-    def toJson(self):
+    def toJson(self) -> json:
         json = {}
         json["type"] = self.type
         json["from"] = self.source.key
@@ -17,13 +17,3 @@ class Edge():
 
     def __str__(self):
         return "({},{}):{}".format(self.source.key, self.to.key, self.type)
-
-
-def main():
-    v1 = Vertex(1,'','')
-    v2 = Vertex(2, '', '')
-    e = Edge('',v1,v2)
-    print(e)
-
-if __name__ == '__main__':
-    main()

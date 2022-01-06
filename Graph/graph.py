@@ -59,7 +59,7 @@ class Graph:
 
     def add_edge(self,edge:Edge) -> None:
         self.__edges[edge.source.key, edge.to.key] = edge
-        edge.source.add_neibors(edge.to)
+        edge.source.add_neighbor(edge.to)
 
     def get_vertices(self) ->list:
         list = []
@@ -103,32 +103,3 @@ class Graph:
         nx.draw_networkx_edges(G, pos,  edge_color='r', arrows=True)
         nx.draw_networkx_edges(G, pos,  arrows=False)
         plt.show()
-
-def main():
-    g1 = Graph('../Files/json graphs/src1.json')
-    json1 = g1.toJson()
-    print(json1)
-    # g1.draw()
-    # print(str(g1.num_of_vertices()))
-    # print(str(g1.num_of_edges()))
-    # g1.print_vertices()
-    # print()
-    # g1.print_edges()
-
-
-    # g = Graph()
-    # v1 = Vertex(1,'v1','class')
-    # v2 = Vertex(2, 'v2', 'class')
-    # e = Edge('extends',v1,v2)
-    # g.add_vertex(v1)
-    # g.add_vertex(v2)
-    # g.add_edge(e)
-    #
-    # e=g.edges[v1.key, v2.key]
-    # print(e)
-    # # g.draw()
-    # print(g.edges)
-
-
-if __name__ == '__main__':
-    main()
