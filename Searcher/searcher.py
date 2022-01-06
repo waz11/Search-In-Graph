@@ -1,3 +1,5 @@
+import time
+
 from Graph.graph import Graph
 from Ranker.ranker import Ranker
 from Searcher.maxheap import MaxHeap
@@ -43,6 +45,7 @@ class Searcher:
         return vertices
 
     def search(self, k=2, threshold = 1):
+        start_time = time.time()
         self.__calculate_similarities()
         first_vertices = self.__get_first_nodes()
         self.results = MaxHeap(len(first_vertices)*2+1)
@@ -55,6 +58,9 @@ class Searcher:
             self.__greedy_algorithm_recursive(result, 2, threshold, visited)
             rank = result.get_rank() / self.query.graph.num_of_vertices()
             self.results.insert(rank, result)
+        end_time = time.time()
+        print("time:", end_time - start_time,"seconds")
+
         # # TESING:
         # vertex = list(first_vertices)[0]
         # result = Result()
