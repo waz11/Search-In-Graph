@@ -38,6 +38,7 @@ class CodeFromFile:
         new_edges = []
 
         for v in vertices:
+            print(v)
             name = v["name"]
             key = v["key"]
             type = v["type"]
