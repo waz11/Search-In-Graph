@@ -6,7 +6,7 @@ import re
 from Preprocess.Parser.CodeWrapper import CodeWrapper
 from Preprocess.Parser.MapCreator import MapCreator
 from Preprocess.Parser.CodeParser import codeParser
-from Utils.json_functions import save_json_to_file, read_json_file
+from Utils.json_functions import save_json_to_file, get_data_from_json_file
 
 
 class CodeFromFile:
@@ -32,7 +32,7 @@ class CodeFromFile:
                 self.create_parse_and_map()
 
     def connect_between_classes(self):
-        data = read_json_file(self.output_path)
+        data = get_data_from_json_file(self.output_path)
         map = {}
         vertices = data["vertices"]
         new_edges = []

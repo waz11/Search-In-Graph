@@ -1,7 +1,13 @@
 import json
 
 
-def read_json_file(path) -> json:
+def list_to_json(list:list) -> json:
+    json = []
+    for element in list:
+        json.append(element.toJson())
+    return json
+
+def get_data_from_json_file(path) -> json:
     f = open(path)
     data = json.load(f)
     f.close()

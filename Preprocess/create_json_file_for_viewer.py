@@ -4,7 +4,7 @@ import json
 # and import the output file
 
 from Graph.graph import Graph
-from Utils.json_functions import read_json_file, save_json_to_file
+from Utils.json_functions import get_data_from_json_file, save_json_to_file
 
 
 def main():
