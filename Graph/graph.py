@@ -108,7 +108,6 @@ class Graph:
 
     def get_edges(self) ->list:
         list = self.edges.values()
-        print(list)
         return list
 
 
@@ -122,10 +121,10 @@ class Graph:
         vertices = []
         for vertex in self.get_vertices():
             vertices.append(vertex.toJson())
+        json["vertices"] = vertices
         edges = []
         for edge in self.get_edges():
             edges.append(edge.toJson())
-        json["vertices"] = vertices
         json["edges"] = edges
         return json
 
