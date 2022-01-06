@@ -67,7 +67,7 @@ class Searcher:
         total_time = end_time - start_time
         print(total_time)
 
-        # # TESING:
+        # # TESTING:
         # vertex = list(first_vertices)[0]
         # result = Result()
         # result.add_vertex(vertex, 1)
