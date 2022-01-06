@@ -1,5 +1,4 @@
 from Graph.graph import Graph
-from Graph.vertex import Vertex
 from Ranker.ranker import Ranker
 from Searcher.maxheap import MaxHeap
 from Searcher.query import Query

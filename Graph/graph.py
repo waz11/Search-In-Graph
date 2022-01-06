@@ -1,6 +1,5 @@
 import json
 import string
-
 import networkx as nx
 from matplotlib import pyplot as plt
 from Graph.edge import Edge

@@ -1,14 +1,11 @@
 import re
 from gensim.parsing import PorterStemmer
 from gensim.parsing.preprocessing import remove_stopwords
-from nltk.corpus import wordnet
 
 class Tokenizer:
 
     def __init__(self):
         self.p = PorterStemmer()
-        # self.synonyms :set = {}
-        # self.__add_synonyms()
 
     def get_tokens(self, content, rm_stopwords=False, stem=False) -> set:
         tokens: set = {}
@@ -34,21 +31,9 @@ class Tokenizer:
         matches = re.finditer('.+?(?:(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])|$)', word)
         return [m.group(0).lower() for m in matches]
 
-    # def __add_synonyms(self):
-    #     synonyms = []
-    #     for token in self.tokens:
-    #         for syn in wordnet.synsets(token):
-    #             for l in syn.lemmas():
-    #                 synonyms.append(l.name())
-    #     synonyms.append(self.content)
-    #     self.synonyms = set(synonyms)
-
-
 def main():
     t = Tokenizer("list_iterable")
     print(t.tokens)
-    # print(t.synonyms)
-
 
 
 if __name__ == '__main__':
