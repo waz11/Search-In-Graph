@@ -51,16 +51,17 @@ class Searcher:
         second = vertices_list[middle_index:2*middle_index]
         third = vertices_list[2*middle_index:3*middle_index]
 
-        t1 = threading.Thread(self.__calculate_similarities(first))
-        t2 = threading.Thread(self.__calculate_similarities(second))
-        t3 = threading.Thread(self.__calculate_similarities(third))
+        t1 = threading.Thread(target=self.__calculate_similarities, args = (first,))
+        t2 = threading.Thread(target=self.__calculate_similarities, args = (second,))
+        # t3 = threading.Thread(target=self.__calculate_similarities, args = (third,))
 
         t1.start()
         t2.start()
-        t3.start()
+        # t3.start()
+
         t1.join()
         t2.join()
-        t3.join()
+        # t3.join()
 
     def __get_first_nodes(self) ->list:
         vertices = {}
@@ -78,8 +79,8 @@ class Searcher:
 
     def search(self, k=2, threshold = 1):
         start_time = time.time()
-        # self.__calculate_similarities()
-        self.calculate_similarities_multi_threaded()
+        self.__calculate_similarities()
+        # self.calculate_similarities_multi_threaded()
 
         first_vertices = self.__get_first_nodes()
         self.__results = MaxHeap(len(first_vertices) * 2 + 1)
@@ -140,8 +141,9 @@ def main():
     query = Query("class list implements class iterable,class list contains class node")
     graph = Graph('../Files/json graphs/src1.json')
     searcher = Searcher(graph, query)
-    searcher.search()
-    searcher.get_results()
+    # searcher.search()
+    # searcher.get_results()
+    searcher.calculate_similarities_multi_threaded()
 
 
 if __name__ == '__main__':
