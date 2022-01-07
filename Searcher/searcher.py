@@ -60,12 +60,12 @@ class Searcher:
         t2 = threading.Thread(self.__calculate_similarities(second))
         t3 = threading.Thread(self.__calculate_similarities(third))
 
-        # t1.start()
-        # t2.start()
-        # t3.start()
-        # t1.join()
-        # t2.join()
-        # t3.join()
+        t1.start()
+        t2.start()
+        t3.start()
+        t1.join()
+        t2.join()
+        t3.join()
 
     def __get_first_nodes(self) ->list:
         vertices = {}
@@ -83,8 +83,7 @@ class Searcher:
 
     def search(self, k=2, threshold = 1):
         start_time = time.time()
-        # if len(self.similarities) == 0:
-            # self.__calculate_similarities()
+        # self.__calculate_similarities()
         self.calculate_similarities_multi_threaded()
 
         first_vertices = self.__get_first_nodes()
@@ -143,22 +142,11 @@ class Searcher:
 
 
 def main():
-
-    # print(similarities_for_testing('src1'))
-
     query = Query("class list implements class iterable,class list contains class node")
     graph = Graph('../Files/json graphs/src1.json')
     searcher = Searcher(graph, query)
-
-    start = time.time()
-    searcher.calculate_similarities_multi_threaded()
-    end = time.time()
-    print(len(searcher.similarities))
-    print("total time:", end-start)
-    print(searcher.similarities)
-
-    # searcher.search()
-    # searcher.get_results()
+    searcher.search()
+    searcher.get_results()
 
 
 if __name__ == '__main__':
