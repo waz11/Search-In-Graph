@@ -1,8 +1,6 @@
 from Preprocess.Components.Component import Component
 
-
 class EnumComponent(Component):
-
     def __init__(self, enum_name, task):
         super().__init__()
         self.enum_name = enum_name

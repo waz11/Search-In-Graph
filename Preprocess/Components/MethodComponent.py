@@ -1,8 +1,6 @@
 from Preprocess.Components.Component import Component
 
-
 class MethodComponent(Component):
-
     def __init__(self, method_name, class_task):
         super().__init__()
         self.task = class_task
