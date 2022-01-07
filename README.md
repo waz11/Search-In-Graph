@@ -1,22 +1,25 @@
-# Part I : converting of code to graph
+# My FINAL BACHELOR PROJECT
 
-## graph object
+## PART I : CODE TO GRAPH
+
+### graph object
 input: path to code folder\
 output: graph in json file\
 the graph is a json file, contains two arrays: vertices and edges.\
-## vertex
+### vertex
 	name - project's name / class's name / method's name
 	key - identify key
 	type - project / class / method
 	attributes - fields in class / arguments in method
-## edge
+### edge
 	type - class / method / implements / extends / contains(=argument)
 	from - source vertex
 	to - destination vertex
 ### graph illustration:
 ![(Unsaved File)](https://user-images.githubusercontent.com/62445178/147954326-a32f7106-72d2-466e-a859-b1c6d663f3b7.png)
 
-## Instruction:
+## PART II: SEARCH ENGINGE
+### Instruction:
 1. build json file (into: Files/json graphs) contains graph from java project:\
 path: Preprocess/graph_builder.py\
 function: code_to_graph_in_json_file(project_path, project_name='')\
@@ -36,10 +39,6 @@ graph.loading_graph_From_json_file(path)\
 query = Query(query_text)\
 searcher(graph,query)
 
-
-
-
-# Part II : search in graph
 
 ## query
 query as text: class list implements class iterable,class list contains class node\
