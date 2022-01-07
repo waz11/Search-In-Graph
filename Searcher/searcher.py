@@ -32,14 +32,9 @@ class Searcher:
     def class_relationship_based_similarity(self, threshold, k):
         pass
 
-    # def __calculate_similarities(self) -> None:
-    #     for vertex1 in self.query.graph.get_vertices():
-    #         for vertex2 in self.graph.get_vertices():
-    #             sim = self.__ranker.get_rank(vertex1, vertex2)
-    #             self.__heap.insert(sim, vertex2)
-    #             self.__similarities[vertex1.key, vertex2.key] = sim
-
     def __calculate_similarities(self, vertices) -> None:
+        if len(vertices) == 0:
+            vertices = self.graph.get_vertices()
         for vertex1 in self.query.graph.get_vertices():
             for vertex2 in vertices:
                 # print(threading.get_ident())
