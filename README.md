@@ -2,16 +2,18 @@
 
 ## PART I : CODE TO GRAPH
 
-### graph object
+### Graph object
 input: path to code folder\
 output: graph in json file\
-the graph is a json file, contains two arrays: vertices and edges.\
-### vertex
+the graph is a json file, contains two arrays: vertices and edges.
+
+
+### Vertex
 	name - project's name / class's name / method's name
 	key - identify key
 	type - project / class / method
 	attributes - fields in class / arguments in method
-### edge
+### Edge
 	type - class / method / implements / extends / contains(=argument)
 	from - source vertex
 	to - destination vertex
