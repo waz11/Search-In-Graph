@@ -1,3 +1,4 @@
+import os
 import string
 import time
 from Graph.graph import Graph
@@ -5,6 +6,7 @@ from Ranker.ranker import Ranker
 from Searcher.maxheap import MaxHeap
 from Searcher.query import Query
 from Searcher.result import Result
+import threading
 
 
 def similarities_for_testing(java_project_name :string):
@@ -20,10 +22,9 @@ class Searcher:
     def __init__(self, graph:Graph, query:Query, similarities:list={}):
         self.graph :Graph = graph
         self.query :Query = query
-        self.__heap :MaxHeap = MaxHeap(graph.num_of_vertices() * query.graph.num_of_vertices())
         self.__ranker :Ranker = Ranker()
         self.__results :MaxHeap = MaxHeap()
-        self.__similarities :list = similarities
+        self.similarities :list = similarities
 
     def class_based_similarity(self):
         pass
@@ -31,12 +32,40 @@ class Searcher:
     def class_relationship_based_similarity(self, threshold, k):
         pass
 
-    def __calculate_similarities(self) -> None:
+    # def __calculate_similarities(self) -> None:
+    #     for vertex1 in self.query.graph.get_vertices():
+    #         for vertex2 in self.graph.get_vertices():
+    #             sim = self.__ranker.get_rank(vertex1, vertex2)
+    #             self.__heap.insert(sim, vertex2)
+    #             self.__similarities[vertex1.key, vertex2.key] = sim
+
+    def __calculate_similarities(self, vertices) -> None:
         for vertex1 in self.query.graph.get_vertices():
-            for vertex2 in self.graph.get_vertices():
+            for vertex2 in vertices:
+                # print(threading.get_ident())
                 sim = self.__ranker.get_rank(vertex1, vertex2)
-                self.__heap.insert(sim, vertex2)
-                self.__similarities[vertex1.key, vertex2.key] = sim
+                self.similarities[vertex1.key, vertex2.key] = sim
+
+
+    def calculate_similarities_multi_threaded(self) -> None:
+        vertices_list = self.graph.get_vertices()
+        length = len(vertices_list)
+        middle_index = length // 3
+
+        first = vertices_list[:middle_index]
+        second = vertices_list[middle_index:2*middle_index]
+        third = vertices_list[2*middle_index:3*middle_index]
+
+        t1 = threading.Thread(self.__calculate_similarities(first))
+        t2 = threading.Thread(self.__calculate_similarities(second))
+        t3 = threading.Thread(self.__calculate_similarities(third))
+
+        # t1.start()
+        # t2.start()
+        # t3.start()
+        # t1.join()
+        # t2.join()
+        # t3.join()
 
     def __get_first_nodes(self) ->list:
         vertices = {}
@@ -44,7 +73,7 @@ class Searcher:
             max_sim = 0
             vertex = None
             for vertex2 in self.graph.get_vertices():
-                sim = self.__similarities[vertex1.key, vertex2.key]
+                sim = self.similarities[vertex1.key, vertex2.key]
                 if sim>max_sim:
                     max_sim=sim
                     vertex = vertex2
@@ -54,8 +83,10 @@ class Searcher:
 
     def search(self, k=2, threshold = 1):
         start_time = time.time()
-        if len(self.__similarities) == 0:
-            self.__calculate_similarities()
+        # if len(self.similarities) == 0:
+            # self.__calculate_similarities()
+        self.calculate_similarities_multi_threaded()
+
         first_vertices = self.__get_first_nodes()
         self.__results = MaxHeap(len(first_vertices) * 2 + 1)
         for vertex in first_vertices.keys():
@@ -97,7 +128,7 @@ class Searcher:
             for vertex2 in result.graph.get_vertices():
                 for neighbor in vertex2.neighbors:
                     if neighbor.key not in visited:
-                        sim = self.__similarities[vertex1.key, neighbor.key]
+                        sim = self.similarities[vertex1.key, neighbor.key]
                         if sim > max_sim:
                             max_sim = sim
                             vertex = neighbor
@@ -113,11 +144,19 @@ class Searcher:
 
 def main():
 
-    print(similarities_for_testing('src1'))
+    # print(similarities_for_testing('src1'))
 
-    # query = Query("class list implements class iterable,class list contains class node")
-    # graph = Graph('../Files/json graphs/src1.json')
-    # searcher = Searcher(graph, query)
+    query = Query("class list implements class iterable,class list contains class node")
+    graph = Graph('../Files/json graphs/src1.json')
+    searcher = Searcher(graph, query)
+
+    start = time.time()
+    searcher.calculate_similarities_multi_threaded()
+    end = time.time()
+    print(len(searcher.similarities))
+    print("total time:", end-start)
+    print(searcher.similarities)
+
     # searcher.search()
     # searcher.get_results()
 
