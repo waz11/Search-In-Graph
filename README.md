@@ -63,8 +63,9 @@ semantic similarity - with semach library, for more details go to: https://gsi-u
 	
 	
 ## Task List:
-	- [v] parsing java code to graph
-	- [v] parsing query to graph
-	- [v] ranker
-	- [v] searcher
+	[v] parser
+	[v] query
+	[v] result object
+	[v] ranker
+	[v] searcher
 
