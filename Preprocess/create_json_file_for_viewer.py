@@ -1,8 +1,3 @@
-import json
-
-# go to: http://khmap.ise.bgu.ac.il/map/
-# and import the output file
-
 from Graph.graph import Graph
 from Utils.json_functions import get_data_from_json_file, save_json_to_file
 
