@@ -36,6 +36,9 @@ class CodeParser:
             if (typeof(x) == 'class' or typeof(x) == 'interface'):
                 class_component = class_handler(x)
                 name = class_component.name
+                if name.lower() == 'main':
+                    continue
+
                 type = class_component.type
                 modifiers = class_component.modifiers
                 class_vertex = graph.add_class(name, modifiers)
@@ -48,6 +51,8 @@ class CodeParser:
 
                 for method in class_component.methods:
                     name = method.name
+                    if name.lower == 'main':
+                        continue
                     arguments = []
                     for arg in method.arguments:
                         if arg not in unwanted_types:

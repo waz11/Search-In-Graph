@@ -29,7 +29,7 @@ def class_handler(component):
             field = field_handler(comp)
             class_comp.fields.append(field)
 
-        if (typeof(comp) == 'method'):
+        if (typeof(comp) == 'method' and comp.name.lower() != 'main'):
             method = method_handler(comp)
             class_comp.methods.append(method)
     return class_comp

@@ -10,6 +10,7 @@ def main():
     # query.graph.draw()
 
     graph = CodeParser('Files/codes/src1').graph
+    print(graph.toJson())
     # graph.draw()
     print(graph.num_of_vertices(),"vertices")
     print(graph.num_of_edges(),"edges")
