@@ -27,8 +27,9 @@ class Searcher:
             vertices = self.graph.get_vertices()
         for vertex1 in self.query.graph.get_vertices():
             for vertex2 in vertices:
-                # print(threading.get_ident())
-                sim = self.__ranker.get_rank(vertex1, vertex2)
+                print(threading.get_ident())
+                # sim = self.__ranker.get_rank(vertex1, vertex2)
+                sim = Ranker().get_rank(vertex1, vertex2)
                 self.similarities[vertex1.key, vertex2.key] = sim
 
 
@@ -44,11 +45,9 @@ class Searcher:
         t1 = threading.Thread(target=self.__calculate_similarities, args = (first,))
         t2 = threading.Thread(target=self.__calculate_similarities, args = (second,))
         t3 = threading.Thread(target=self.__calculate_similarities, args = (third,))
-
         t1.start()
         t2.start()
         t3.start()
-
         t1.join()
         t2.join()
         t3.join()
@@ -69,8 +68,8 @@ class Searcher:
 
     def search(self, k=2, threshold = 1):
         start_time = time.time()
-        self.__calculate_similarities()
-        # self.calculate_similarities_multi_threaded()
+        # self.__calculate_similarities()
+        self.calculate_similarities_multi_threaded()
 
         first_vertices = self.__get_first_nodes()
         self.__results = MaxHeap(len(first_vertices) * 2 + 1)
