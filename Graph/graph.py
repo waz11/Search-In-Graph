@@ -9,11 +9,11 @@ from Utils.json_functions import list_to_json, save_json_to_file
 
 class Graph:
     def __init__(self):
-        self.vertices :dict = {}        # key:vertex
-        self.edges :dict = {}           # key,key:edge
-        self.classes_names = dict()     # name:vertex
-        self.methods_names = dict()     # name:vertex
-        self.interfaces_names = dict()  #name:vertex
+        self.vertices :dict = {}            # key:vertex
+        self.edges :dict = {}               # key,key:edge
+        self.classes_names :dict = {}       # name:vertex
+        self.methods_names :dict = {}       # name:vertex
+        self.interfaces_names :dict = {}    # name:vertex
         self.key = -1
 
     def __get_key(self):
