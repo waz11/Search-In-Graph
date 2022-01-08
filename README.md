@@ -17,7 +17,7 @@ to : target vertex
 ### ILLUSTRATION:
 ![src1 (1)](https://user-images.githubusercontent.com/62445178/148656861-98410dbf-f92d-4e69-9fae-c562716cd0e5.png)
 
-## PART II: SEARCH ENGINGE
+## PART II: SEARCH IN GRAPH
 ### Instruction:
 1. clone the project
 2. install dependencies
