@@ -1,3 +1,4 @@
+from Graph.edge import Edge
 from Graph.graph import Graph
 from Graph.vertex import Vertex
 
@@ -12,7 +13,7 @@ class Result:
         self.graph.add_vertex(vertex)
         self.rank += rank
 
-    def add_edge(self, edge):
+    def add_edge(self, edge:Edge):
         self.graph.add_edge(edge.type, edge.source, edge.to)
 
     def get_rank(self):

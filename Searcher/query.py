@@ -1,16 +1,15 @@
+import string
+
 from Graph.graph import Graph
 
 
 class Query:
 
-    def __init__(self, query):
+    def __init__(self, query:string):
         self.query = query
         self.graph = Graph()
         self.content = query.split(',')
         self.special_words = set(["extends", "implements", "method", "class", "contains"])
-        self.__parse()
-
-    def build_json_obj(self):
         self.__parse()
 
     def __str__(self):

@@ -1,9 +1,5 @@
 import sys
 
-from Graph.edge import Edge
-from Graph.vertex import Vertex
-
-
 class Element:
     def __init__(self, rank, element=''):
         self.rank = rank

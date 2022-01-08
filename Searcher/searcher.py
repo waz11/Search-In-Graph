@@ -1,5 +1,3 @@
-import os
-import string
 import time
 from Graph.graph import Graph
 from Ranker.ranker import Ranker
@@ -45,15 +43,15 @@ class Searcher:
 
         t1 = threading.Thread(target=self.__calculate_similarities, args = (first,))
         t2 = threading.Thread(target=self.__calculate_similarities, args = (second,))
-        # t3 = threading.Thread(target=self.__calculate_similarities, args = (third,))
+        t3 = threading.Thread(target=self.__calculate_similarities, args = (third,))
 
         t1.start()
         t2.start()
-        # t3.start()
+        t3.start()
 
         t1.join()
         t2.join()
-        # t3.join()
+        t3.join()
 
     def __get_first_nodes(self) ->list:
         vertices = {}
