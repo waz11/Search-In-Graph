@@ -7,11 +7,13 @@ from Utils.create_json_file_for_viewer import create_json_file_for_viewer
 def main():
     query = Query("class list implements class iterable,class list contains class node")
     graph = CodeParser('Files/codes/src1').graph
+    print(graph.num_of_vertices(),"vertices")
+    print(graph.num_of_edges(),"edges")
     # create_json_file_for_viewer(graph, 'src1')
 
-    # searcher = Searcher(graph, query)
-    # searcher.search()
-    # searcher.get_results()
+    searcher = Searcher(graph, query)
+    searcher.search()
+    searcher.get_results()
 
 
 if __name__ == '__main__':

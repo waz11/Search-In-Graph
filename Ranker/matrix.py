@@ -2,16 +2,23 @@ class Matrix:
 
     def __init__(self):
         self.__Similarity_matrix_vertex = {}
-        self.__Similarity_matrix_vertex['class', 'project'] = 0
         self.__Similarity_matrix_vertex['class', 'class'] = 1
         self.__Similarity_matrix_vertex['method', 'method'] = 1
+        self.__Similarity_matrix_vertex['interface', 'interface'] = 1
+        self.__Similarity_matrix_vertex['abstract', 'abstract'] = 1
+
+        self.__Similarity_matrix_vertex['class', 'abstract'] = 0.7
         self.__Similarity_matrix_vertex['class', 'method'] = 0.5
+        self.__Similarity_matrix_vertex['class', 'interface'] = 0.1
+        self.__Similarity_matrix_vertex['method', 'interface'] = 0.1
 
         self.__Similarity_matrix_edge = {}
+
         self.__Similarity_matrix_edge['implements', 'implements'] = 1
         self.__Similarity_matrix_edge['extends', 'extends'] = 1
         self.__Similarity_matrix_edge['contains', 'contains'] = 1
         self.__Similarity_matrix_edge['method', 'method'] = 1
+
         self.__Similarity_matrix_edge['implements', 'extends'] = 0.75
         self.__Similarity_matrix_edge['implements', 'contains'] = 0.5
         self.__Similarity_matrix_edge['implements', 'method'] = 0.5
