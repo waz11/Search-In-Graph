@@ -33,4 +33,15 @@ query as graph:\
 
 
 ### Parser
-**So far, the parser deals only with some patterns of syntax in query, as described 
+**So far, the parser deals only with some patterns of syntax in query, as described below:
+- class [class_name] extends class [class_name]
+- class [class_name] implements class [class_name]
+- class [class_name] contains class [class_name]
+- class [class_name] contains method [method_name]
+- class [class_name] contains field [field_name]
+- method method_name contains field [field_name]
+
+###Rahker
+semantic similarity - with semach library, for more details go to: https://gsi-upm.github.io/sematch/
+
+
