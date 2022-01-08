@@ -26,11 +26,11 @@ path: Preprocess/create_json_file_for_viewer.py\
 function: create_json_file_for_viewer(json_file)\
 with BGU vpn, go to: http://khmap.ise.bgu.ac.il/map and import the output file
 
-## query
+## Query
 query as text: class list implements class iterable,class list contains class node\
 query as graph:\
 ![query1](https://user-images.githubusercontent.com/62445178/148056668-61379d48-9b40-4419-ae4a-f3c919d67483.png)
 
 
-## parser
+## Parser
 **So far, the parser deals only with some patterns of syntax in query, as described 
