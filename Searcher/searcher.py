@@ -79,7 +79,7 @@ class Searcher:
             result.add_vertex(vertex, rank)
             visited = set()
             visited.add(vertex.key)
-            self.__greedy_algorithm_recursive(result, 2, threshold, visited)
+            self.__greedy_algorithm_recursive(result, k, threshold, visited)
             rank = result.get_rank() / self.query.graph.num_of_vertices()
             self.__results.insert(rank, result)
         end_time = time.time()
