@@ -56,7 +56,7 @@ class Searcher:
         t2.join()
         t3.join()
 
-    def __get_first_nodes(self) ->list:
+    def __get_first_nodes(self)->list:
         vertices = {}
         for vertex1 in self.query.graph.get_vertices():
             max_sim = 0
