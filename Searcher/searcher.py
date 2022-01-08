@@ -96,7 +96,7 @@ class Searcher:
             self.__results.insert(rank, result)
         end_time = time.time()
         total_time = end_time - start_time
-        print(total_time)
+        print(total_time, "seconds")
 
         # # TESTING:
         # vertex = list(first_vertices)[0]
@@ -111,7 +111,7 @@ class Searcher:
     def get_results(self):
         while self.__results.size > 0:
             element = self.__results.extractMax()
-            print(element.rank, element.element.graph.toJson())
+            # print(element.rank, element.element.graph.toJson())
             element.element.graph.draw()
 
     def __greedy_algorithm_recursive(self, result:Result, k, th, visited:set) -> Result:

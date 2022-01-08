@@ -13,7 +13,7 @@ class Result:
         self.rank += rank
 
     def add_edge(self, edge):
-        self.graph.add_edge(edge)
+        self.graph.add_edge(edge.type, edge.source, edge.to)
 
     def get_rank(self):
         return self.rank
