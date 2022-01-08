@@ -1,3 +1,4 @@
+import string
 import time
 from Graph.graph import Graph
 from Ranker.ranker import Ranker
@@ -89,8 +90,8 @@ class Searcher:
             self.__results.insert(rank, result)
         end_time = time.time()
         total_time = end_time - start_time
-        convert(total_time)
-        print('total time:', convert(total_time))
+        convert_second(total_time)
+        print('total time:', convert_second(total_time))
 
         # # TESTING:
         # vertex = list(first_vertices)[0]
@@ -132,7 +133,7 @@ class Searcher:
         self.__greedy_algorithm_recursive(result, k - 1, 0, visited)
 
 
-def convert(seconds):
+def convert_second(seconds)->string:
     seconds = seconds % (24 * 3600)
     hour = seconds // 3600
     seconds %= 3600
