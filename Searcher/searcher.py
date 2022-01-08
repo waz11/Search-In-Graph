@@ -33,7 +33,7 @@ class Searcher:
     def class_relationship_based_similarity(self, threshold, k):
         pass
 
-    def __calculate_similarities(self, vertices) -> None:
+    def __calculate_similarities(self, vertices = []) -> None:
         if len(vertices) == 0:
             vertices = self.graph.get_vertices()
         for vertex1 in self.query.graph.get_vertices():
@@ -140,7 +140,7 @@ class Searcher:
 
 def main():
     query = Query("class list implements class iterable,class list contains class node")
-    graph = CodeParser('../Files/codes/src1')
+    graph = CodeParser('../Files/codes/src1').graph
 
     searcher = Searcher(graph, query)
     searcher.search()

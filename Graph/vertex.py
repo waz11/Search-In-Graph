@@ -1,5 +1,7 @@
 import json
 
+from Parser.tokenizer import Tokenizer
+
 
 class Vertex:
 
@@ -14,6 +16,7 @@ class Vertex:
         for att in attributes:
             self.attributes.add(att)
         self.neighbors = set()
+        self.tokens = Tokenizer().get_tokens(name)
 
     def set_modifiers(self,modifiers):
         self.modifiers=modifiers

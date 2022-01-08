@@ -17,6 +17,10 @@ class Graph:
         self.key += 1
         return self.key
 
+    def add_vertex(self,vertex):
+        self.vertices[vertex.key] = vertex
+
+
     def add_class(self, name, modifiers=[]):
         vertex = self.classes_names.get(name)
         if vertex:
@@ -54,10 +58,10 @@ class Graph:
         edge.source.add_neighbor(edge.to)
 
     def get_vertex(self,key):
-        return self.__vertices.get(key, None)
+        return self.vertices.get(key, None)
 
     def get_edge(self,source_key, to_key):
-        return self.__edges.get((source_key, to_key),None)
+        return self.edges.get((source_key, to_key),None)
 
     def get_vertices(self) ->list:
         list = []
@@ -66,7 +70,7 @@ class Graph:
         return list
 
     def get_edges(self) ->list:
-        list = self.__edges.values()
+        list = self.edges.values()
         return list
 
     def num_of_vertices(self) -> int:
