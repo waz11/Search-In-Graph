@@ -9,12 +9,12 @@ from Parser.codeToGraph.code_to_graph import CodeParser
 
 
 class Searcher:
-    def __init__(self, graph:Graph, query:Query, similarities:list={}):
+    def __init__(self, graph:Graph, query:Query):
         self.graph :Graph = graph
         self.query :Query = query
         self.__ranker :Ranker = Ranker()
         self.__results :MaxHeap = MaxHeap()
-        self.similarities :list = similarities
+        self.similarities = dict()
 
     def class_based_similarity(self):
         pass
@@ -27,9 +27,13 @@ class Searcher:
             vertices = self.graph.get_vertices()
         for vertex1 in self.query.graph.get_vertices():
             for vertex2 in vertices:
+                # for multithreaed:
                 # print(threading.get_ident())
-                # sim = self.__ranker.get_rank(vertex1, vertex2)
-                sim = Ranker().get_rank(vertex1, vertex2)
+                # sim = Ranker().get_rank(vertex1, vertex2)
+
+                # for single-threaded:
+                sim = self.__ranker.get_rank(vertex1, vertex2)
+
                 self.similarities[vertex1.key, vertex2.key] = sim
 
 
@@ -68,6 +72,7 @@ class Searcher:
 
     def search(self, k=2, threshold = 1):
         start_time = time.time()
+
         self.__calculate_similarities()
         # self.calculate_similarities_multi_threaded()
 
