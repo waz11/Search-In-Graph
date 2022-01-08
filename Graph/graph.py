@@ -107,6 +107,11 @@ class Graph:
             v2 :string = edge.to.name
             ed.append((v1,v2))
         G.add_edges_from(ed)
+
+        if self.num_of_edges() == 0:
+            for vertex in self.vertices.values():
+                G.add_node(vertex.name)
+
         pos = nx.spring_layout(G)
         nx.draw_networkx_nodes(G, pos, cmap=plt.get_cmap('jet'),node_size=1000)
         nx.draw_networkx_labels(G, pos, font_size=10, font_color='k')
@@ -129,9 +134,8 @@ def main():
     g = Graph()
     v1 = g.add_class('name1', 'type')
     v2 = g.add_class('name2', 'kkk')
-    g.add_edge('extends',v1,v2)
-    json = g.toJson()
-    g.save_to_json_file('../Files/ron.json')
+    # g.add_edge('extends',v1,v2)
+    g.draw()
 
 if __name__ == '__main__':
     main()
