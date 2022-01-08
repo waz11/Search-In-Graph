@@ -1,6 +1,6 @@
 # __**MY FINAL BACHELOR PROJECT**__
 
-## PART I : JAVA PROJECT TO GRAPH
+## PART I : JAVA PROJECT TO GRAPH OBJECT
 
 ### Graph object
 input: path to code folder\
