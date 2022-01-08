@@ -7,6 +7,7 @@ from Searcher.maxheap import MaxHeap
 from Searcher.query import Query
 from Searcher.result import Result
 import threading
+from Parser.codeToGraph.code_to_graph import CodeParser
 
 
 def similarities_for_testing(java_project_name :string):
@@ -139,11 +140,12 @@ class Searcher:
 
 def main():
     query = Query("class list implements class iterable,class list contains class node")
-    graph = Graph('../Files/json graphs/src1.json')
+    graph = CodeParser('../Files/codes/src1')
+
     searcher = Searcher(graph, query)
-    # searcher.search()
-    # searcher.get_results()
-    searcher.calculate_similarities_multi_threaded()
+    searcher.search()
+    searcher.get_results()
+    # searcher.calculate_similarities_multi_threaded()
 
 
 if __name__ == '__main__':
