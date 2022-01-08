@@ -102,7 +102,7 @@ class Searcher:
     def get_results(self):
         while self.__results.size > 0:
             element = self.__results.extractMax()
-            # print(element.rank, element.element.graph.toJson())
+            print(element.rank, element.element.graph.toJson())
             element.element.graph.draw()
 
     def __greedy_algorithm_recursive(self, result:Result, k, th, visited:set) -> Result:
@@ -135,7 +135,7 @@ def main():
 
     searcher = Searcher(graph, query)
     searcher.search()
-    searcher.get_results()
+    # searcher.get_results()
     # searcher.calculate_similarities_multi_threaded()
 
 
