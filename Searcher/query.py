@@ -32,7 +32,7 @@ class Query:
                         g.add_edge("extends", vertex1, vertex2)
                     if word=='implements':
                         vertex1 = g.add_class(words[i - 1])
-                        vertex2 = g.add_class(words[i + 2])
+                        vertex2 = g.add_interface(words[i + 1])
                         g.add_edge("implements", vertex1, vertex2)
                     if word=='contains':
                         if words[i-2] == 'class':
