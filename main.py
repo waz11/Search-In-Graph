@@ -11,7 +11,7 @@ def main():
 
     graph = CodeParser('Files/codes/src1').graph
     print(graph.toJson())
-    graph.draw()
+    # graph.draw()
     print(graph.num_of_vertices(),"vertices")
     print(graph.num_of_edges(),"edges")
     # create_json_file_for_viewer(graph, 'src1')

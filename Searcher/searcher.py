@@ -89,7 +89,8 @@ class Searcher:
             self.__results.insert(rank, result)
         end_time = time.time()
         total_time = end_time - start_time
-        print(total_time, "seconds")
+        convert(total_time)
+        print('total time:', convert(total_time))
 
         # # TESTING:
         # vertex = list(first_vertices)[0]
@@ -130,6 +131,14 @@ class Searcher:
         visited.add(vertex.key)
         self.__greedy_algorithm_recursive(result, k - 1, 0, visited)
 
+
+def convert(seconds):
+    seconds = seconds % (24 * 3600)
+    hour = seconds // 3600
+    seconds %= 3600
+    minutes = seconds // 60
+    seconds %= 60
+    return "%d:%02d:%02d" % (hour, minutes, seconds)
 
 def main():
     query = Query("class list implements class iterable,class list contains class node")
