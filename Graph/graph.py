@@ -20,11 +20,11 @@ class Graph:
         self.key += 1
         return self.key
 
-    def add_vertex(self,vertex):
+    def add_vertex(self,vertex:Vertex):
         self.vertices[vertex.key] = vertex
 
 
-    def add_class(self, name, modifiers=[]):
+    def add_class(self, name:string, modifiers=[]):
         vertex = self.classes_names.get(name)
         if vertex:
             if len(modifiers) > len(vertex.modifiers):
@@ -44,7 +44,7 @@ class Graph:
         self.methods_names[name] = vertex
         return vertex
 
-    def add_interface(self, name):
+    def add_interface(self, name:string):
         vertex = self.interfaces_names.get(name)
         if vertex:
             return vertex
@@ -55,7 +55,7 @@ class Graph:
             self.interfaces_names[name] = vertex
             return vertex
 
-    def add_edge(self, type, source, to):
+    def add_edge(self, type:string, source:Vertex, to:Vertex):
         edge = Edge(source, to, type)
         self.edges[edge.source.key, edge.to.key] = edge
         edge.source.add_neighbor(edge.to)
