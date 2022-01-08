@@ -14,7 +14,7 @@ attributes : fields (in class) / arguments (in method)
 type - class / method / implements / extends / contains(for arguments)\
 from - source vertex\
 to - destination vertex
-### graph illustration:
+### ILLUSTRATION:
 ![src1 (1)](https://user-images.githubusercontent.com/62445178/148656861-98410dbf-f92d-4e69-9fae-c562716cd0e5.png)
 
 ## PART II: SEARCH ENGINGE
