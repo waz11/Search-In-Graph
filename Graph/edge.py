@@ -3,7 +3,8 @@ import string
 from Graph.vertex import Vertex
 
 class Edge():
-    def __init__(self, type, source:Vertex, to:Vertex):
+
+    def __init__(self, source:Vertex, to:Vertex, type):
         self.type :string = type
         self.source :Vertex = source
         self.to :Vertex = to
