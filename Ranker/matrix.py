@@ -21,13 +21,11 @@ class Matrix:
 
 
     def vertex_matrix(self, type1, type2):
-        # if (type1,type2) in self.__Similarity_matrix_vertex.keys():
-        #     sim = self.__Similarity_matrix_vertex[type1, type2]
-        # elif (type2,type1) in self.__Similarity_matrix_vertex.keys():
-        #     sim = self.__Similarity_matrix_vertex[type2, type1]
-        # return sim
-
-        return 1
+        if (type1,type2) in self.__Similarity_matrix_vertex.keys():
+            sim = self.__Similarity_matrix_vertex[type1, type2]
+        elif (type2,type1) in self.__Similarity_matrix_vertex.keys():
+            sim = self.__Similarity_matrix_vertex[type2, type1]
+        return sim
 
     def edge_matrix(self, type1, type2):
         sim = 0.1

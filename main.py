@@ -6,11 +6,12 @@ from Searcher.searcher import Searcher
 def main():
     query = Query("class list implements class iterable,class list contains class node")
     graph = CodeParser('Files/codes/src1').graph
-    j = query.graph.toJson()
+    j = graph.toJson()
+    print(j)
 
-    searcher = Searcher(graph, query)
-    searcher.search()
-    searcher.get_results()
+    # searcher = Searcher(graph, query)
+    # searcher.search()
+    # searcher.get_results()
 
 
 if __name__ == '__main__':

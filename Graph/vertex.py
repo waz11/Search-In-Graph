@@ -32,8 +32,10 @@ class Vertex:
         json["key"] = self.key
         json["type"] = self.type
         json["name"] = self.name
-        json["modifiers"] = self.modifiers
-        json["attributes"] = self.attributes
+        # json["modifiers"] = self.modifiers
+        json["attributes"] = []
+        if len(self.attributes) > 0:
+            json["attributes"] = self.attributes
         return json
 
     def __str__(self):
