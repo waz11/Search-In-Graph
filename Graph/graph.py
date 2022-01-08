@@ -113,10 +113,9 @@ class Graph:
                 G.add_node(vertex.name)
 
         pos = nx.spring_layout(G)
-        nx.draw_networkx_nodes(G, pos, cmap=plt.get_cmap('jet'),node_size=1000)
+        nx.draw_networkx_nodes(G, pos, cmap=plt.get_cmap('jet'),node_size=2000,node_color='#00b4d9')
         nx.draw_networkx_labels(G, pos, font_size=10, font_color='k')
         nx.draw_networkx_edges(G, pos,  edge_color='r', arrows=True)
-        nx.draw_networkx_edges(G, pos,  arrows=False)
         plt.show()
 
 
@@ -134,7 +133,7 @@ def main():
     g = Graph()
     v1 = g.add_class('name1', 'type')
     v2 = g.add_class('name2', 'kkk')
-    # g.add_edge('extends',v1,v2)
+    g.add_edge('extends',v1,v2)
     g.draw()
 
 if __name__ == '__main__':

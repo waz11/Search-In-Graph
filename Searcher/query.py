@@ -23,17 +23,17 @@ class Query:
                 if word in self.special_words:
                     if word=='class':
                         g.add_class(words[i + 1])
-                    if word =='method':
+                    elif word =='method':
                         g.add_method(words[i + 1])
-                    if word=='extends':
+                    elif word=='extends':
                         vertex1 = g.add_class(words[i - 1])
                         vertex2 = g.add_class(words[i + 2])
                         g.add_edge("extends", vertex1, vertex2)
-                    if word=='implements':
+                    elif word=='implements':
                         vertex1 = g.add_class(words[i - 1])
                         vertex2 = g.add_interface(words[i + 1])
                         g.add_edge("implements", vertex1, vertex2)
-                    if word=='contains':
+                    elif word=='contains':
                         if words[i-2] == 'class':
                             vertex1 = g.add_class(words[i - 1])
                         else:
