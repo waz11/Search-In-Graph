@@ -9,14 +9,14 @@ class Result:
         self.graph = Graph()
         self.rank = 0.0
 
-    def add_vertex(self, vertex:Vertex, rank):
+    def add_vertex(self, vertex:Vertex, rank)->None:
         self.graph.add_vertex(vertex)
         self.rank += rank
 
-    def add_edge(self, edge:Edge):
+    def add_edge(self, edge:Edge)->None:
         self.graph.add_edge(edge.type, edge.source, edge.to)
 
-    def get_rank(self):
+    def get_rank(self)->float:
         return self.rank
 
     def __str__(self):

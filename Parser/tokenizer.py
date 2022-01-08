@@ -7,7 +7,7 @@ class Tokenizer:
     def __init__(self):
         self.p = PorterStemmer()
 
-    def get_tokens(self, content, rm_stopwords=False, stem=False) -> set:
+    def get_tokens(self, content, rm_stopwords=False, stem=False)->set:
         tokens: set = {}
         words = re.split('[^A-Za-z]+', content)
         ret = []
@@ -27,7 +27,7 @@ class Tokenizer:
             tokens = set(ret)
         return tokens
 
-    def __camel_case_split(self, word) -> list:
+    def __camel_case_split(self, word)->list:
         matches = re.finditer('.+?(?:(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])|$)', word)
         return [m.group(0).lower() for m in matches]
 

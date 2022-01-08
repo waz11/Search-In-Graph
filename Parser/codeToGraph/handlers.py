@@ -5,7 +5,7 @@ from Parser.codeToGraph.components.methodComponent import MethodComponent
 from Parser.codeToGraph.types import typeof
 
 
-def class_handler(component):
+def class_handler(component)->ClassComponent:
     name = component.name
     modifier = component.modifiers
     extends = ''
@@ -34,13 +34,13 @@ def class_handler(component):
             class_comp.methods.append(method)
     return class_comp
 
-def field_handler(component):
+def field_handler(component)->FieldComponent:
     type = component.type.name
     name = component.declarators[0].name
     field_comp = FieldComponent(type, name)
     return field_comp
 
-def method_handler(component):
+def method_handler(component)->MethodComponent:
     arguments = set()
     if component.parameters:
         for x in component.parameters:

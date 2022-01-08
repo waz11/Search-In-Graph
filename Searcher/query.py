@@ -15,7 +15,7 @@ class Query:
     def __str__(self):
         return str(self.content)
 
-    def __parse(self):
+    def __parse(self)->Graph:
         g = Graph()
         for sentence in self.content:
             words = list(sentence.split(' '))

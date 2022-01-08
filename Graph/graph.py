@@ -1,4 +1,5 @@
 import string
+import json
 from Graph.edge import Edge
 from Graph.vertex import Vertex
 import networkx as nx
@@ -90,7 +91,7 @@ class Graph:
         for e in self.edges.values():
             print(e)
 
-    def toJson(self):
+    def toJson(self)->json:
         json = {}
         json["vertices"] = list_to_json(list(self.vertices.values()))
         json["edges"] = list_to_json(list(self.edges.values()))

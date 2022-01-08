@@ -1,3 +1,5 @@
+import string
+
 from Graph.vertex import Vertex
 from Ranker.matrix import Matrix
 from Ranker.sematch.semantic.similarity import WordNetSimilarity
@@ -7,7 +9,7 @@ class Ranker:
     def __init__(self):
         self.__wns = WordNetSimilarity()
 
-    def __words_sim(self, vertex1, vertex2):
+    def __words_sim(self, vertex1:Vertex, vertex2:Vertex)->float:
         rank = 0
         for word1 in vertex1.tokens:
             for word2 in vertex2.tokens:
@@ -16,7 +18,7 @@ class Ranker:
         rank /= max(len(vertex1.tokens), len(vertex2.tokens))
         return rank
 
-    def __single_pair_word_sim(self, word1, word2):
+    def __single_pair_word_sim(self, word1:string, word2:string)->float:
         wns = WordNetSimilarity()
         if word1 == word2:
             sim = 1
@@ -24,11 +26,11 @@ class Ranker:
             sim = wns.word_similarity(word1, word2)
         return sim
 
-    def __type_sim(self, type1, typ2):
+    def __type_sim(self, type1:string, typ2:string)->float:
         m = Matrix()
         return m.vertex_matrix(type1, typ2)
 
-    def get_rank(self, vertex1, vertex2):
+    def get_rank(self, vertex1:Vertex, vertex2:Vertex)->float:
         sim = word_sim = self.__words_sim(vertex1, vertex2)
         if len(vertex1.type) > 0 and len(vertex2.type) > 0:
             type_sim = self.__type_sim(vertex1.type, vertex2.type)

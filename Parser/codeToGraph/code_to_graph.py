@@ -1,4 +1,5 @@
 import re
+import string
 from pathlib import Path
 import javalang
 from Graph.graph import Graph
@@ -7,15 +8,15 @@ from Parser.codeToGraph.handlers import class_handler
 from Parser.codeToGraph.types import typeof
 
 primitive_variables = set(['String','boolean', 'byte', 'char', 'double','float', 'int', 'long', 'short'])
-generice_variable = set(['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'])
-unwanted_types = primitive_variables.union(generice_variable)
+generic_types = set(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'])
+unwanted_types = primitive_variables.union(generic_types)
 
 class CodeParser:
-    def __init__(self, path):
+    def __init__(self, path:string):
         self.directory_path = path
         self.graph = self.build_graph()
 
-    def __concat_files(self,project_path):
+    def __concat_files(self,project_path:string)->string:
         pathlist = Path(project_path).glob('**/*.java')
         result = ""
         for path in pathlist:
@@ -27,7 +28,7 @@ class CodeParser:
             result += code_file
         return result
 
-    def build_graph(self):
+    def build_graph(self)->Graph:
         code = self.__concat_files(self.directory_path)
         parsed_code = parse(code)
         graph = Graph()

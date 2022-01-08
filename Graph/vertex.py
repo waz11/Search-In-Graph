@@ -1,5 +1,4 @@
 import json
-
 from Parser.tokenizer import Tokenizer
 
 
@@ -18,16 +17,16 @@ class Vertex:
         self.neighbors = set()
         self.tokens = Tokenizer().get_tokens(name)
 
-    def set_modifiers(self,modifiers):
+    def set_modifiers(self,modifiers)->None:
         self.modifiers=modifiers
 
-    def add_attribute(self, type):
+    def add_attribute(self, type)->None:
         self.attributes.add(type)
 
-    def add_neighbor(self, vertex):
+    def add_neighbor(self, vertex)->None:
         self.neighbors.add(vertex)
 
-    def toJson(self) -> json:
+    def toJson(self)->json:
         json = {}
         json["key"] = self.key
         json["type"] = self.type

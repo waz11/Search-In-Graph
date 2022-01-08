@@ -27,14 +27,15 @@ class Matrix:
         self.__Similarity_matrix_edge['contains', 'method'] = 0.5
 
 
-    def vertex_matrix(self, type1, type2):
+    def vertex_matrix(self, type1, type2)->float:
+        sim=0
         if (type1,type2) in self.__Similarity_matrix_vertex.keys():
             sim = self.__Similarity_matrix_vertex[type1, type2]
         elif (type2,type1) in self.__Similarity_matrix_vertex.keys():
             sim = self.__Similarity_matrix_vertex[type2, type1]
         return sim
 
-    def edge_matrix(self, type1, type2):
+    def edge_matrix(self, type1, type2)->float:
         sim = 0.1
         if (type1, type2) in self.__Similarity_matrix_vertex.keys():
             sim = self.__Similarity_matrix_vertex[type1, type2]
@@ -44,8 +45,8 @@ class Matrix:
 
 def main():
     m = Matrix()
-    m.vertex_matrix('class','project')
-
+    x=m.vertex_matrix('class','method')
+    print(type(x))
 
 if __name__ == '__main__':
     main()
