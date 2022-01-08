@@ -16,15 +16,15 @@ class Graph:
         self.interfaces_names :dict = {}    # name:vertex
         self.key = -1
 
-    def __get_key(self):
+    def __get_key(self)->int:
         self.key += 1
         return self.key
 
-    def add_vertex(self,vertex:Vertex):
+    def add_vertex(self,vertex:Vertex)->None:
         self.vertices[vertex.key] = vertex
 
 
-    def add_class(self, name:string, modifiers=[]):
+    def add_class(self, name:string, modifiers=[])->Vertex:
         vertex = self.classes_names.get(name)
         if vertex:
             if len(modifiers) > len(vertex.modifiers):
@@ -37,14 +37,14 @@ class Graph:
             self.classes_names[name] = vertex
             return vertex
 
-    def add_method(self, name, arguments=[], modifiers=[], return_type=''):
+    def add_method(self, name, arguments=[], modifiers=[], return_type='')->Vertex:
         key = self.__get_key()
         vertex = Vertex(key, name, 'method', arguments, modifiers)
         self.vertices[key] = vertex
         self.methods_names[name] = vertex
         return vertex
 
-    def add_interface(self, name:string):
+    def add_interface(self, name:string)->Vertex:
         vertex = self.interfaces_names.get(name)
         if vertex:
             return vertex
@@ -60,33 +60,33 @@ class Graph:
         self.edges[edge.source.key, edge.to.key] = edge
         edge.source.add_neighbor(edge.to)
 
-    def get_vertex(self,key):
+    def get_vertex(self,key:int)->Vertex:
         return self.vertices.get(key, None)
 
-    def get_edge(self,source_key, to_key):
+    def get_edge(self,source_key:int, to_key:int)->Edge:
         return self.edges.get((source_key, to_key),None)
 
-    def get_vertices(self) ->list:
+    def get_vertices(self)->list:
         list = []
         for vertex in self.vertices.values():
             list.append(vertex)
         return list
 
-    def get_edges(self) ->list:
+    def get_edges(self)->list:
         list = self.edges.values()
         return list
 
-    def num_of_vertices(self) -> int:
+    def num_of_vertices(self)->int:
         return len(self.vertices)
 
-    def num_of_edges(self) -> int:
+    def num_of_edges(self)->int:
         return len(self.edges)
 
-    def print_vertices(self):
+    def print_vertices(self)->None:
         for v in self.vertices.values():
             print(v)
 
-    def print_edges(self):
+    def print_edges(self)->None:
         for e in self.edges.values():
             print(e)
 
@@ -96,10 +96,10 @@ class Graph:
         json["edges"] = list_to_json(list(self.edges.values()))
         return json
 
-    def save_to_json_file(self, path):
+    def save_to_json_file(self, path)->None:
         save_json_to_file(self.toJson(), path)
 
-    def draw(self) -> None:
+    def draw(self)->None:
         G = nx.DiGraph()
         ed = []
         for edge in self.edges.values():
