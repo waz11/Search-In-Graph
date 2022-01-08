@@ -4,7 +4,7 @@ from Graph.vertex import Vertex
 import networkx as nx
 from matplotlib import pyplot as plt
 
-from Utils.json_functions import list_to_json
+from Utils.json_functions import list_to_json, save_json_to_file
 
 
 class Graph:
@@ -96,6 +96,9 @@ class Graph:
         json["edges"] = list_to_json(list(self.edges.values()))
         return json
 
+    def save_to_json_file(self, path):
+        save_json_to_file(self.toJson(), path)
+
     def draw(self) -> None:
         G = nx.DiGraph()
         ed = []
@@ -128,7 +131,7 @@ def main():
     v2 = g.add_class('name2', 'kkk')
     g.add_edge('extends',v1,v2)
     json = g.toJson()
-    print(json)
+    g.save_to_json_file('../Files/ron.json')
 
 if __name__ == '__main__':
     main()

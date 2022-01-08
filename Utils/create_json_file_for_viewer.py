@@ -10,7 +10,7 @@ def create_json_file_for_viewer(graph:Graph,graph_name='src'):
     json["class"] = "go.GraphLinksModel"
     json["nodeDataArray"] = vertices
     json["linkDataArray"] = edges
-    save_json_to_file(json, '../Files/json graphs for viewer/'+graph_name+'.json')
+    save_json_to_file(json, 'Files/json graphs for viewer/'+graph_name+'.json')
 
 def __parse_vertices(vertices):
     new_vertices = []
@@ -55,8 +55,8 @@ def __parse_edges(edges):
 
 
 def main():
-    g = Graph('../Files/json graphs/src3.json')
-    create_json_file_for_viewer(g, 'src3')
+    g = Graph('../Files/json graphs/src1.json')
+    create_json_file_for_viewer(g, 'src1')
     # create_json_file_for_viewer(g, 'src2')
 
 if __name__ == '__main__':
