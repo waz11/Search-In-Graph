@@ -19,6 +19,8 @@ to - destination vertex
 
 ## PART II: SEARCH ENGINGE
 ### Instruction:
+1. clone the project
+2. install dependencies
 graphviewer - (optional):\
 path: Preprocess/create_json_file_for_viewer.py\
 function: create_json_file_for_viewer(json_file)\
