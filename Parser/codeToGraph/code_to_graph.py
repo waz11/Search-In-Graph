@@ -4,6 +4,7 @@ import javalang
 from Graph.graph import Graph
 from javalang.parse import parse
 from Parser.codeToGraph.handlers import handle_class
+from Parser.codeToGraph.types import typeof
 
 primitive_variables = set(['String','boolean', 'byte', 'char', 'double','float', 'int', 'long', 'short'])
 generice_variable = set(['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'])
@@ -26,24 +27,13 @@ class CodeParser:
             result += code_file
         return result
 
-    def __typeof(self, component):
-        types = {
-            javalang.tree.ClassDeclaration: 'class',
-            javalang.tree.FieldDeclaration:'field',
-            javalang.tree.ConstructorDeclaration: 'constructor',
-            javalang.tree.MethodDeclaration: 'method',
-            javalang.tree.InterfaceDeclaration: 'interface'
-        }
-        return types.get(type(component))
-
-
     def build_graph(self):
         code = self.__concat_files(self.directory_path)
         parsed_code = parse(code)
         graph = Graph()
 
         for x in parsed_code.types:
-            if (self.__typeof(x) == 'class' or self.__typeof(x) == 'interface'):
+            if (typeof(x) == 'class' or typeof(x) == 'interface'):
                 class_component = handle_class(x)
                 name = class_component.name
                 type = class_component.type

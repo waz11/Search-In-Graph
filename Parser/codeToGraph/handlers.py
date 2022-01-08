@@ -2,17 +2,8 @@ import javalang
 from Parser.codeToGraph.components.classComponent import ClassComponent
 from Parser.codeToGraph.components.fieldComponent import FieldComponent
 from Parser.codeToGraph.components.methodComponent import MethodComponent
+from Parser.codeToGraph.types import typeof
 
-def typeof(component):
-
-    types = {
-        javalang.tree.ClassDeclaration: 'class',
-        javalang.tree.FieldDeclaration:'field',
-        javalang.tree.ConstructorDeclaration: 'constructor',
-        javalang.tree.MethodDeclaration: 'method',
-        javalang.tree.InterfaceDeclaration: 'interface'
-    }
-    return types.get(type(component))
 
 def handle_class(component):
     name = component.name
