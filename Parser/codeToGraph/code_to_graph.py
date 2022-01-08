@@ -3,7 +3,7 @@ from pathlib import Path
 import javalang
 from Graph.graph import Graph
 from javalang.parse import parse
-from Parser.codeToGraph.handlers import handle_class
+from Parser.codeToGraph.handlers import class_handler
 from Parser.codeToGraph.types import typeof
 
 primitive_variables = set(['String','boolean', 'byte', 'char', 'double','float', 'int', 'long', 'short'])
@@ -34,7 +34,7 @@ class CodeParser:
 
         for x in parsed_code.types:
             if (typeof(x) == 'class' or typeof(x) == 'interface'):
-                class_component = handle_class(x)
+                class_component = class_handler(x)
                 name = class_component.name
                 type = class_component.type
                 modifiers = class_component.modifiers
