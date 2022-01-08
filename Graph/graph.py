@@ -112,7 +112,7 @@ class Graph:
             for vertex in self.vertices.values():
                 G.add_node(vertex.name)
 
-        pos = nx.spring_layout(G)
+        pos = nx.spring_layout(G, k=500)
         nx.draw_networkx_nodes(G, pos, cmap=plt.get_cmap('jet'),node_size=2000,node_color='#00b4d9')
         nx.draw_networkx_labels(G, pos, font_size=10, font_color='k')
         nx.draw_networkx_edges(G, pos,  edge_color='r', arrows=True)
