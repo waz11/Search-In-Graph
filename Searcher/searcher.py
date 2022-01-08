@@ -1,7 +1,7 @@
 import time
 from Graph.graph import Graph
 from Ranker.ranker import Ranker
-from Searcher.maxheap import MaxHeap
+from Utils.maxheap import MaxHeap
 from Searcher.query import Query
 from Searcher.result import Result
 import threading

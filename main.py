@@ -13,8 +13,8 @@ def main():
     # create_json_file_for_viewer(graph, 'src1')
 
     searcher = Searcher(graph, query)
-    # searcher.search()
-    # searcher.get_results()
+    searcher.search()
+    searcher.get_results()
 
 
 if __name__ == '__main__':
