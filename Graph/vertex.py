@@ -28,12 +28,13 @@ class Vertex:
         self.neighbors.add(vertex)
 
     def toJson(self) -> json:
-        j = {}
-        j["key"] = self.key
-        j["type"] = self.type
-        j["name"] = self.name
-        j["modifiers"] = self.modifiers
-        j["attributes"] = self.attributes
+        json = {}
+        json["key"] = self.key
+        json["type"] = self.type
+        json["name"] = self.name
+        json["modifiers"] = self.modifiers
+        json["attributes"] = self.attributes
+        return json
 
     def __str__(self):
         neighbors = []

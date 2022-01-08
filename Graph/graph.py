@@ -4,6 +4,9 @@ from Graph.vertex import Vertex
 import networkx as nx
 from matplotlib import pyplot as plt
 
+from Utils.json_functions import list_to_json
+
+
 class Graph:
     def __init__(self):
         self.vertices :dict = {}        # key:vertex
@@ -87,11 +90,11 @@ class Graph:
         for e in self.edges.values():
             print(e)
 
-    # def toJson(self):
-    #     json = {}
-    #     json["vertices"] = list_to_json(list(self.__vertices.values()))
-    #     json["edges"] = list_to_json(list(self.__edges.values()))
-    #     return json
+    def toJson(self):
+        json = {}
+        json["vertices"] = list_to_json(list(self.vertices.values()))
+        json["edges"] = list_to_json(list(self.edges.values()))
+        return json
 
     def draw(self) -> None:
         G = nx.DiGraph()
@@ -123,9 +126,9 @@ def main():
     g = Graph()
     v1 = g.add_class('name1', 'type')
     v2 = g.add_class('name2', 'kkk')
-    for v in g.get_vertices():
-        print(v)
-
+    g.add_edge('extends',v1,v2)
+    json = g.toJson()
+    print(json)
 
 if __name__ == '__main__':
     main()

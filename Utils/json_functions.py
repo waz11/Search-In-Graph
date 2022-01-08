@@ -4,6 +4,7 @@ import json
 def list_to_json(list:list) -> json:
     json = []
     for element in list:
+        print(element.toJson)
         json.append(element.toJson())
     return json
 
