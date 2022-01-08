@@ -1,25 +1,21 @@
 # __**MY FINAL BACHELOR PROJECT**__
 
-## PART I : CODE TO GRAPH
+## PART I : JAVA PROJECT TO GRAPH
 
 ### Graph object
 input: path to code folder\
-output: graph in json file\
-the graph is a json file, contains two arrays: vertices and edges.
-
-
-### Vertex
-	name - project's name / class's name / method's name
-	key - identify key
-	type - project / class / method
-	attributes - fields in class / arguments in method
+output: graph object contains vertices & edges
+### Vertex fields:
+key : identifier
+name : class's name / method's name\
+type : class / interface / method\
+attributes : fields (in class) / arguments (in method)
 ### Edge
-	type - class / method / implements / extends / contains(=argument)
-	from - source vertex
-	to - destination vertex
+type - class / method / implements / extends / contains(for arguments)\
+from - source vertex\
+to - destination vertex
 ### graph illustration:
-![(Unsaved File)](https://user-images.githubusercontent.com/62445178/147954326-a32f7106-72d2-466e-a859-b1c6d663f3b7.png)
-
+![src1 (1)](https://user-images.githubusercontent.com/62445178/148656861-98410dbf-f92d-4e69-9fae-c562716cd0e5.png)
 ## PART II: SEARCH ENGINGE
 ### Instruction:
 1. build json file (into: Files/json graphs) contains graph from java project:\
