@@ -40,7 +40,7 @@ class CodeParser:
                 if name.lower() == 'main':
                     continue
 
-                type = class_component.type
+                # type = class_component.type
                 modifiers = class_component.modifiers
                 class_vertex = graph.add_class(name, modifiers)
 
@@ -80,13 +80,13 @@ class CodeParser:
         return graph
 
 def main():
-    c = CodeParser('../../Files/codes/src1')
-    graph = c.build_graph()
-    graph.print_vertices()
-    graph.print_edges()
-    print(graph.num_of_vertices(), "vertices")
-    print(graph.num_of_edges(),"edges")
-    graph.draw()
+    c = CodeParser('../../Files/codes/src4')
+    # print(c)
+    # graph.print_vertices()
+    # graph.print_edges()
+    # print(graph.num_of_vertices(), "vertices")
+    # print(graph.num_of_edges(),"edges")
+    # graph.draw()
 
 if __name__ == '__main__':
     main()

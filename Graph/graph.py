@@ -103,10 +103,12 @@ class Graph:
     def draw(self)->None:
         G = nx.DiGraph()
         ed = []
+        edge_labels = dict()
         for edge in self.edges.values():
             v1 :string = edge.source.name
             v2 :string = edge.to.name
             ed.append((v1,v2))
+            edge_labels[v1,v2] = edge.type
         G.add_edges_from(ed)
 
         if self.num_of_edges() == 0:
@@ -116,7 +118,10 @@ class Graph:
         pos = nx.spring_layout(G, k=500)
         nx.draw_networkx_nodes(G, pos, cmap=plt.get_cmap('jet'),node_size=2000,node_color='#00b4d9')
         nx.draw_networkx_labels(G, pos, font_size=10, font_color='k')
-        nx.draw_networkx_edges(G, pos,  edge_color='r', arrows=True)
+        nx.draw_networkx_edges(G, pos, edge_color = 'b', arrowsize=20, arrowstyle='fancy')
+
+        nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels)
+
         plt.show()
 
 

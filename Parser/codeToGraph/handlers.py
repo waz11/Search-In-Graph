@@ -1,4 +1,9 @@
+import json
 import javalang
+from javalang.tree import StatementExpression
+from collections.abc import Iterable
+
+
 from Parser.codeToGraph.components.classComponent import ClassComponent
 from Parser.codeToGraph.components.fieldComponent import FieldComponent
 from Parser.codeToGraph.components.methodComponent import MethodComponent
@@ -40,8 +45,53 @@ def field_handler(component)->FieldComponent:
     field_comp = FieldComponent(type, name)
     return field_comp
 
+calls = []
+
+def handler(x):
+    if typeof(x) == 'calling':
+        # print(x.member)
+        calls.append(x.member)
+        return x.member
+    elif typeof(x) == 'expression':
+        handler(x.expression)
+    elif typeof(x) == 'statement':
+        if hasattr(x, 'body'):
+            handler(x.body)
+    elif typeof(x) == 'if':
+        # print(x)
+        handler(x.condition)
+        if x.else_statement != None:
+            handler(x.else_statement)
+        if x.then_statement != None:
+            handler(x.then_statement)
+    elif typeof(x) == 'operation':
+        handler(x.operandl)
+    elif typeof(x) == 'assignment':
+        handler(x.value)
+    else:
+        if hasattr(x, 'statements'):
+            for st in x.statements:
+                handler(st)
+        # else:
+        #     print(x)
+        #     print(type(x))
+
+
+
+def method_body_handler(component):
+    calls.clear()
+    for x in component:
+        handler(x)
+    # print(calls)
+    return calls.copy()
+
+
 def method_handler(component)->MethodComponent:
     arguments = set()
+    if component.body:
+        method_calls = method_body_handler(component.body)
+        # if len(method_calls)>0:
+        #     print(method_calls)
     if component.parameters:
         for x in component.parameters:
             type = x.type.name
