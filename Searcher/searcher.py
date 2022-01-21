@@ -142,12 +142,12 @@ def convert_second(seconds)->string:
     return "%d:%02d:%02d" % (hour, minutes, seconds)
 
 def main():
-    query = Query("class list implements class iterable,class list contains class node")
+    query = Query("class list implements iterable,class list contains class node")
     graph = CodeParser('../Files/codes/src1').graph
 
     searcher = Searcher(graph, query)
     searcher.search()
-    # searcher.get_results()
+    searcher.get_results()
     # searcher.calculate_similarities_multi_threaded()
 
 
