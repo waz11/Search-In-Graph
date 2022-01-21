@@ -1,9 +1,9 @@
 import sys
 
 class Element:
-    def __init__(self, rank, element=''):
+    def __init__(self, rank, item=''):
         self.rank = rank
-        self.element = element
+        self.item = item
 
 class MaxHeap:
     def __init__(self, maxsize=10):
@@ -57,9 +57,9 @@ class MaxHeap:
 
     def Print(self) -> None:
         for i in range(1, (self.size // 2) + 1):
-            print("PARENT : " + str(self.Heap[i].element) +
-                  " LEFT CHILD : " + str(self.Heap[2 * i].element) +
-                  " RIGHT CHILD : " + str(self.Heap[2 * i + 1].element))
+            print("PARENT : " + str(self.Heap[i].item) +
+                  " LEFT CHILD : " + str(self.Heap[2 * i].item) +
+                  " RIGHT CHILD : " + str(self.Heap[2 * i + 1].item))
 
     def extractMax(self) -> (Element, float):
         popped = self.Heap[self.FRONT]
@@ -78,8 +78,8 @@ if __name__ == "__main__":
     # print(maxHeap.size)
     maxHeap.Print()
     element = maxHeap.extractMax()
-    print("The Max val is ", element.rank, element.element)
+    print("The Max val is ", element.rank, element.item)
     element = maxHeap.extractMax()
-    print("The Max val is ", element.rank, element.element)
+    print("The Max val is ", element.rank, element.item)
     element = maxHeap.extractMax()
-    print("The Max val is ", element.rank, element.element)
+    print("The Max val is ", element.rank, element.item)

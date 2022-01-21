@@ -4,7 +4,7 @@ from Graph.graph import Graph
 from algorithm1.Ranker.ranker import Ranker
 from Utils.maxheap import MaxHeap
 from algorithm1.Searcher.query import Query
-from algorithm1.Searcher.result import Result
+from Result.result import Result
 import threading
 from Parser.codeToGraph.code_to_graph import CodeParser
 
@@ -104,10 +104,13 @@ class Searcher:
         # # END
 
     def get_results(self):
+        results = []
         while self.__results.size > 0:
             element = self.__results.extractMax()
-            print(element.rank, element.element.graph.toJson())
-            element.element.graph.draw()
+            results.append(element)
+            print(element.rank, element.item.graph.toJson())
+            element.item.graph.draw()
+        return self.__results
 
     def __greedy_algorithm_recursive(self, result:Result, k, th, visited:set) -> Result:
         if k==0:

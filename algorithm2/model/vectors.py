@@ -50,7 +50,7 @@ class WordEmbedding:
     def build(self):
         sqlite3.register_adapter(np.ndarray, self.adapt_array)
         sqlite3.register_converter("array", self.convert_array)
-        conn = sqlite3.connect('../model/vectors.db', detect_types=sqlite3.PARSE_DECLTYPES)
+        conn = sqlite3.connect('vectors.db', detect_types=sqlite3.PARSE_DECLTYPES)
         return conn
 
     def drop_table(self):
@@ -98,7 +98,7 @@ class WordEmbedding:
         return 1.0 - spatial.distance.cosine(v1, v2)
 
 def main():
-    g = CodeParser('../Files/codes/src1').graph
+    g = CodeParser('../../Files/codes/src1').graph
     model = WordEmbedding(g, 'src1')
     # model.print_table()
 
