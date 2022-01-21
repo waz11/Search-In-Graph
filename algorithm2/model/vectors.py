@@ -77,9 +77,6 @@ class WordEmbedding:
             res = model[key]
         return res
 
-
-
-
     def print_table(self):
         self.crsr.execute("SELECT * FROM %s" % self.table_name)
         ans = self.crsr.fetchall()
@@ -100,14 +97,13 @@ class WordEmbedding:
 def main():
     g = CodeParser('../../Files/codes/src1').graph
     model = WordEmbedding(g, 'src1')
-    # model.print_table()
+    model.print_table()
 
     # g.print_vertices()
-    v1 = model["list"]
-    v1 = model["delete"]
-    v2 = model["blue"]
+    v1 = model[0]
+    v2 = model[1]
     d = model.euclid_distance(v1, v2)
-    # print(d)
+    print(d)
 
 
 if __name__ == '__main__':

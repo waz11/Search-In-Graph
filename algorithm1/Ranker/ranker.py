@@ -50,7 +50,9 @@ def main():
     # print(sim1, sim2)
 
     ranker = Ranker()
-    x = ranker.wns.word_similarity("remove","delete")
+    x = ranker.wns.word_similarity('remove', 'delete')
+    print(x)
+    x = ranker.wns.word_similarity('high', 'low')
     print(x)
 
 if __name__ == '__main__':
