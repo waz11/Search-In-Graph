@@ -14,10 +14,10 @@ class Query:
 
     def parse(self):
         tokens = Tokenizer().get_tokens(self.content, rm_stopwords=True)
-        filtered = self.delete_java_words(tokens)
+        filtered = self.remove_java_words(tokens)
         return filtered
 
-    def delete_java_words(self,tokens):
+    def remove_java_words(self, tokens):
         core_terms = ['class','method','contains','implements']
         filtered = list(filter(lambda t: t not in core_terms, tokens))
         return filtered
