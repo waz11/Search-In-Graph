@@ -1,9 +1,6 @@
-import re
-
 from Parser.codeToGraph.code_to_graph import CodeParser
-from Searcher.query import Query
-from Searcher.searcher import Searcher
-from Utils.create_json_file_for_viewer import create_json_file_for_viewer
+from algorithm1.Searcher.query import Query
+from algorithm1.Searcher.searcher import Searcher
 
 
 def main():

@@ -1,8 +1,8 @@
 import string
 
 from Graph.vertex import Vertex
-from Ranker.matrix import Matrix
-from Ranker.sematch.semantic.similarity import WordNetSimilarity
+from algorithm1.Ranker.matrix import Matrix
+from algorithm1.Ranker.sematch.semantic.similarity import WordNetSimilarity
 
 
 class Ranker:

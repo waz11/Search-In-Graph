@@ -1,10 +1,10 @@
 import string
 import time
 from Graph.graph import Graph
-from Ranker.ranker import Ranker
+from algorithm1.Ranker.ranker import Ranker
 from Utils.maxheap import MaxHeap
-from Searcher.query import Query
-from Searcher.result import Result
+from algorithm1.Searcher.query import Query
+from algorithm1.Searcher.result import Result
 import threading
 from Parser.codeToGraph.code_to_graph import CodeParser
 
@@ -143,7 +143,7 @@ def convert_second(seconds)->string:
 
 def main():
     query = Query("class list implements iterable,class list contains class node")
-    graph = CodeParser('../Files/codes/src1').graph
+    graph = CodeParser('../../Files/codes/src1').graph
 
     searcher = Searcher(graph, query)
     searcher.search()
