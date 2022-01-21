@@ -2,11 +2,11 @@
 
 ## Instructions
 ### algorithm1:
-1. download the sematch package from: https://files.pythonhosted.org/packages/f4/1a/09377bdde1fcf4ede770c631e50199511a07921cf11dc66d3a83f2514277/sematch-1.0.4.tar.gz
+1. download the sematch package from: [link](https://files.pythonhosted.org/packages/f4/1a/09377bdde1fcf4ede770c631e50199511a07921cf11dc66d3a83f2514277/sematch-1.0.4.tar.gz) 
 2. add the sematch folder to the following path: algorithm1/Ranker/sematch
 
 ### algorithm2:
-1. download the cc.en.300.bin file from https://fasttext.cc/docs/en/crawl-vectors.html
+1. download the cc.en.300.bin file from: [link](https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.bin.gz)
 2. add the file to the following path: algorithm2/model/cc.en.300.bin
 
 
