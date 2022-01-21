@@ -1,0 +1,406 @@
+{
+    "class": "go.GraphLinksModel",
+    "nodeDataArray": [
+        {
+            "text": "Project 1",
+            "key": 0
+        },
+        {
+            "category": "Task",
+            "strokeWidth": 2,
+            "text": "List",
+            "key": 1
+        },
+        {
+            "category": "Task",
+            "strokeWidth": 2,
+            "text": "Iterable",
+            "key": 2
+        },
+        {
+            "category": "Task",
+            "strokeWidth": 2,
+            "text": "ListFilterIterator",
+            "key": 3
+        },
+        {
+            "category": "Task",
+            "strokeWidth": 2,
+            "text": "Iterator",
+            "key": 4
+        },
+        {
+            "category": "Task",
+            "strokeWidth": 2,
+            "text": "ListIterator",
+            "key": 5
+        },
+        {
+            "category": "Task",
+            "strokeWidth": 2,
+            "text": "Main",
+            "key": 6
+        },
+        {
+            "category": "Task",
+            "strokeWidth": 2,
+            "text": "Node",
+            "key": 7
+        },
+        {
+            "category": "Quality",
+            "stroke": "rgb(255, 0, 0",
+            "strokeWidth": 1,
+            "text": "List",
+            "key": 11
+        },
+        {
+            "category": "Quality",
+            "stroke": "rgb(255, 0, 0",
+            "strokeWidth": 1,
+            "text": "iterator",
+            "key": 12
+        },
+        {
+            "category": "Quality",
+            "stroke": "rgb(255, 0, 0",
+            "strokeWidth": 1,
+            "text": "add",
+            "key": 13
+        },
+        {
+            "category": "Quality",
+            "stroke": "rgb(255, 0, 0",
+            "strokeWidth": 1,
+            "text": "getHead",
+            "key": 14
+        },
+        {
+            "category": "Quality",
+            "stroke": "rgb(255, 0, 0",
+            "strokeWidth": 1,
+            "text": "getTail",
+            "key": 15
+        },
+        {
+            "category": "Quality",
+            "stroke": "rgb(255, 0, 0",
+            "strokeWidth": 1,
+            "text": "ListFilterIterator",
+            "key": 16
+        },
+        {
+            "category": "Quality",
+            "stroke": "rgb(255, 0, 0",
+            "strokeWidth": 1,
+            "text": "hasNext",
+            "key": 17
+        },
+        {
+            "category": "Quality",
+            "stroke": "rgb(255, 0, 0",
+            "strokeWidth": 1,
+            "text": "next",
+            "key": 18
+        },
+        {
+            "category": "Quality",
+            "stroke": "rgb(255, 0, 0",
+            "strokeWidth": 1,
+            "text": "ListIterator",
+            "key": 19
+        },
+        {
+            "category": "Quality",
+            "stroke": "rgb(255, 0, 0",
+            "strokeWidth": 1,
+            "text": "hasNext",
+            "key": 20
+        },
+        {
+            "category": "Quality",
+            "stroke": "rgb(255, 0, 0",
+            "strokeWidth": 1,
+            "text": "next",
+            "key": 21
+        },
+        {
+            "category": "Quality",
+            "stroke": "rgb(255, 0, 0",
+            "strokeWidth": 1,
+            "text": "remove",
+            "key": 22
+        },
+        {
+            "category": "Quality",
+            "stroke": "rgb(255, 0, 0",
+            "strokeWidth": 1,
+            "text": "main",
+            "key": 23
+        },
+        {
+            "category": "Quality",
+            "stroke": "rgb(255, 0, 0",
+            "strokeWidth": 1,
+            "text": "Node",
+            "key": 24
+        },
+        {
+            "category": "Quality",
+            "stroke": "rgb(255, 0, 0",
+            "strokeWidth": 1,
+            "text": "setNext",
+            "key": 25
+        },
+        {
+            "category": "Quality",
+            "stroke": "rgb(255, 0, 0",
+            "strokeWidth": 1,
+            "text": "getNext",
+            "key": 26
+        },
+        {
+            "category": "Quality",
+            "stroke": "rgb(255, 0, 0",
+            "strokeWidth": 1,
+            "text": "getData",
+            "key": 27
+        }
+    ],
+    "linkDataArray": [
+        {
+            "category": "class",
+            "text": "",
+            "from": 0,
+            "to": 1
+        },
+        {
+            "category": "class",
+            "text": "",
+            "from": 0,
+            "to": 2
+        },
+        {
+            "category": "class",
+            "text": "",
+            "from": 0,
+            "to": 3
+        },
+        {
+            "category": "class",
+            "text": "",
+            "from": 0,
+            "to": 4
+        },
+        {
+            "category": "class",
+            "text": "",
+            "from": 0,
+            "to": 5
+        },
+        {
+            "category": "class",
+            "text": "",
+            "from": 0,
+            "to": 6
+        },
+        {
+            "category": "class",
+            "text": "",
+            "from": 0,
+            "to": 7
+        },
+        {
+            "category": "ExtendedBy",
+            "text": "implements",
+            "from": 1,
+            "to": 2
+        },
+        {
+            "category": "ExtendedBy",
+            "text": "implements",
+            "from": 3,
+            "to": 4
+        },
+        {
+            "category": "ExtendedBy",
+            "text": "implements",
+            "from": 5,
+            "to": 4
+        },
+        {
+            "category": "Contribution",
+            "text": "method",
+            "from": 1,
+            "to": 11
+        },
+        {
+            "category": "Contribution",
+            "text": "method",
+            "from": 1,
+            "to": 12
+        },
+        {
+            "category": "Contribution",
+            "text": "method",
+            "from": 1,
+            "to": 13
+        },
+        {
+            "category": "Contribution",
+            "text": "method",
+            "from": 1,
+            "to": 14
+        },
+        {
+            "category": "Contribution",
+            "text": "method",
+            "from": 1,
+            "to": 15
+        },
+        {
+            "category": "Contribution",
+            "text": "method",
+            "from": 3,
+            "to": 16
+        },
+        {
+            "category": "Contribution",
+            "text": "method",
+            "from": 3,
+            "to": 17
+        },
+        {
+            "category": "Contribution",
+            "text": "method",
+            "from": 3,
+            "to": 18
+        },
+        {
+            "category": "Contribution",
+            "text": "method",
+            "from": 5,
+            "to": 19
+        },
+        {
+            "category": "Contribution",
+            "text": "method",
+            "from": 5,
+            "to": 20
+        },
+        {
+            "category": "Contribution",
+            "text": "method",
+            "from": 5,
+            "to": 21
+        },
+        {
+            "category": "Contribution",
+            "text": "method",
+            "from": 5,
+            "to": 22
+        },
+        {
+            "category": "Contribution",
+            "text": "method",
+            "from": 6,
+            "to": 23
+        },
+        {
+            "category": "Contribution",
+            "text": "method",
+            "from": 7,
+            "to": 24
+        },
+        {
+            "category": "Contribution",
+            "text": "method",
+            "from": 7,
+            "to": 25
+        },
+        {
+            "category": "Contribution",
+            "text": "method",
+            "from": 7,
+            "to": 26
+        },
+        {
+            "category": "Contribution",
+            "text": "method",
+            "from": 7,
+            "to": 27
+        },
+        {
+            "category": "Contribution",
+            "text": "method",
+            "from": 13,
+            "to": 25
+        },
+        {
+            "category": "Contribution",
+            "text": "method",
+            "from": 18,
+            "to": 27
+        },
+        {
+            "category": "Contribution",
+            "text": "method",
+            "from": 18,
+            "to": 26
+        },
+        {
+            "category": "Contribution",
+            "text": "method",
+            "from": 21,
+            "to": 27
+        },
+        {
+            "category": "Contribution",
+            "text": "method",
+            "from": 21,
+            "to": 26
+        },
+        {
+            "category": "Contribution",
+            "text": "method",
+            "from": 23,
+            "to": 13
+        },
+        {
+            "category": "ConsistsOf",
+            "text": "contains",
+            "from": 1,
+            "to": 7
+        },
+        {
+            "category": "ConsistsOf",
+            "text": "contains",
+            "from": 3,
+            "to": 1
+        },
+        {
+            "category": "ConsistsOf",
+            "text": "contains",
+            "from": 3,
+            "to": 7
+        },
+        {
+            "category": "ConsistsOf",
+            "text": "contains",
+            "from": 5,
+            "to": 7
+        },
+        {
+            "category": "ConsistsOf",
+            "text": "contains",
+            "from": 7,
+            "to": 7
+        },
+        {
+            "category": "ConsistsOf",
+            "text": "contains",
+            "from": 25,
+            "to": 7
+        }
+    ]
+}
