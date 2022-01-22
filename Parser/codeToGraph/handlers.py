@@ -72,7 +72,9 @@ def class_handler(component)->ClassComponent:
     interface = typeof(component)=='interface'
 
     if component.extends:
-        if isinstance(component.extends, list):
+        if isinstance(component.extends, str):
+            extends = component.extends
+        elif isinstance(component.extends, list):
             extends = component.extends[0].name
         else:
             extends = component.extends.name
@@ -80,7 +82,10 @@ def class_handler(component)->ClassComponent:
     if not interface and component.implements:
         implements = component.implements
         for class_name in implements:
-            implements_list.append(class_name.name)
+            if isinstance(class_name,str):
+                implements_list.append(class_name)
+            else:
+                implements_list.append(class_name.name)
 
     if interface:
         modifier.add('interface')
@@ -100,7 +105,6 @@ def class_handler(component)->ClassComponent:
                 method = method_handler(comp)
                 class_comp.methods.append(method)
     except: None
-    print(class_comp)
     return class_comp
 
 def field_handler(component)->FieldComponent:
@@ -150,7 +154,7 @@ def method_body_handler(component):
     return calls.copy()
 
 
-def method_handler(component)->MethodComponent:
+def method_handler(component)-> MethodComponent:
     arguments = set()
     if component.body:
         method_calls = method_body_handler(component.body)

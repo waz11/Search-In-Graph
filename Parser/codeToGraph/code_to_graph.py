@@ -101,7 +101,7 @@ def main():
     # g = CodeParser('../../Files/codes/lucene-master/demo/src/main/java').graph
     # g.save_to_json_file('../../Files/json graphs/lucene-master.json')
 
-    g = CodeParser('../../Files/codes/ron').graph
+    g = CodeParser('../../Files/codes/poi').graph
     g.save_to_json_file('../../Files/json graphs/poi.json')
 
 if __name__ == '__main__':
