@@ -1,6 +1,6 @@
 from Parser.codeToGraph.code_to_graph import CodeParser
 from algorithm1.Searcher.query import Query
-from algorithm1.Searcher.searcher import Searcher
+from algorithm1.Searcher.GreedySearch import GreedySearch
 
 
 def main():
@@ -14,7 +14,7 @@ def main():
     print(graph.num_of_vertices(),"vertices", graph.num_of_edges(),"edges")
     # create_json_file_for_viewer(graph, 'src1')
 
-    searcher = Searcher(graph, query)
+    searcher = GreedySearch(graph, query)
     searcher.search()
     searcher.get_results()
 

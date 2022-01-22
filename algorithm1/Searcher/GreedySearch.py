@@ -1,6 +1,7 @@
 import string
 import time
 from Graph.graph import Graph
+from Interfaces.ISearcher import ISearcher
 from algorithm1.Ranker.ranker import Ranker
 from Utils.maxheap import MaxHeap
 from algorithm1.Searcher.query import Query
@@ -9,7 +10,7 @@ import threading
 from Parser.codeToGraph.code_to_graph import CodeParser
 
 
-class Searcher:
+class GreedySearch(ISearcher):
     def __init__(self, graph:Graph, query:Query):
         self.graph :Graph = graph
         self.query :Query = query
@@ -148,7 +149,7 @@ def main():
     query = Query("class list implements iterable,class list contains class node")
     graph = CodeParser('../../Files/codes/src1').graph
 
-    searcher = Searcher(graph, query)
+    searcher = GreedySearch(graph, query)
     searcher.search()
     searcher.get_results()
     # searcher.calculate_similarities_multi_threaded()

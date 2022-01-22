@@ -3,11 +3,12 @@ import time
 import snowballstemmer
 from Graph.graph import Graph
 from Graph.vertex import Vertex
+from Interfaces.ISearcher import ISearcher
 from Parser.codeToGraph.code_to_graph import CodeParser
 from algorithm2.Searcher.query import Query
 
 
-class Searcher:
+class BeamSearch(ISearcher):
     def __init__(self, graph:Graph, query:Query):
         self.graph :Graph = graph
         self.query :Query = query
@@ -51,7 +52,7 @@ class Searcher:
 def main():
     query = Query("class list implements class iterable,class list contains class node")
     graph = CodeParser('../../Files/codes/src1').graph
-    searcher = Searcher(graph, query)
+    searcher = BeamSearch(graph, query)
     searcher.search()
 
     # searcher.is_relevant()
