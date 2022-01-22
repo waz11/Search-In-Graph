@@ -1,9 +1,7 @@
-import string
-import time
 import snowballstemmer
 from Graph.graph import Graph
 from Graph.vertex import Vertex
-from Interfaces.ISearcher import ISearcher
+from Interfaces import ISearcher
 from Parser.codeToGraph.code_to_graph import CodeParser
 from algorithm2.Searcher.query import Query
 

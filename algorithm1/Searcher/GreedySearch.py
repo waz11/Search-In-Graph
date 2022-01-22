@@ -1,7 +1,7 @@
 import string
 import time
 from Graph.graph import Graph
-from Interfaces.ISearcher import ISearcher
+from Interfaces import ISearcher
 from algorithm1.Ranker.ranker import Ranker
 from Utils.maxheap import MaxHeap
 from algorithm1.Searcher.query import Query
