@@ -16,9 +16,8 @@ class CodeParser:
         self.directory_path = path
         self.graph = Graph()
         self.build_graph(self.graph)
-        self.graph.print_vertices()
 
-    def __concat_files(self,project_path:string)->string:
+    def concat_files(self, project_path:string)->string:
         pathlist = Path(project_path).glob('**/*.java')
         result = ""
         for path in pathlist:
@@ -27,13 +26,16 @@ class CodeParser:
                 code_file = f.read()
                 code_file = re.sub("package(.*?);", '', code_file)
                 code_file = re.sub("import(.*?);", '', code_file)
-            result += code_file
+            try:
+                parsed_code = parse(code_file)
+                result += code_file
+            except:
+                pass
         return result
 
-    def build_graph(self, graph:Graph)->Graph:
-        code = self.__concat_files(self.directory_path)
+    def build_graph(self, graph:Graph) ->None:
+        code = self.concat_files(self.directory_path)
         parsed_code = parse(code)
-
         for x in parsed_code.types:
             if (typeof(x) == 'class' or typeof(x) == 'interface'):
                 class_component = class_handler(x)
@@ -79,10 +81,9 @@ class CodeParser:
                 for interface_name in class_component.implements:
                     interface_vertex = graph.add_interface(interface_name)
                     graph.add_edge('implements', class_vertex, interface_vertex)
-            else:
-                print(x)
+            # else:
+            #     print(x)
 
-        return graph
 
 def main():
     # c = CodeParser('../../Files/codes/src4')
@@ -96,9 +97,8 @@ def main():
     # g = CodeParser('../../Files/codes/lucene-master/demo/src/main/java').graph
     # g.save_to_json_file('../../Files/json graphs/lucene-master.json')
 
-    g = CodeParser('../../Files/codes/standard').graph
+    g = CodeParser('../../Files/codes/poi').graph
     g.save_to_json_file('../../Files/json graphs/poi.json')
-
 
 if __name__ == '__main__':
     main()
