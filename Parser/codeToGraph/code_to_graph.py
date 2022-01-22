@@ -14,7 +14,9 @@ unwanted_types = primitive_variables.union(generic_types)
 class CodeParser:
     def __init__(self, path:string):
         self.directory_path = path
-        self.graph = self.build_graph()
+        self.graph = Graph()
+        self.build_graph(self.graph)
+        self.graph.print_vertices()
 
     def __concat_files(self,project_path:string)->string:
         pathlist = Path(project_path).glob('**/*.java')
@@ -28,10 +30,9 @@ class CodeParser:
             result += code_file
         return result
 
-    def build_graph(self)->Graph:
+    def build_graph(self, graph:Graph)->Graph:
         code = self.__concat_files(self.directory_path)
         parsed_code = parse(code)
-        graph = Graph()
 
         for x in parsed_code.types:
             if (typeof(x) == 'class' or typeof(x) == 'interface'):
@@ -66,6 +67,10 @@ class CodeParser:
                         arg_vertex = graph.add_class(arg)
                         graph.add_edge('argument', method_vertex, arg_vertex)
 
+                for inner_class in class_component.inner_classes:
+                    name = inner_class.name
+
+
                 if class_component.extends:
                     name = class_component.extends
                     extended_class_vertex = graph.add_class(name, 'class')
@@ -80,13 +85,20 @@ class CodeParser:
         return graph
 
 def main():
-    c = CodeParser('../../Files/codes/src4')
+    # c = CodeParser('../../Files/codes/src4')
     # print(c)
     # graph.print_vertices()
     # graph.print_edges()
     # print(graph.num_of_vertices(), "vertices")
     # print(graph.num_of_edges(),"edges")
     # graph.draw()
+
+    # g = CodeParser('../../Files/codes/lucene-master/demo/src/main/java').graph
+    # g.save_to_json_file('../../Files/json graphs/lucene-master.json')
+
+    g = CodeParser('../../Files/codes/standard').graph
+    g.save_to_json_file('../../Files/json graphs/poi.json')
+
 
 if __name__ == '__main__':
     main()

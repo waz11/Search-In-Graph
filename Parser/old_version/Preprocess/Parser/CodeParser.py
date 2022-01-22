@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 import javalang
 from Parser.old_version.Preprocess.Components.ClassAttribute import ClassAttribute
+from Parser.old_version.Preprocess.Components.MultiTypeClassAttribute import MultiTypeClassAttribute
 from Parser.old_version.Preprocess.Parser import CodeWrapper
 from Parser.old_version.Preprocess.Components.ClassComponent import ClassComponent
 from Parser.old_version.Preprocess.Components.MethodComponent import MethodComponent

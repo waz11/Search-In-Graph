@@ -1,10 +1,11 @@
 class ClassComponent:
-    def __init__(self,name, modifiers=[], extends='', implements=[], interface=False):
+    def __init__(self,name, modifiers=[], extends='', implements=[], inner_classes=[], interface=False):
         self.type = 'class'
         self.name = name
         self.modifiers = modifiers
         self.extends = extends
         self.implements = implements
+        self.inner_classes = inner_classes
         self.fields = []
         self.methods = []
         if interface:

@@ -15,10 +15,14 @@ def class_handler(component)->ClassComponent:
     modifier = component.modifiers
     extends = ''
     implements_list = []
+    inner_classes = []
     interface = typeof(component)=='interface'
 
     if component.extends:
-        extends = component.extends.name
+        if isinstance(component.extends, list):
+            extends = component.extends[0].name
+        else:
+            extends = component.extends.name
 
     if not interface and component.implements:
         implements = component.implements
@@ -28,13 +32,17 @@ def class_handler(component)->ClassComponent:
     if interface:
         modifier.add('interface')
 
-    class_comp = ClassComponent(name, modifier, extends, implements_list, interface)
+    class_comp = ClassComponent(name, modifier, extends, implements_list,inner_classes, interface)
     for comp in component.body:
-        if (typeof(comp) == 'field'):
+        if typeof(comp) == 'class':
+            inner_class_comp = class_handler(comp)
+            inner_classes.append(inner_class_comp)
+
+        elif (typeof(comp) == 'field'):
             field = field_handler(comp)
             class_comp.fields.append(field)
 
-        if (typeof(comp) == 'method' and comp.name.lower() != 'main'):
+        elif (typeof(comp) == 'method' and comp.name.lower() != 'main'):
             method = method_handler(comp)
             class_comp.methods.append(method)
     return class_comp
