@@ -1,10 +1,8 @@
-import snowballstemmer
 from Graph.graph import Graph
 from Graph.vertex import Vertex
 from Interfaces import ISearcher
 from Parser.codeToGraph.code_to_graph import CodeParser
 from algorithm2.Searcher.query import Query
-
 
 class BeamSearch(ISearcher):
     def __init__(self, graph:Graph, query:Query):
@@ -13,14 +11,19 @@ class BeamSearch(ISearcher):
         self.model = []
         self.candidate_nodes = []
 
+
     def __is_relevant(self,vertex:Vertex):
         stemmer = snowballstemmer.stemmer('english');
         # print(stemmer.stemWords("happines existing".split()))
         # stems = vertex.
         for q in self.query.tokens:
-            for v in vertex.tokens:
-                if q==v: return True
-                # if stemmer.stemWords(v.split())
+            if q == v: return self.matrix['full_name']
+            else:
+                for v in vertex.tokens:
+                    if q==v: return self.matrix['part_name']
+                    elif stemmer.stemWord(v) == stemmer.stemWord(q): return self.matrix['stemming']
+
+
 
     def generating_candidate_nodes(self) ->set:
         vertices = self.graph.get_vertices()
