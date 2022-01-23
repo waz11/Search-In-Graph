@@ -47,7 +47,7 @@ class BeamSearch(ISearcher):
             c = []
             for i in candidate_nodes[key]:
                 c.append(i.name)
-            print('key:', key, 'candidates:', c)
+            print('key:', key, c)
 
 
 
