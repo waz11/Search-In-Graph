@@ -34,9 +34,7 @@ class BeamSearch(ISearcher):
         score_irrelevant = 0
 
     def get_node_weight(self, score_relevant, score_irrelevant) ->float:
-        numerator  = 2 * score_relevant * score_irrelevant
-        denominator = score_relevant + score_irrelevant
-        return numerator / denominator
+        return (2 * score_relevant * score_irrelevant) / (score_relevant + score_irrelevant)
 
     def generating_and_measuring_subgraph(self):
         pass
