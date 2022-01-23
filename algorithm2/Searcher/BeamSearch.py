@@ -59,12 +59,6 @@ def main():
     searcher = BeamSearch(graph, query)
     searcher.search()
 
-    # searcher.is_relevant()
-
-
-    # stemmer = snowballstemmer.stemmer('english');
-    # print(stemmer.stemWords("happines existing".split()))
-
 
 if __name__ == '__main__':
     main()
