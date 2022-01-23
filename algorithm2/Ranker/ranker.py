@@ -23,7 +23,9 @@ class Ranker:
                     elif self.stemmer.stemWord(b1) == self.stemmer.stemWord(b2):
                         rank = self.matrix['stemming']
                     else:
-                        rank = self.wns.word_similarity(b1,b2)
+                        semantic_sim = self.wns.word_similarity(b1,b2)
+                        if semantic_sim > 0.5:
+                            rank = self.wns.word_similarity(b1,b2)
         score_relevant = 0
         score_irrelevant = 0
         return rank

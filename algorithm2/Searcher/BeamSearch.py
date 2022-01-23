@@ -3,35 +3,31 @@ from Graph.vertex import Vertex
 from Interfaces import ISearcher
 from Parser.codeToGraph.code_to_graph import CodeParser
 from algorithm2.Searcher.query import Query
+from algorithm2.Ranker.ranker import Ranker
+
 
 class BeamSearch(ISearcher):
+
     def __init__(self, graph:Graph, query:Query):
         self.graph :Graph = graph
         self.query :Query = query
         self.model = []
         self.candidate_nodes = []
+        self.ranker = Ranker()
 
-
-    def __is_relevant(self,vertex:Vertex):
-        stemmer = snowballstemmer.stemmer('english');
-        # print(stemmer.stemWords("happines existing".split()))
-        # stems = vertex.
-        for q in self.query.tokens:
-            if q == v: return self.matrix['full_name']
-            else:
-                for v in vertex.tokens:
-                    if q==v: return self.matrix['part_name']
-                    elif stemmer.stemWord(v) == stemmer.stemWord(q): return self.matrix['stemming']
-
-
+    def get_candidate(self, query_Vertex):
+        candidates = set()
+        for v in self.graph.get_vertices():
+            sim = self.ranker.sim(query_Vertex, v)
+            if(sim>0):
+                candidates.add(v.key)
+        return candidates
 
     def generating_candidate_nodes(self) ->set:
-        vertices = self.graph.get_vertices()
-        relevant = set()
-        for v in vertices:
-            if self.__is_relevant(v):
-                relevant.add(v)
-        return relevant
+        candidates = []
+        for v in self.query.graph.get_vertices():
+            candidates[v.key] = self.get_candidate(v)
+        return candidates
 
     def measuring_candidates_weight(self):
         pass
