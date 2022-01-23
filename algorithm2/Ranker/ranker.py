@@ -1,3 +1,5 @@
+import string
+
 from Graph.vertex import Vertex
 from algorithm2.Ranker.matrix import Matrix
 from algorithm1.Ranker.sematch.semantic.similarity import WordNetSimilarity
@@ -39,25 +41,23 @@ class Ranker:
         return rank
 
 
-    def is_candidate_node(self, v1: Vertex, v2: Vertex) -> bool:
-        return self.__full_name_matching(v1,v2) or self.__part_name_matching(v1,v2) or self.__stemming_matching(v1,v2) or self.__similar_words_matching(v1,v2)
+    def is_candidate_node(self, token: string, vertex: Vertex) -> bool:
+        return self.__full_name_matching(token,vertex) or self.__part_name_matching(token,vertex) or self.__stemming_matching(token,vertex) or self.__similar_words_matching(token,vertex)
 
-    def __full_name_matching(self, vertex1: Vertex, vertex2: Vertex) -> bool:
-        return vertex1.name == vertex2.name
+    def __full_name_matching(self, token: string, vertex: Vertex) -> bool:
+        return token == vertex.name
 
-    def __part_name_matching(self, vertex1: Vertex, vertex2: Vertex) -> bool:
-        for t1 in vertex1.tokens:
-            for t2 in vertex2.tokens:
-                if t1 == t2: return True
+    def __part_name_matching(self, token: string, vertex: Vertex) -> bool:
+        for t1 in vertex.tokens:
+            if token == t1: return True
         return False
 
-    def __stemming_matching(self, vertex1: Vertex, vertex2: Vertex) -> bool:
-        for t1 in vertex1.tokens:
-            for t2 in vertex2.tokens:
-                if self.stemmer.stemWord(t1) == self.stemmer.stemWord(t2): return True
+    def __stemming_matching(self, token: string, vertex: Vertex) -> bool:
+        for t1 in vertex.tokens:
+            if self.stemmer.stemWord(token) == self.stemmer.stemWord(t1): return True
         return False
 
-    def __similar_words_matching(self, vertex1: Vertex, vertex2: Vertex) -> bool:
+    def __similar_words_matching(self, token: string, vertex: Vertex) -> bool:
         # for t1 in vertex1.tokens():
         #     for t2 in vertex2.tokens():
 

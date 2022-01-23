@@ -1,3 +1,5 @@
+import string
+
 from Graph.graph import Graph
 from Graph.vertex import Vertex
 from Interfaces import ISearcher
@@ -15,18 +17,17 @@ class BeamSearch(ISearcher):
         self.candidate_nodes = []
         self.ranker = Ranker()
 
-    def get_candidate(self, query_Vertex):
+    def get_candidates_for_query_token(self, token:string):
         candidates = set()
         for v in self.graph.get_vertices():
-            sim = self.ranker.matching(query_Vertex, v)
-            if(sim>0):
-                candidates.add(v.key)
+            if self.ranker.is_candidate_node(token, v):
+                candidates.add(v)
         return candidates
 
-    def generating_candidate_nodes(self) ->set:
-        candidates = []
-        for v in self.query.graph.get_vertices():
-            candidates[v.key] = self.get_candidate(v)
+    def generating_candidate_nodes(self)->set:
+        candidates = {}
+        for token in self.query.tokens:
+            candidates[token] = self.get_candidates_for_query_token(token)
         return candidates
 
     def measuring_candidates_weight(self):
@@ -42,8 +43,11 @@ class BeamSearch(ISearcher):
 
     def search(self):
         candidate_nodes = self.generating_candidate_nodes()
-        print([v.name for v in candidate_nodes])
-
+        for key in candidate_nodes.keys():
+            c = []
+            for i in candidate_nodes[key]:
+                c.append(i.name)
+            print('key:', key, 'candidates:', c)
 
 
 
