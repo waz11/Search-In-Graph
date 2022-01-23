@@ -1,8 +1,7 @@
 import string
 
 from Graph.graph import Graph
-from Graph.vertex import Vertex
-from Interfaces import ISearcher
+from Utils.Interfaces import ISearcher
 from Parser.codeToGraph.code_to_graph import CodeParser
 from algorithm2.Searcher.query import Query
 from algorithm2.Ranker.ranker import Ranker
