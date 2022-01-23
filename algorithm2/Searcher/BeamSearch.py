@@ -18,7 +18,7 @@ class BeamSearch(ISearcher):
     def get_candidate(self, query_Vertex):
         candidates = set()
         for v in self.graph.get_vertices():
-            sim = self.ranker.sim(query_Vertex, v)
+            sim = self.ranker.matching(query_Vertex, v)
             if(sim>0):
                 candidates.add(v.key)
         return candidates
@@ -30,7 +30,8 @@ class BeamSearch(ISearcher):
         return candidates
 
     def measuring_candidates_weight(self):
-        pass
+        score_relevant = 0
+        score_irrelevant = 0
 
     def generating_and_measuring_subgraph(self):
         pass
