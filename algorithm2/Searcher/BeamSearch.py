@@ -29,12 +29,9 @@ class BeamSearch(ISearcher):
             candidates[token] = self.get_candidates_for_query_token(token)
         return candidates
 
-    def measuring_candidates_weight(self):
-        score_relevant = 0
-        score_irrelevant = 0
-
-    def get_node_weight(self, score_relevant, score_irrelevant) ->float:
-        return (2 * score_relevant * score_irrelevant) / (score_relevant + score_irrelevant)
+    def measuring_candidates_weight(self, vertex) ->float:
+        weight = self.ranker.get_scores(self.query.tokens, list(vertex.tokens))
+        return weight
 
     def generating_and_measuring_subgraph(self):
         pass
@@ -48,8 +45,11 @@ class BeamSearch(ISearcher):
         for key in candidate_nodes.keys():
             c = []
             for i in candidate_nodes[key]:
-                c.append(i.name)
-            print('key:', key, c)
+                w = self.measuring_candidates_weight(i)
+                c.append((i.name,w))
+            print(key, c)
+
+
 
 
 

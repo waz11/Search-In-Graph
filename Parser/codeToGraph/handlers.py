@@ -14,7 +14,7 @@ generic_types = set(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
 unwanted_types = primitive_variables.union(generic_types)
 
 
-def foo(graph, x):
+def component_handler(graph, x):
     class_component = class_handler(x)
     name = class_component.name
     if name.lower() == 'main':
@@ -47,7 +47,7 @@ def foo(graph, x):
             graph.add_edge('argument', method_vertex, arg_vertex)
 
     for inner_class in class_component.inner_classes:
-        inner_class_vertex = foo(graph, inner_class)
+        inner_class_vertex = component_handler(graph, inner_class)
         graph.add_edge('inner class', class_vertex, inner_class_vertex)
 
 

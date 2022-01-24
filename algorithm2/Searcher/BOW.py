@@ -4,25 +4,36 @@ import collections
 
 
 def calculateBOW(wordset,l_doc):
-  tf_diz = dict.fromkeys(wordset,0)
-  for word in l_doc:
-      tf_diz[word]=l_doc.count(word)
-  return tf_diz
+    tf_diz = dict.fromkeys(wordset,0)
+    for word in l_doc:
+        tf_diz[word]=l_doc.count(word)
+    return tf_diz
+
+def get_scores(bow_q:list, bow_v:list):
+    bow_q_size = len(bow_q)
+    bow_v_size = len(bow_v)
+
+    wordset = np.union1d(bow_q, bow_v)
+    bow1 = calculateBOW(wordset, bow_q)
+    bow2 = calculateBOW(wordset, bow_v)
+    df_bow = pd.DataFrame([bow1, bow2])
+
+    intersection_idx = [i for i, v in enumerate(df_bow.values[0]) if v == df_bow.values[1][i]]
+    intersection = len(intersection_idx)
+    score_relevant = intersection / bow_q_size
+    score_irrelevant = intersection / bow_v_size
+    if (score_relevant + score_irrelevant) == 0: return 0
+    return (2 * score_relevant * score_irrelevant) / (score_relevant + score_irrelevant)
 
 
 
 def main():
-    doc1 = 'Game of Thrones is an amazing tv series!'
-    doc2 = 'Game of Thrones is the best tv tv series!'
+    doc1 = 'a'
+    doc2 = 'a b c e f'
     doc1 = doc1.lower().split()
     doc2 = doc2.lower().split()
-    wordset = np.union1d(doc1,doc2)
-    bow1 = calculateBOW(wordset, doc1)
-    bow2 = calculateBOW(wordset, doc2)
-    df_bow = pd.DataFrame([bow1, bow2])
-    print(df_bow)
-
-
+    score = get_scores(doc1 , doc2)
+    print(score)
 
 if __name__ == '__main__':
     main()

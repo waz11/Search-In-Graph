@@ -147,8 +147,9 @@ def convert_second(seconds)->string:
 
 def main():
     query = Query("class list implements iterable,class list contains class node")
-    graph = CodeParser('../../Files/codes/src2').graph
-
+    query.graph.draw()
+    graph = CodeParser('../../Files/codes/src1').graph
+    # graph.draw()
     searcher = GreedySearch(graph, query)
     searcher.search()
     searcher.get_results()

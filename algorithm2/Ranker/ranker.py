@@ -4,7 +4,7 @@ from Graph.vertex import Vertex
 from algorithm2.Ranker.matrix import Matrix
 from algorithm1.Ranker.sematch.semantic.similarity import WordNetSimilarity
 import snowballstemmer
-
+from algorithm2.Searcher.BOW import get_scores
 
 class Ranker:
 
@@ -12,6 +12,7 @@ class Ranker:
         self.matrix = Matrix()
         self.stemmer = snowballstemmer.stemmer('english')
         self.wns = WordNetSimilarity()
+
 
     # def sim(self, bow1, bow2)->float:
     #     rank = 0
@@ -62,6 +63,9 @@ class Ranker:
         #     for t2 in vertex2.tokens():
 
         return False
+
+    def get_scores(self, bow_q: list, bow_v: list):
+        return get_scores(bow_q, bow_v)
 
 
 def main():
