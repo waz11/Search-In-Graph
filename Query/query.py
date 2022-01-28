@@ -14,15 +14,13 @@ class Query:
     def __str__(self):
         return str(self.content)
 
+    # for BeamSearch:
     def get_tokens(self):
         tokens = Tokenizer().get_tokens(self.content, rm_stopwords=True)
-        filtered = self.remove_java_words(tokens)
-        return filtered
-
-    def remove_java_words(self, tokens):
         filtered = list(filter(lambda t: t not in self.special_words, tokens))
         return filtered
 
+    # for GreedySearch:
     def build_graph(self)->Graph:
         g = Graph()
         content = self.content.split(',')
