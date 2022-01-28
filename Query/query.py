@@ -1,23 +1,32 @@
 import string
 
 from Graph.graph import Graph
-
+from Parser.tokenizer import Tokenizer
 
 class Query:
 
     def __init__(self, query:string):
-        self.query = query
-        self.graph = Graph()
-        self.content = query.split(',')
+        self.content = query
         self.special_words = set(["extends", "implements", "method", "class", "contains"])
-        self.__parse()
+        self.tokens = self.get_tokens()
+        self.graph = self.build_graph()
 
     def __str__(self):
         return str(self.content)
 
-    def __parse(self)->Graph:
+    def get_tokens(self):
+        tokens = Tokenizer().get_tokens(self.content, rm_stopwords=True)
+        filtered = self.remove_java_words(tokens)
+        return filtered
+
+    def remove_java_words(self, tokens):
+        filtered = list(filter(lambda t: t not in self.special_words, tokens))
+        return filtered
+
+    def build_graph(self)->Graph:
         g = Graph()
-        for sentence in self.content:
+        content = self.content.split(',')
+        for sentence in content:
             words = list(sentence.split(' '))
             for i, word in enumerate(words):
                 if word in self.special_words:
@@ -44,18 +53,14 @@ class Query:
                         elif words[i+1]== 'class':
                             vertex2 = g.add_class(words[i + 2])
                             g.add_edge("contains", vertex1, vertex2)
-        self.graph = g
+        return g
 
 def main():
-    q1 = "class c2 extends class c1"
-    q2 = "class c2 implements class c3"
-    q3 = "class c1 contains method m1"
-    q = q1+','+q2+','+q3
-
-    query = Query("class list implements class iterable,class list contains class node")
-    query.graph.print_vertices()
-    query.graph.print_edges()
-    query.graph.draw()
+    q = "class list implements class iterable,class list contains class node"
+    query = Query(q)
+    # print(query.tokens)
+    g=query.graph
+    g.draw()
 
 
 if __name__ == '__main__':

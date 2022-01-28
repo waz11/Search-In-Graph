@@ -4,7 +4,7 @@ from Graph.graph import Graph
 from Utils.Interfaces import ISearcher
 from algorithm1.Ranker.ranker import Ranker
 from Utils.maxheap import MaxHeap
-from algorithm1.Searcher.query import Query
+from Query.query import Query
 from Result.result import Result
 import threading
 from Parser.codeToGraph.code_to_graph import CodeParser
@@ -29,7 +29,7 @@ class GreedySearch(ISearcher):
             vertices = self.graph.get_vertices()
         for vertex1 in self.query.graph.get_vertices():
             for vertex2 in vertices:
-                # for multithreaed:
+                # **for multithreading:**
                 # print(threading.get_ident())
                 # sim = Ranker().get_rank(vertex1, vertex2)
 

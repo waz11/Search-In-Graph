@@ -3,7 +3,7 @@ import string
 from Graph.graph import Graph
 from Utils.Interfaces import ISearcher
 from Parser.codeToGraph.code_to_graph import CodeParser
-from algorithm2.Searcher.query import Query
+from Query.query import Query
 from algorithm2.Ranker.ranker import Ranker
 
 
@@ -16,7 +16,7 @@ class BeamSearch(ISearcher):
         self.candidate_nodes = []
         self.ranker = Ranker()
 
-    def get_candidates_for_query_token(self, token:string):
+    def get_candidates_token(self, token:string):
         candidates = set()
         for v in self.graph.get_vertices():
             if self.ranker.is_candidate_node(token, v):
@@ -26,7 +26,7 @@ class BeamSearch(ISearcher):
     def generating_candidate_nodes(self)->set:
         candidates = {}
         for token in self.query.tokens:
-            candidates[token] = self.get_candidates_for_query_token(token)
+            candidates[token] = self.get_candidates_token(token)
         return candidates
 
     def measuring_candidates_weight(self, vertex) ->float:
@@ -55,6 +55,7 @@ class BeamSearch(ISearcher):
 
 def main():
     query = Query("class list implements class iterable,class list contains class node")
+    query.graph.draw()
     graph = CodeParser('../../Files/codes/src1').graph
     searcher = BeamSearch(graph, query)
     searcher.search()
