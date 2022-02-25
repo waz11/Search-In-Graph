@@ -1,5 +1,4 @@
 import string
-
 from Graph.graph import Graph
 from Searcher.BeamSearch.model.WordEmbedding import WordEmbedding
 from Searcher.ISearcher import ISearcher
@@ -28,9 +27,12 @@ class BeamSearch(ISearcher):
 
     def generating_candidate_nodes(self)->set:
         candidates = set()
+        candidates_by_token = {}
         for token in self.query.tokens:
-            candidates |= self.get_candidates_by_token(token)
-        return candidates
+            curr_candidates = self.get_candidates_by_token(token)
+            candidates_by_token[token] = [curr_candidates]
+            candidates |= curr_candidates
+        return candidates, candidates_by_token
 
     def measuring_candidates_weight(self, candidates) ->float:
         weights_heap = MaxHeap()
@@ -39,7 +41,9 @@ class BeamSearch(ISearcher):
             weights_heap.insert_item(weight, candidate)
         return weights_heap
 
-    def generating_and_measuring_subgraph(self):
+    def generating_and_measuring_subgraph(self, candidates, candidates_by_token):
+        weights_heap = self.measuring_candidates_weight(candidates)
+        candidate, rank = weights_heap.pop()
 
 
         pass
@@ -49,9 +53,11 @@ class BeamSearch(ISearcher):
 
 
     def search(self):
-        candidate_nodes = self.generating_candidate_nodes()
-        weights_heap :MaxHeap = self.measuring_candidates_weight(candidate_nodes)
-        candidate, rank = weights_heap.pop()
+        candidates, candidates_by_token = self.generating_candidate_nodes()
+        self.generating_and_measuring_subgraph(candidates, candidates_by_token)
+
+
+
 
 
 
