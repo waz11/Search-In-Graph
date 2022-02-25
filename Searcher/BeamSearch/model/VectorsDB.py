@@ -52,16 +52,10 @@ class VecDB:
         self.crsr.execute("INSERT INTO %s  VALUES (?,?)" % self.table_name, (key, vector))
         self.conn.commit()
 
-    def __getitem__(self, key):
-        if isinstance(key, int):
-            # crsr = conn.cursor()
-            self.key = str(key)
-            self.crsr.execute('SELECT * FROM %s where key=%s' % (self.table_name, key))
-            vector = self.crsr.fetchall()
-            res = vector[0][1]
-        else:
-            model = fasttext.load_model('cc.en.300.bin')
-            res = model[key]
+    def get(self, key):
+        self.crsr.execute('SELECT * FROM %s where key=%s' % (self.table_name, str(key)))
+        vector = self.crsr.fetchall()
+        res = vector[0][1]
         return res
 
     def print_table(self):
@@ -79,8 +73,8 @@ class VecDB:
 
 
 def main():
-    db = VecDB('project')
-    # g = CodeParser('../../../Files/codes/src1').graph
+    db = VecDB('src1')
+    g = CodeParser('../../../Files/codes/src1').graph
     # model = VecDB(g, 'src1')
     # model.print_table()
 
