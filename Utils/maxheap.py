@@ -1,85 +1,140 @@
-import sys
+from Graph.vertex import Vertex
+from Result.result import Result
 
-class Element:
-    def __init__(self, rank, item=''):
-        self.rank = rank
-        self.item = item
 
 class MaxHeap:
-    def __init__(self, maxsize=10):
-        self.maxsize = maxsize
+    def __init__(self, key=None):
+        # Stores actual heap items.
+        self.arr = list()
+        # Stores indexes of each item for supporting updates and deletion.
+        self.pos_map = {}
+        # Stores current size of heap.
         self.size = 0
-        self.Heap = [Element(0)] * (self.maxsize + 1)
-        self.Heap[0] = Element(sys.maxsize)
-        self.FRONT = 1
+        # Stores function used to evaluate the score of an item on which basis ordering
+        # will be done.
+        self.key = key or (lambda x: x)
 
-    def parent(self, pos) -> int:
-        return pos // 2
+    def _parent(self, i):
+        """Returns parent index of given index if exists else None"""
+        return int((i - 1) / 2) if i > 0 else None
 
-    def leftChild(self, pos) -> int:
-        return 2 * pos
+    def _left(self, i):
+        """Returns left-child-index of given index if exists else None"""
+        left = int(2 * i + 1)
+        return left if 0 < left < self.size else None
 
-    def rightChild(self, pos) -> int:
-        return (2 * pos) + 1
+    def _right(self, i):
+        """Returns right-child-index of given index if exists else None"""
+        right = int(2 * i + 2)
+        return right if 0 < right < self.size else None
 
-    def isLeaf(self, pos) -> bool:
-        if pos >= (self.size // 2) and pos <= self.size:
-            return True
-        return False
+    def _swap(self, i, j):
+        """Performs changes required for swapping two elements in the heap"""
+        # First update the indexes of the items in index map.
+        self.pos_map[self.arr[i][0]], self.pos_map[self.arr[j][0]] = (
+            self.pos_map[self.arr[j][0]],
+            self.pos_map[self.arr[i][0]],
+        )
+        # Then swap the items in the list.
+        self.arr[i], self.arr[j] = self.arr[j], self.arr[i]
 
-    def swap(self, fpos, spos) -> None:
-        self.Heap[fpos], self.Heap[spos] = (self.Heap[spos],
-                                            self.Heap[fpos])
+    def _cmp(self, i, j):
+        """Compares the two items using default comparison"""
+        return self.arr[i][1] < self.arr[j][1]
 
-    def maxHeapify(self, pos) -> None:
-        if not self.isLeaf(pos):
-            if (self.Heap[pos].rank < self.Heap[self.leftChild(pos)].rank or
-                    self.Heap[pos].rank < self.Heap[self.rightChild(pos)].rank):
-                if (self.Heap[self.leftChild(pos)].rank >
-                        self.Heap[self.rightChild(pos)].rank):
-                    self.swap(pos, self.leftChild(pos))
-                    self.maxHeapify(self.leftChild(pos))
-                else:
-                    self.swap(pos, self.rightChild(pos))
-                    self.maxHeapify(self.rightChild(pos))
+    def _get_valid_parent(self, i):
+        """
+        Returns index of valid parent as per desired ordering among given index and
+        both it's children
+        """
+        left = self._left(i)
+        right = self._right(i)
+        valid_parent = i
 
+        if left is not None and not self._cmp(left, valid_parent):
+            valid_parent = left
+        if right is not None and not self._cmp(right, valid_parent):
+            valid_parent = right
 
-    def insert(self, rank, component=None) -> None:
-        element = Element(rank, component)
-        if self.size >= self.maxsize:
+        return valid_parent
+
+    def _heapify_up(self, index):
+        """Fixes the heap in upward direction of given index"""
+        parent = self._parent(index)
+        while parent is not None and not self._cmp(index, parent):
+            self._swap(index, parent)
+            index, parent = parent, self._parent(parent)
+
+    def _heapify_down(self, index):
+        """Fixes the heap in downward direction of given index"""
+        valid_parent = self._get_valid_parent(index)
+        while valid_parent != index:
+            self._swap(index, valid_parent)
+            index, valid_parent = valid_parent, self._get_valid_parent(valid_parent)
+
+    def update_item(self, item, item_value):
+        """Updates given item value in heap if present"""
+        if item not in self.pos_map:
             return
-        self.size += 1
-        self.Heap[self.size] = element
-        current = self.size
-        while (self.Heap[current].rank > self.Heap[self.parent(current)].rank):
-            self.swap(current, self.parent(current))
-            current = self.parent(current)
+        index = self.pos_map[item]
+        self.arr[index] = [item, self.key(item_value)]
+        # Make sure heap is right in both up and down direction.
+        # Ideally only one of them will make any change.
+        self._heapify_up(index)
+        self._heapify_down(index)
 
-    def Print(self) -> None:
-        for i in range(1, (self.size // 2) + 1):
-            print("PARENT : " + str(self.Heap[i].item) +
-                  " LEFT CHILD : " + str(self.Heap[2 * i].item) +
-                  " RIGHT CHILD : " + str(self.Heap[2 * i + 1].item))
-
-    def extractMax(self) -> (Element, float):
-        popped = self.Heap[self.FRONT]
-        self.Heap[self.FRONT] = self.Heap[self.size]
+    def delete_item(self, item):
+        """Deletes given item from heap if present"""
+        if item not in self.pos_map:
+            return
+        index = self.pos_map[item]
+        del self.pos_map[item]
+        self.arr[index] = self.arr[self.size - 1]
+        self.pos_map[self.arr[self.size - 1][0]] = index
         self.size -= 1
-        self.maxHeapify(self.FRONT)
-        return popped
+        # Make sure heap is right in both up and down direction. Ideally only one
+        # of them will make any change- so no performance loss in calling both.
+        if self.size > index:
+            self._heapify_up(index)
+            self._heapify_down(index)
+
+    def insert_item(self, item_value, item):
+        """Inserts given item with given value in heap"""
+        arr_len = len(self.arr)
+        if arr_len == self.size:
+            self.arr.append([item, self.key(item_value)])
+        else:
+            self.arr[self.size] = [item, self.key(item_value)]
+        self.pos_map[item] = self.size
+        self.size += 1
+        self._heapify_up(self.size - 1)
+
+    def get_top(self):
+        """Returns top item tuple (Calculated value, item) from heap if present"""
+        return self.arr[0] if self.size else None
+
+    def pop(self):
+        """
+        Return top item tuple (Calculated value, item) from heap and removes it as well
+        if present
+        """
+        top_item_tuple = self.get_top()
+        if top_item_tuple:
+            self.delete_item(top_item_tuple[0])
+        return top_item_tuple
+
 
 
 if __name__ == "__main__":
-    maxHeap = MaxHeap(7)
-    maxHeap.insert(1)
-    maxHeap.insert(2)
-    maxHeap.insert(2)
+    res = Result()
+    v1 = Vertex(1, 'v1', '')
+    res.add_vertex(v1,1)
+    v2 = Vertex(2, 'v2', '')
+    res.add_vertex(v2,3)
 
-    # print(maxHeap.size)
-    maxHeap.Print()
-    element = maxHeap.extractMax()
-    print("The Max val is ", element.rank, element.item)
-    element = maxHeap.extractMax()
-    print("The Max val is ", element.rank, element.item)
-    element = maxHeap.extractMax()
-    print("The Max val is ", element.rank, element.item)
+
+    maxHeap = MaxHeap()
+    maxHeap.insert_item(20, res)
+    res, rank = maxHeap.pop()
+    print(res)
+    print(rank)

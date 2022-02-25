@@ -16,17 +16,20 @@ class BeamSearch(ISearcher):
         self.candidate_nodes = []
         self.ranker = Ranker()
 
-    def get_candidates_token(self, token:string):
+    def get_candidates_by_token(self, token:string) ->set:
         candidates = set()
-        for v in self.graph.get_vertices():
-            if self.ranker.is_candidate_node(token, v):
-                candidates.add(v)
+        for vertex in self.graph.get_vertices():
+            if self.ranker.is_candidate_node(token, vertex):
+                candidates.add(vertex)
         return candidates
 
     def generating_candidate_nodes(self)->set:
-        candidates = {}
+        # candidates = {}
+        # for token in self.query.tokens:
+        #     candidates[token] = self.get_candidates_by_token(token)
+        candidates = set()
         for token in self.query.tokens:
-            candidates[token] = self.get_candidates_token(token)
+            candidates |= self.get_candidates_by_token(token)
         return candidates
 
     def measuring_candidates_weight(self, vertex) ->float:
@@ -34,6 +37,8 @@ class BeamSearch(ISearcher):
         return weight
 
     def generating_and_measuring_subgraph(self):
+
+
         pass
 
     def extending_and_recommending_subgraph(self):
@@ -42,12 +47,10 @@ class BeamSearch(ISearcher):
 
     def search(self):
         candidate_nodes = self.generating_candidate_nodes()
-        for key in candidate_nodes.keys():
-            c = []
-            for i in candidate_nodes[key]:
-                w = self.measuring_candidates_weight(i)
-                c.append((i.name,w))
-            print(key, c)
+        for candidate in candidate_nodes:
+            weight = self.measuring_candidates_weight(candidate)
+            print(candidate.name, weight)
+
 
 
 

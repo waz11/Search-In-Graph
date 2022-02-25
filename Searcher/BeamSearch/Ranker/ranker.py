@@ -4,7 +4,7 @@ from Graph.vertex import Vertex
 from Searcher.BeamSearch.Ranker.matrix import Matrix
 # from Searcher.Gready_Search.Ranker.sematch.semantic.similarity import WordNetSimilarity
 import snowballstemmer
-from Searcher.BeamSearch.Searcher.BOW import get_scores
+import Searcher.BeamSearch.Searcher.BOW as BOW
 
 class Ranker:
 
@@ -65,7 +65,7 @@ class Ranker:
         return False
 
     def get_scores(self, bow_q: list, bow_v: list):
-        return get_scores(bow_q, bow_v)
+        return BOW.get_scores(bow_q, bow_v)
 
 
 def main():

@@ -79,7 +79,7 @@ class GreedySearch(ISearcher):
         # self.calculate_similarities_multi_threaded()
 
         first_vertices = self.__get_first_nodes()
-        self.__results = MaxHeap(len(first_vertices) * 2 + 1)
+        self.__results = MaxHeap()
         for vertex in first_vertices.keys():
             rank = first_vertices[vertex]
             result = Result()
@@ -88,13 +88,13 @@ class GreedySearch(ISearcher):
             visited.add(vertex.key)
             self.__greedy_algorithm_recursive(result, k, threshold, visited)
             rank = result.get_rank() / self.query.graph.num_of_vertices()
-            self.__results.insert(rank, result)
+            self.__results.insert_item(rank, result)
         end_time = time.time()
         total_time = end_time - start_time
         convert_second(total_time)
         print('total time:', convert_second(total_time))
 
-        # # TESTING:
+        # # TEST:
         # vertex = list(first_vertices)[0]
         # result = Result()
         # result.add_vertex(vertex, 1)
@@ -107,10 +107,10 @@ class GreedySearch(ISearcher):
     def get_results(self):
         results = []
         while self.__results.size > 0:
-            element = self.__results.extractMax()
-            results.append(element)
-            print(element.rank, element.item.graph.toJson())
-            element.item.graph.draw()
+            result, rank = self.__results.pop()
+            results.append(result)
+            print(rank, result.graph.toJson())
+            result.graph.draw()
         return self.__results
 
     def __greedy_algorithm_recursive(self, result:Result, k, th, visited:set) -> Result:
