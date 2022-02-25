@@ -5,13 +5,16 @@ from Searcher.BeamSearch.Ranker.matrix import Matrix
 # from Searcher.Gready_Search.Ranker.sematch.semantic.similarity import WordNetSimilarity
 import snowballstemmer
 import Searcher.BeamSearch.Searcher.BOW as BOW
+from Searcher.BeamSearch.model.WordEmbedding import WordEmbedding
+
 
 class Ranker:
 
-    def __init__(self):
+    def __init__(self, vectors):
         self.matrix = Matrix()
         self.stemmer = snowballstemmer.stemmer('english')
         # self.wns = WordNetSimilarity()
+        self.model :WordEmbedding = vectors
 
 
     # def sim(self, bow1, bow2)->float:
@@ -66,6 +69,11 @@ class Ranker:
 
     def get_scores(self, bow_q: list, bow_v: list):
         return BOW.get_scores(bow_q, bow_v)
+
+    def euclidean_distnace_between_vertices(self,vertex1,vertex2):
+        vec1 = self.model[vertex1.key]
+        vec2 = self.model[vertex2.key]
+        return self.model.euclid_distance(vec1, vec2)
 
 
 def main():

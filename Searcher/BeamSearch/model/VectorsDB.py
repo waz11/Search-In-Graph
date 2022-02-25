@@ -3,20 +3,15 @@ import fasttext
 import sqlite3
 import numpy as np
 import io
-
-from scipy import spatial
-from scipy.spatial import distance
 from Parser.codeToGraph.code_to_graph import CodeParser
 
-class WordEmbedding:
-    def __init__(self, graph, project_name):
-        self.graph = graph
-        self.table_name = project_name
+class VecDB:
+    def __init__(self, table_name="src"):
+        self.table_name = table_name
         self.conn = self.build()
         self.crsr = self.conn.cursor()
         if not self.is_table_exist():
             self.create_table()
-            self.build_table()
 
     def __del__(self):
         self.conn.close()
@@ -27,14 +22,6 @@ class WordEmbedding:
             return True
         except:
             return False
-
-
-    def build_table(self):
-        model = fasttext.load_model('model/cc.en.300.bin')
-        for v in self.graph.get_vertices():
-            key = v.key
-            vector = model[v.name]
-            self.insert_vector(key, vector)
 
     def adapt_array(self, arr):
         out = io.BytesIO()
@@ -61,8 +48,8 @@ class WordEmbedding:
         self.crsr.execute("CREATE TABLE IF NOT EXISTS %s (key INT PRIMARY KEY NOT NULL, vector array NOT NULL);" % self.table_name)
         self.conn.commit()
 
-    def insert_vector(self,key, x): # numpy.ndarray
-        self.crsr.execute("INSERT INTO %s  VALUES (?,?)" % self.table_name, (key, x))
+    def insert_vector(self,key, vector): # numpy.ndarray
+        self.crsr.execute("INSERT INTO %s  VALUES (?,?)" % self.table_name, (key, vector))
         self.conn.commit()
 
     def __getitem__(self, key):
@@ -83,27 +70,26 @@ class WordEmbedding:
         for i in ans:
             key = i[0]
             vector = i[1]
-            # print(key)
-        print(len(ans))
+            print(key, vector[0])
 
     def delete_db(self):
         self.conn.close()
         os.remove('vectors.db')
 
-    def euclid_distance(self, v1, v2):
-        # distance.euclidean(v1, v2)
-        return 1.0 - spatial.distance.cosine(v1, v2)
+
 
 def main():
-    g = CodeParser('../../../Files/codes/src1').graph
-    model = WordEmbedding(g, 'src1')
-    model.print_table()
+    db = VecDB('project')
+    # g = CodeParser('../../../Files/codes/src1').graph
+    # model = VecDB(g, 'src1')
+    # model.print_table()
 
     # g.print_vertices()
-    v1 = model[0]
-    v2 = model[1]
-    d = model.euclid_distance(v1, v2)
-    print(d)
+    # v1 = model[2]
+    # v2 = model[1]
+    # d = model.euclid_distance(v1, v2)
+    # print(d)
+    pass
 
 
 if __name__ == '__main__':

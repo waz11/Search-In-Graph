@@ -1,6 +1,7 @@
 import string
 
 from Graph.graph import Graph
+from Searcher.BeamSearch.model.WordEmbedding import WordEmbedding
 from Utils.Interfaces import ISearcher
 from Parser.codeToGraph.code_to_graph import CodeParser
 from Query.query import Query
@@ -15,7 +16,8 @@ class BeamSearch(ISearcher):
         self.query :Query = query
         self.model = []
         self.candidate_nodes = []
-        self.ranker = Ranker()
+        self.model = WordEmbedding(Graph, '')
+        self.ranker = Ranker(self.model)
 
     def get_candidates_by_token(self, token:string) ->set:
         candidates = set()
