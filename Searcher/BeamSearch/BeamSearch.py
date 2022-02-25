@@ -2,7 +2,7 @@ import string
 
 from Graph.graph import Graph
 from Searcher.BeamSearch.model.WordEmbedding import WordEmbedding
-from Utils.Interfaces import ISearcher
+from Searcher.ISearcher import ISearcher
 from Parser.codeToGraph.code_to_graph import CodeParser
 from Query.query import Query
 from Searcher.BeamSearch.Ranker.ranker import Ranker

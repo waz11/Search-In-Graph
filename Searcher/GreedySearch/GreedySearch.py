@@ -1,8 +1,9 @@
 import string
 import time
 from Graph.graph import Graph
-from Utils.Interfaces import ISearcher
+
 from Searcher.GreedySearch.Ranker.ranker import Ranker
+from Searcher.ISearcher import ISearcher
 from Utils.maxheap import MaxHeap
 from Query.query import Query
 from Result.result import Result
@@ -148,7 +149,7 @@ def convert_second(seconds)->string:
 def main():
     query = Query("class list implements iterable,class list contains class node")
     query.graph.draw()
-    graph = CodeParser('../../../Files/codes/src1').graph
+    graph = CodeParser('../../Files/codes/src1').graph
     # graph.draw()
     searcher = GreedySearch(graph, query)
     searcher.search()
