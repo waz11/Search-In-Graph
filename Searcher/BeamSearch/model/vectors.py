@@ -95,7 +95,7 @@ class WordEmbedding:
         return 1.0 - spatial.distance.cosine(v1, v2)
 
 def main():
-    g = CodeParser('../../Files/codes/src1').graph
+    g = CodeParser('../../../Files/codes/src1').graph
     model = WordEmbedding(g, 'src1')
     model.print_table()
 

@@ -1,17 +1,17 @@
 import string
 
 from Graph.vertex import Vertex
-from algorithm2.Ranker.matrix import Matrix
-from algorithm1.Ranker.sematch.semantic.similarity import WordNetSimilarity
+from Searcher.BeamSearch.Ranker.matrix import Matrix
+# from Searcher.Gready_Search.Ranker.sematch.semantic.similarity import WordNetSimilarity
 import snowballstemmer
-from algorithm2.Searcher.BOW import get_scores
+from Searcher.BeamSearch.Searcher.BOW import get_scores
 
 class Ranker:
 
     def __init__(self):
         self.matrix = Matrix()
         self.stemmer = snowballstemmer.stemmer('english')
-        self.wns = WordNetSimilarity()
+        # self.wns = WordNetSimilarity()
 
 
     # def sim(self, bow1, bow2)->float:

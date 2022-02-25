@@ -4,7 +4,7 @@ from Graph.graph import Graph
 from Utils.Interfaces import ISearcher
 from Parser.codeToGraph.code_to_graph import CodeParser
 from Query.query import Query
-from algorithm2.Ranker.ranker import Ranker
+from Searcher.BeamSearch.Ranker.ranker import Ranker
 
 
 class BeamSearch(ISearcher):
@@ -56,7 +56,7 @@ class BeamSearch(ISearcher):
 def main():
     query = Query("class list implements class iterable,class list contains class node")
     query.graph.draw()
-    graph = CodeParser('../../Files/codes/src1').graph
+    graph = CodeParser('../../../Files/codes/src1').graph
     searcher = BeamSearch(graph, query)
     searcher.search()
 
