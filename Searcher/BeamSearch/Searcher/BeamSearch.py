@@ -5,6 +5,7 @@ from Utils.Interfaces import ISearcher
 from Parser.codeToGraph.code_to_graph import CodeParser
 from Query.query import Query
 from Searcher.BeamSearch.Ranker.ranker import Ranker
+from Utils.maxheap import MaxHeap
 
 
 class BeamSearch(ISearcher):
@@ -24,17 +25,17 @@ class BeamSearch(ISearcher):
         return candidates
 
     def generating_candidate_nodes(self)->set:
-        # candidates = {}
-        # for token in self.query.tokens:
-        #     candidates[token] = self.get_candidates_by_token(token)
         candidates = set()
         for token in self.query.tokens:
             candidates |= self.get_candidates_by_token(token)
         return candidates
 
-    def measuring_candidates_weight(self, vertex) ->float:
-        weight = self.ranker.get_scores(self.query.tokens, list(vertex.tokens))
-        return weight
+    def measuring_candidates_weight(self, candidates) ->float:
+        weights_heap = MaxHeap()
+        for candidate in candidates:
+            weight = self.ranker.get_scores(self.query.tokens, list(candidate.tokens))
+            weights_heap.insert_item(weight, candidate)
+        return weights_heap
 
     def generating_and_measuring_subgraph(self):
 
@@ -47,9 +48,9 @@ class BeamSearch(ISearcher):
 
     def search(self):
         candidate_nodes = self.generating_candidate_nodes()
-        for candidate in candidate_nodes:
-            weight = self.measuring_candidates_weight(candidate)
-            print(candidate.name, weight)
+        weights_heap :MaxHeap = self.measuring_candidates_weight(candidate_nodes)
+        candidate, rank = weights_heap.pop()
+
 
 
 
