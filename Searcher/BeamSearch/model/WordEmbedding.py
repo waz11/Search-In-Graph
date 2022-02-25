@@ -10,7 +10,7 @@ from Searcher.BeamSearch.model.VectorsDB import VecDB
 
 class WordEmbedding:
 
-    def __init__(self, graph, project_name="src"):
+    def __init__(self, graph, project_name="src1"):
         self.db = VecDB(project_name)
         self.graph = graph
 

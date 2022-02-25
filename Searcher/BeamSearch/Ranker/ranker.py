@@ -4,7 +4,7 @@ from Graph.vertex import Vertex
 from Searcher.BeamSearch.Ranker.matrix import Matrix
 # from Searcher.Gready_Search.Ranker.sematch.semantic.similarity import WordNetSimilarity
 import snowballstemmer
-import Searcher.BeamSearch.Searcher.BOW as BOW
+import Searcher.BeamSearch.model.BOW as BOW
 from Searcher.BeamSearch.model.WordEmbedding import WordEmbedding
 
 

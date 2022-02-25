@@ -16,7 +16,7 @@ class BeamSearch(ISearcher):
         self.query :Query = query
         self.model = []
         self.candidate_nodes = []
-        self.model = WordEmbedding(Graph, '')
+        self.model = WordEmbedding(Graph)
         self.ranker = Ranker(self.model)
 
     def get_candidates_by_token(self, token:string) ->set:
@@ -62,7 +62,7 @@ class BeamSearch(ISearcher):
 def main():
     query = Query("class list implements class iterable,class list contains class node")
     query.graph.draw()
-    graph = CodeParser('../../../Files/codes/src1').graph
+    graph = CodeParser('../../Files/codes/src1').graph
     searcher = BeamSearch(graph, query)
     searcher.search()
 
