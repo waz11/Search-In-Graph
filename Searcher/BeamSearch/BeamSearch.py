@@ -72,10 +72,13 @@ class BeamSearch(ISearcher):
         beam = self.top(1,C)
         for v in beam:
             v = v[0]
+            Wv = self.model[v]
             delta = 0
             for candidates in Ci.values():
                 for c in candidates:
-                    dist = self.dist(v,c)
+                    Wc = self.model[c.key]
+                    dist = self.dist(v,c) / Wc*Wv
+
                 delta += self.dist(v,c)
 
 
