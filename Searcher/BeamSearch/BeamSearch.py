@@ -76,8 +76,7 @@ class BeamSearch(ISearcher):
             for candidates in Ci.values():
                 for c in candidates:
                     dist = self.dist(v,c)
-                    print(dist)
-                # delta += self.dist(v,c)
+                delta += self.dist(v,c)
 
 
 
@@ -97,8 +96,8 @@ def main():
     # query.graph.draw()
     graph = CodeParser('../../Files/codes/src1').graph
     searcher = BeamSearch(graph, query)
-    # searcher.search()
-    searcher.model.db.print_table('src1')
+    searcher.search()
+    # searcher.model.db.print_table('src1')
     # searcher.model.db.delete_db()
 
 
