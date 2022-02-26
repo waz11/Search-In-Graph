@@ -59,10 +59,7 @@ def main():
     g = CodeParser('../../../Files/codes/src1').graph
     model = WordEmbedding(g, 'src1')
     model.db.print_table("src1")
-    # v1 = Vertex(1,'','class')
-    # v2 = Vertex(12, '', 'class')
-    # res = model.euclid(v1,v2)
-    # print(res)
+
 
 
 if __name__ == '__main__':
