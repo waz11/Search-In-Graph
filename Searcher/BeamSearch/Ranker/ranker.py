@@ -78,7 +78,7 @@ class Ranker:
 
 def main():
     v1 = Vertex(1, 'list','class')
-    v2 = Vertex(1, 'node', 'class')
+    v2 = Vertex(12, 'node', 'class')
     ranker = Ranker()
     ans = ranker.is_candidate_node(v1,v2)
     print(ans)

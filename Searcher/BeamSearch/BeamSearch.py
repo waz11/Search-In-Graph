@@ -13,9 +13,7 @@ class BeamSearch(ISearcher):
     def __init__(self, graph:Graph, query:Query):
         self.graph :Graph = graph
         self.query :Query = query
-        self.model = []
-        self.candidate_nodes = []
-        self.model = WordEmbedding(Graph)
+        self.model = WordEmbedding(Graph, 'src1')
         self.ranker = Ranker(self.model)
 
     def get_candidates_by_token(self, token:string) ->set:
@@ -26,24 +24,29 @@ class BeamSearch(ISearcher):
         return candidates
 
     def generating_candidate_nodes(self)->set:
-        candidates = set()
         candidates_by_token = {}
         for token in self.query.tokens:
             curr_candidates = self.get_candidates_by_token(token)
-            candidates_by_token[token] = [curr_candidates]
-            candidates |= curr_candidates
-        return candidates, candidates_by_token
+            candidates_by_token[token] = set(curr_candidates)
+        return candidates_by_token
 
-    def measuring_candidates_weight(self, candidates) ->float:
+    def sort_candidates(self, candidates) ->float:
         weights_heap = MaxHeap()
         for candidate in candidates:
             weight = self.ranker.get_scores(self.query.tokens, list(candidate.tokens))
             weights_heap.insert_item(weight, candidate)
         return weights_heap
 
+    def union_candidates(self, candidates_by_token:dict):
+        candidates = set()
+        for token in self.query.tokens:
+            candidates |= candidates_by_token[token]
+        return candidates
+
     def generating_and_measuring_subgraph(self, candidates, candidates_by_token):
-        weights_heap = self.measuring_candidates_weight(candidates)
+        weights_heap = self.sort_candidates(candidates)
         candidate, rank = weights_heap.pop()
+
 
 
         pass
@@ -51,10 +54,34 @@ class BeamSearch(ISearcher):
     def extending_and_recommending_subgraph(self):
         pass
 
+    def top(self, k:int, C:MaxHeap):
+        result = []
+        k = min(k, C.size)
+        while(k>0):
+            result.append(C.pop())
+            k-=1
+        return result
+
+    def dist(self, vertex1, vertex2):
+        return self.model.euclid(vertex1, vertex2)
 
     def search(self):
-        candidates, candidates_by_token = self.generating_candidate_nodes()
-        self.generating_and_measuring_subgraph(candidates, candidates_by_token)
+        Ci :dict = self.generating_candidate_nodes()
+        C :set = self.union_candidates(Ci)
+        C :MaxHeap = self.sort_candidates(C)
+        beam = self.top(1,C)
+        for v in beam:
+            v = v[0]
+            delta = 0
+            for candidates in Ci.values():
+                for c in candidates:
+                    dist = self.dist(v,c)
+                    print(dist)
+                # delta += self.dist(v,c)
+
+
+
+        # self.generating_and_measuring_subgraph(candidates, candidate_Q)
 
 
 
@@ -67,10 +94,12 @@ class BeamSearch(ISearcher):
 
 def main():
     query = Query("class list implements class iterable,class list contains class node")
-    query.graph.draw()
+    # query.graph.draw()
     graph = CodeParser('../../Files/codes/src1').graph
     searcher = BeamSearch(graph, query)
-    searcher.search()
+    # searcher.search()
+    searcher.model.db.print_table('src1')
+    # searcher.model.db.delete_db()
 
 
 if __name__ == '__main__':

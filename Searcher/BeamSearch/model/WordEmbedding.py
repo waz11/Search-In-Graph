@@ -1,44 +1,42 @@
-import string
 import fasttext
-import numpy as np
+import numpy
 from scipy import spatial
 from scipy.spatial import distance
-from Graph.graph import Graph
 from Graph.vertex import Vertex
 from Parser.codeToGraph.code_to_graph import CodeParser
-from Searcher.BeamSearch.model.VectorsDB import VecDB
+from Searcher.BeamSearch.model.VectorsDB import VectorsDB
 
 
 class WordEmbedding:
 
     def __init__(self, graph, project_name="src1"):
-        self.db = VecDB(project_name)
+        self.project_name = project_name
+        self.db = VectorsDB()
         self.graph = graph
 
-        if not self.db.is_table_exist():
-            self.db.create_table()
+        if not self.db.is_table_exist(project_name):
+            self.db.create_table(project_name)
             self.load_model()
             self.build_table()
 
     def load_model(self):
-        self.model = fasttext.load_model('./cc.en.300.bin')
+        print("loading model")
+        self.model = fasttext.load_model('cc.en.300.bin')
 
     def build_table(self):
         for vertex in self.graph.get_vertices():
             key = vertex.key
             vector = self.model[vertex.name]
-            self.db.insert_vector(key, vector)
+            self.db.insert_vector(self.project_name, key, vector)
 
     def __getitem__(self, item):
-        print("ron")
         if(isinstance(item, Vertex)):
-            return self.db.get(item.key)
-        elif(isinstance(item, int)):
-            return self.db.get(item)
+            item = item.key
         elif(isinstance(item, str)):
             if not self.load_model():
                 self.load_model()
             return self.model[item]
+        return self.db.get(self.project_name, item)
 
 
 
@@ -47,14 +45,24 @@ class WordEmbedding:
         return 1.0 - spatial.distance.cosine(v1, v2)
 
     def euclid(self, v1, v2):
-        return distance.euclidean(v1, v2)
+        if isinstance(v1,numpy.ndarray):
+            return distance.euclidean(v1, v2)
+        if(isinstance(v1,Vertex) and isinstance(v2,Vertex)):
+            print(v1.key, v2.key)
+            v1 = self.__getitem__(v1)
+            v2 = self.__getitem__(v2)
+            return distance.euclidean(v1, v2)
+
 
 
 def main():
     g = CodeParser('../../../Files/codes/src1').graph
     model = WordEmbedding(g, 'src1')
-    v1 = model[1]
-    v2 = model[2]
+    model.db.print_table("src1")
+    # v1 = Vertex(1,'','class')
+    # v2 = Vertex(12, '', 'class')
+    # res = model.euclid(v1,v2)
+    # print(res)
 
 
 if __name__ == '__main__':

@@ -6,6 +6,7 @@ import networkx as nx
 from matplotlib import pyplot as plt
 
 from Utils.json_functions import list_to_json, save_json_to_file
+from main import src1_path
 
 
 class Graph:
@@ -126,21 +127,15 @@ class Graph:
 
 
 def main():
-    # g1 = Graph('../Files/json graphs/src1.json')
-    # g1.toJson()
-    # g1.draw()
-    # print(str(g1.num_of_vertices()))
-    # print(str(g1.num_of_edges()))
-    # g1.print_vertices()
-    # print()
-    # g1.print_edges()
+
+    pass
 
 
-    g = Graph()
-    v1 = g.add_class('name1', 'type')
-    v2 = g.add_class('name2', 'kkk')
-    g.add_edge('extends',v1,v2)
-    g.draw()
+    # g = Graph()
+    # v1 = g.add_class('name1', 'type')
+    # v2 = g.add_class('name2', 'kkk')
+    # g.add_edge('extends',v1,v2)
+    # g.draw()
 
 
 

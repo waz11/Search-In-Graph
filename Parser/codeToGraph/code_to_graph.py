@@ -6,6 +6,7 @@ from Graph.graph import Graph
 from javalang.parse import parse
 from Parser.codeToGraph.handlers import component_handler
 from Parser.codeToGraph.types import typeof
+from main import src1_path
 
 primitive_variables = set(['String','boolean', 'byte', 'char', 'double','float', 'int', 'long', 'short'])
 generic_types = set(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'])
@@ -44,19 +45,18 @@ class CodeParser:
 
 
 def main():
-    # c = CodeParser('../../Files/codes/src4')
-    # print(c)
-    # graph.print_vertices()
-    # graph.print_edges()
-    # print(graph.num_of_vertices(), "vertices")
-    # print(graph.num_of_edges(),"edges")
-    # graph.draw()
+    from pathlib import Path
+    font_path = Path(__file__).parent / "files" / "resources" / "COMIC.TTF"
+    font_absolute_path = font_path.absolute()
+    print(font_absolute_path)
 
-    # g = CodeParser('../../Files/codes/lucene-master/demo/src/main/java').graph
-    # g.save_to_json_file('../../Files/json graphs/lucene-master.json')
 
-    g = CodeParser('../../Files/codes/poi').graph
-    g.save_to_json_file('../../Files/json graphs/poi.json')
+    print(src1_path)
+    g = CodeParser(src1_path).graph
+    g.draw()
+    x=g.num_of_vertices()
+    print(x)
+
 
 if __name__ == '__main__':
     main()
