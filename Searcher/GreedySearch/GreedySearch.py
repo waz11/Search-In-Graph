@@ -1,5 +1,7 @@
 import string
 import time
+
+import Graph.graph
 from Graph.graph import Graph
 
 from Searcher.GreedySearch.Ranker.ranker import Ranker
@@ -147,10 +149,14 @@ def convert_second(seconds)->string:
     return "%d:%02d:%02d" % (hour, minutes, seconds)
 
 def main():
-    query = Query("class list implements iterable,class list contains class node")
+    # query = Query("class list implements iterable,class list contains class node")
+    # query.graph.draw()
+    # graph = CodeParser('../../Files/codes/src1').graph
+
+    query = Query("interface GenericRecord")
     query.graph.draw()
-    graph = CodeParser('../../Files/codes/src1').graph
-    # graph.draw()
+    graph = CodeParser('../../Files/codes/poi-small').graph
+    graph.draw()
     searcher = GreedySearch(graph, query)
     searcher.search()
     searcher.get_results()

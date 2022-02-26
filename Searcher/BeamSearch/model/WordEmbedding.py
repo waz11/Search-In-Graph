@@ -1,8 +1,9 @@
 import string
-
 import fasttext
+import numpy as np
 from scipy import spatial
-
+from scipy.spatial import distance
+from Graph.graph import Graph
 from Graph.vertex import Vertex
 from Parser.codeToGraph.code_to_graph import CodeParser
 from Searcher.BeamSearch.model.VectorsDB import VecDB
@@ -15,6 +16,7 @@ class WordEmbedding:
         self.graph = graph
 
         if not self.db.is_table_exist():
+            self.db.create_table()
             self.load_model()
             self.build_table()
 
@@ -28,6 +30,7 @@ class WordEmbedding:
             self.db.insert_vector(key, vector)
 
     def __getitem__(self, item):
+        print("ron")
         if(isinstance(item, Vertex)):
             return self.db.get(item.key)
         elif(isinstance(item, int)):
@@ -39,19 +42,19 @@ class WordEmbedding:
 
 
 
-    def euclid_distance(self, v1, v2):
+    def cossin_distance(self, v1, v2):
         # distance.euclidean(v1, v2)
         return 1.0 - spatial.distance.cosine(v1, v2)
+
+    def euclid(self, v1, v2):
+        return distance.euclidean(v1, v2)
 
 
 def main():
     g = CodeParser('../../../Files/codes/src1').graph
     model = WordEmbedding(g, 'src1')
-    v1 = model["ron"]
-    # # v2 = model[1]
-    # # d = model.euclid_distance(v1, v2)
-    print(v1)
-
+    v1 = model[1]
+    v2 = model[2]
 
 
 if __name__ == '__main__':

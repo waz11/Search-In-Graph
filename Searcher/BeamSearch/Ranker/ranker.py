@@ -73,7 +73,7 @@ class Ranker:
     def euclidean_distnace_between_vertices(self,vertex1,vertex2):
         vec1 = self.model[vertex1.key]
         vec2 = self.model[vertex2.key]
-        return self.model.euclid_distance(vec1, vec2)
+        return self.model.cossin_distance(vec1, vec2)
 
 
 def main():

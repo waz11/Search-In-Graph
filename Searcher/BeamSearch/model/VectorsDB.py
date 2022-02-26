@@ -10,8 +10,8 @@ class VecDB:
         self.table_name = table_name
         self.conn = self.build()
         self.crsr = self.conn.cursor()
-        if not self.is_table_exist():
-            self.create_table()
+        # if not self.is_table_exist():
+        #     self.create_table()
 
     def __del__(self):
         self.conn.close()
@@ -45,8 +45,9 @@ class VecDB:
         self.conn.commit()
 
     def create_table(self):
-        self.crsr.execute("CREATE TABLE IF NOT EXISTS %s (key INT PRIMARY KEY NOT NULL, vector array NOT NULL);" % self.table_name)
-        self.conn.commit()
+        if not self.db.is_table_exist():
+            self.crsr.execute("CREATE TABLE IF NOT EXISTS %s (key INT PRIMARY KEY NOT NULL, vector array NOT NULL);" % self.table_name)
+            self.conn.commit()
 
     def insert_vector(self,key, vector): # numpy.ndarray
         self.crsr.execute("INSERT INTO %s  VALUES (?,?)" % self.table_name, (key, vector))

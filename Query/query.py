@@ -7,7 +7,7 @@ class Query:
 
     def __init__(self, query:string):
         self.content = query
-        self.special_words = set(["extends", "implements", "method", "class", "contains"])
+        self.special_words = set(["extends", "implements", "method", "class", "contains","interface"])
         self.tokens = self.get_tokens()
         self.graph = self.build_graph()
 
@@ -40,6 +40,8 @@ class Query:
                         vertex1 = g.add_class(words[i - 1])
                         vertex2 = g.add_interface(words[i + 1])
                         g.add_edge("implements", vertex1, vertex2)
+                    elif word == 'interface':
+                        g.add_interface(words[i + 1])
                     elif word=='contains':
                         if words[i-2] == 'class':
                             vertex1 = g.add_class(words[i - 1])
