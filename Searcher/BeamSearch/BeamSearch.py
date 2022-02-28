@@ -65,21 +65,25 @@ class BeamSearch(ISearcher):
     def dist(self, vertex1, vertex2):
         return self.model.euclid(vertex1, vertex2)
 
-    def search(self):
+    def search(self, k=1):
         Ci :dict = self.generating_candidate_nodes()
         C :set = self.union_candidates(Ci)
         C :MaxHeap = self.sort_candidates(C)
-        beam = self.top(1,C)
+        beam = self.top(k,C)
         for v in beam:
-            v = v[0]
-            Wv = self.model[v]
-            delta = 0
-            for candidates in Ci.values():
-                for c in candidates:
-                    Wc = self.model[c.key]
-                    dist = self.dist(v,c) / Wc*Wv
+            Wv = v[1]
+            vi = v[0]
 
-                delta += self.dist(v,c)
+            delta = 0
+            # print(Ci)
+            # for candidates in Ci.values():
+            #     print(candidates)
+            #     for c in candidates:
+            #         Wc = c[1]
+
+                    # dist = self.dist(v,c) / Wc*Wv
+
+                # delta += self.dist(v,c)
 
 
 

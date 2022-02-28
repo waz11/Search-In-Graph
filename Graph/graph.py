@@ -119,7 +119,7 @@ class Graph:
         pos = nx.spring_layout(G, k=500)
         nx.draw_networkx_nodes(G, pos, cmap=plt.get_cmap('jet'),node_size=2000,node_color='#00b4d9')
         nx.draw_networkx_labels(G, pos, font_size=10, font_color='k')
-        nx.draw_networkx_edges(G, pos, edge_color = 'b', arrowsize=20, arrowstyle='fancy')
+        nx.draw_networkx_edges(G, pos, edge_color = 'b')
 
         nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels)
 
@@ -127,15 +127,11 @@ class Graph:
 
 
 def main():
-
-    pass
-
-
-    # g = Graph()
-    # v1 = g.add_class('name1', 'type')
-    # v2 = g.add_class('name2', 'kkk')
-    # g.add_edge('extends',v1,v2)
-    # g.draw()
+    g = Graph()
+    v1 = g.add_class('name1', 'type')
+    v2 = g.add_class('name2', 'kkk')
+    g.add_edge('extends',v1,v2)
+    g.draw()
 
 
 

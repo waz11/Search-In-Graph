@@ -79,6 +79,7 @@ class GreedySearch(ISearcher):
         start_time = time.time()
 
         self.__calculate_similarities()
+        print(self.similarities)
         # self.calculate_similarities_multi_threaded()
 
         first_vertices = self.__get_first_nodes()
@@ -151,11 +152,9 @@ def convert_second(seconds)->string:
 def main():
     # query = Query("class list implements iterable,class list contains class node")
     # query.graph.draw()
-    # graph = CodeParser('../../Files/codes/src1').graph
 
-    query = Query("interface GenericRecord")
-    query.graph.draw()
-    graph = CodeParser('../../Files/codes/poi-small').graph
+    query = Query("class longList implements iterable,class longList contains class node")
+    graph = CodeParser('../../Files/codes/src1').graph
     graph.draw()
     searcher = GreedySearch(graph, query)
     searcher.search()
