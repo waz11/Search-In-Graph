@@ -123,6 +123,9 @@ class MaxHeap:
             self.delete_item(top_item_tuple[0])
         return top_item_tuple
 
+    def __iter__(self):
+        return iter(self.arr)
+
 
 
 if __name__ == "__main__":

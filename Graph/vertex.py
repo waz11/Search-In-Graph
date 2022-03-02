@@ -40,6 +40,4 @@ class Vertex:
         if self.neighbors:
             for neighbor in self.neighbors:
                 neighbors.append(neighbor.name)
-        if len(self.attributes) > 0:
-            return "[key:{}, type:{}, name:{}, attributes:{}, neighbors:{}]".format(self.key, self.type, self.name, self.attributes, neighbors)
-        return "[key:{}, type:{}, name:{}]".format(self.key, self.type, self.name, neighbors)
+        return "[{},{},{}]".format(self.key, self.type, self.name)

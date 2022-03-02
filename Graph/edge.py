@@ -17,4 +17,4 @@ class Edge():
         return json
 
     def __str__(self):
-        return "({},{}):{}".format(self.source.key, self.to.key, self.type)
+        return "({}-{}->{})".format(self.source.key,self.type, self.to.key)

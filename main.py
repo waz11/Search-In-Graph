@@ -1,8 +1,12 @@
-import os
-src1_path = os.path.abspath("./Files/codes/src1")
+from Parser.codeToGraph.code_to_graph import CodeParser
+
 
 def main():
-    print(src1_path)
+    g = CodeParser('../Files/codes/src1').graph
+    print(g.vertices)
+    g.print_vertices()
+    g.print_edges()
+
 
 if __name__ == '__main__':
     main()

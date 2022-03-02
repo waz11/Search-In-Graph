@@ -1,13 +1,15 @@
 import string
 import json
+
+
 from Graph.edge import Edge
 from Graph.vertex import Vertex
 import networkx as nx
 from matplotlib import pyplot as plt
-
+from Parser.old_version.Graph.graph import Graph
 from Utils.json_functions import list_to_json, save_json_to_file
-from main import src1_path
 
+from neo.connect import App
 
 class Graph:
     def __init__(self):
@@ -18,6 +20,9 @@ class Graph:
         self.interfaces_names :dict = {}    # name:vertex
         self.key = -1
 
+    def __len__(self):
+        return len(self.vertices)
+
     def __get_key(self)->int:
         self.key += 1
         return self.key
@@ -25,6 +30,15 @@ class Graph:
     def add_vertex(self,vertex:Vertex)->None:
         self.vertices[vertex.key] = vertex
 
+    def copy_vertex(self, other:Vertex):
+        vertex = Vertex(other.key, other.name, other.type)
+        self.vertices[other.key] = vertex
+        return vertex
+
+    def copy_edge(self, other :Edge):
+        source = self.get_vertex(other.source.key)
+        to = self.get_vertex(other.to.key)
+        self.add_edge(other.type, source,to)
 
     def add_class(self, name:string, modifiers=[])->Vertex:
         vertex = self.classes_names.get(name)
@@ -125,14 +139,62 @@ class Graph:
 
         plt.show()
 
+    def get_path(self, dic, first, last):
+        queue = []
+        parent = dic[last]
+        while(last != first):
+            queue.append(last)
+            parent = dic[last]
+            last = parent
+        queue.append(parent)
+        queue.reverse()
+        sub_graph = Graph()
+        for v in queue:
+            sub_graph.copy_vertex(v)
+        for i,k in enumerate(queue):
+            if(i+1<len(queue)):
+                edge = self.get_edge(queue[i].key, queue[i+1].key)
+                sub_graph.copy_edge(edge)
+        return sub_graph
+
+
+
+    def bfs(self, source :Vertex, goal :Vertex) -> Graph:
+        queue1 = []
+        queue2 = []
+        visited = set()
+        queue2.append(source)
+        dic = dict()
+        while(len(queue2) > 0):
+            queue1 = queue2
+            queue2 = []
+            while(len(queue1)>0):
+                curr = queue1.pop()
+                visited.add(curr.key)
+                if(curr==goal):
+                    return self.get_path(dic, source, goal)
+                else:
+                    for neighbor in curr.neighbors:
+                        if not visited.__contains__(neighbor.key):
+                            queue2.append(neighbor)
+                            dic[neighbor] = curr
+        return None
+
 
 def main():
+
+
+
     g = Graph()
     v1 = g.add_class('name1', 'type')
     v2 = g.add_class('name2', 'kkk')
-    g.add_edge('extends',v1,v2)
-    g.draw()
+    v3 = g.add_class('name3', 'kkk')
 
+    g.add_edge('extends',v1,v3)
+    g.add_edge('extends', v3, v2)
+    # g.draw()
+    sub_g :Graph= g.bfs(v1,v2)
+    print(len(sub_g))
 
 
 if __name__ == '__main__':

@@ -9,7 +9,7 @@ class Result:
         self.graph = Graph()
         self.rank = 0.0
 
-    def add_vertex(self, vertex:Vertex, rank)->None:
+    def add_vertex(self, vertex:Vertex, rank=0)->None:
         self.graph.add_vertex(vertex)
         self.rank += rank
 
