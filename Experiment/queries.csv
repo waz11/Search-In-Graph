@@ -1,5 +1,11 @@
-﻿java project name,qurey,level,expected rank,notes
-src1,"class list implements class iterable,class list contains class node",easy,1,sanity
-src2,,easy,1,sanity
-src3,,easy,1,sanity
-,,,,
+﻿no,project,qurey,level,expected rank,notes
+1,src1,"class list implements class iterable,class list contains class node",,,
+2,src1,"class longList implements iterable,class longList contains class node",,,
+3,src2,,,,
+4,src3,"class aesAttack,method enc,method encryption",,,
+5,maze,"class breadthSearch, method search, method solve",,,
+6,maze,"interface generator, interface mazeGenerator, class maze, class position, method start, class breadh_search, class search",,,
+7,,,,,
+8,,,,,
+9,,,,,
+10,,,,,

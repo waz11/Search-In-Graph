@@ -21,12 +21,6 @@ class GreedySearch(ISearcher):
         self.__results :MaxHeap = MaxHeap()
         self.similarities = dict()
 
-    def class_based_similarity(self):
-        pass
-
-    def class_relationship_based_similarity(self, threshold, k):
-        pass
-
     def __calculate_similarities(self, vertices = []) -> None:
         if len(vertices) == 0:
             vertices = self.graph.get_vertices()
@@ -79,7 +73,7 @@ class GreedySearch(ISearcher):
         start_time = time.time()
 
         self.__calculate_similarities()
-        print(self.similarities)
+        # print(self.similarities)
         # self.calculate_similarities_multi_threaded()
 
         first_vertices = self.__get_first_nodes()
@@ -91,7 +85,7 @@ class GreedySearch(ISearcher):
             visited = set()
             visited.add(vertex.key)
             self.__greedy_algorithm_recursive(result, k, threshold, visited)
-            rank = result.get_rank() / self.query.graph.num_of_vertices()
+            rank = result.get_rank() / max(self.query.graph.num_of_vertices(), len(result.graph))
             self.__results.insert_item(rank, result)
         end_time = time.time()
         total_time = end_time - start_time
@@ -153,8 +147,10 @@ def main():
     # query = Query("class list implements iterable,class list contains class node")
     # query.graph.draw()
 
-    query = Query("class longList implements iterable,class longList contains class node")
-    graph = CodeParser('../../Files/codes/src1').graph
+    # query = Query("class longList implements iterable,class longList contains class node")
+
+    query = Query("class BSERecord,method getRecordName")
+    graph = CodeParser('../../Files/codes/poi/ddf').graph
     graph.draw()
     searcher = GreedySearch(graph, query)
     searcher.search()

@@ -7,9 +7,9 @@ from Graph.vertex import Vertex
 import networkx as nx
 from matplotlib import pyplot as plt
 from Parser.old_version.Graph.graph import Graph
-from Utils.json_functions import list_to_json, save_json_to_file
+from Graph.utils.json_functions import list_to_json, save_json_to_file
 
-from neo.connect import App
+from neoj.connect import App
 
 class Graph:
     def __init__(self):

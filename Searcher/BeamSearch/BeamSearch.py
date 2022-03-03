@@ -88,19 +88,12 @@ class BeamSearch(ISearcher):
             X = Y.pop()
             z = self.findShortestPath(X, Y)
             if z != None:
-                print(z.get_vertices())
                 for vertex in z.get_vertices():
                     res.add_vertex(vertex)
                 for edge in z.get_edges():
                     res.add_edge(edge)
-        res.graph.draw()
 
-        # v0 = self.graph.get_vertex(0)
-        # v1 = self.graph.get_vertex(1)
-        # v17 = self.graph.get_vertex(17)
-        # x: Graph = self.graph.bfs(v0, v17)
-        # print(len(x))
-
+        return res
 
 
     def search(self, k=1):
@@ -108,46 +101,8 @@ class BeamSearch(ISearcher):
         vertex_set = []
         for c in Ci.values():
             vertex_set.append(c[0])
-
-        self.extend_vertex_set_to_connected_subgraph(vertex_set)
-
-
-
-            # rank, vertex = c.pop()
-            # print(vertex)
-
-
-        # C :set = self.union_candidates(Ci)
-        # C :MaxHeap = self.sort_candidates(C)
-        # a =  list((item,rank) for item, rank in C)
-        # print(a)
-        #
-        # beam = self.top(k,C)
-        # for v in beam:
-        #     Wv = v[1]
-        #     vi = v[0]
-        #
-        #     delta = 0
-
-            # for candidates in Ci.values():
-            #     print(candidates)
-            #     for c in candidates:
-            #         Wc = c[1]
-
-                    # dist = self.dist(v,c) / Wc*Wv
-
-                # delta += self.dist(v,c)
-
-
-
-        # self.generating_and_measuring_subgraph(candidates, candidate_Q)
-
-
-
-
-
-
-
+        result = self.extend_vertex_set_to_connected_subgraph(vertex_set)
+        result.graph.draw()
 
 
 
@@ -163,3 +118,19 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+
+
+
+
+# C :set = self.union_candidates(Ci)
+# C :MaxHeap = self.sort_candidates(C)
+# a =  list((item,rank) for item, rank in C)
+# beam = self.top(k,C)
+# for v in beam:
+#     Wv = v[1]
+#     vi = v[0]
+#     delta = 0
+# dist = self.dist(v,c) / Wc*Wv
+# delta += self.dist(v,c)
+# self.generating_and_measuring_subgraph(candidates, candidate_Q)

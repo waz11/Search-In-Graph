@@ -29,12 +29,12 @@ class codeParser:
 
         """get the java classes name"""
         basedir = os.path.dirname(__file__)
-        fin = open(Path('Utils/java_classes_names.txt'), "rt")
+        fin = open(Path('utils/java_classes_names.txt'), "rt")
         for line in fin:
             self.system_methods.append(line)
         fin.close()
-        """get the java util classes name"""
-        fin = open(Path('Utils/java_util_names.txt'), "rt")
+        """get the java utils classes name"""
+        fin = open(Path('utils/java_util_names.txt'), "rt")
         for line in fin:
             line = line.replace('\n', '')
             self.java_util_method.append(line)

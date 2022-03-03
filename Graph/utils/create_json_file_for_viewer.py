@@ -1,5 +1,5 @@
 from Graph.graph import Graph
-from Utils.json_functions import get_data_from_json_file, save_json_to_file
+from Graph.utils.json_functions import get_data_from_json_file, save_json_to_file
 
 
 
@@ -55,7 +55,7 @@ def __parse_edges(edges):
 
 
 def main():
-    g = Graph('../Files/json graphs/src1.json')
+    g = Graph('../../Files/json graphs/src1.json')
     create_json_file_for_viewer(g, 'src1')
     # create_json_file_for_viewer(g, 'src2')
 

@@ -8,7 +8,7 @@ class App:
 
     def __init__(self):
         uri = "neo4j+s://4a367a96.databases.neo4j.io"
-        user = 'neo'
+        user = 'neoj'
         password = 'tOfwQzxEEpycCb4X2hL2VkUjMBp5W86lyhhoezAXJL0'
         self.driver = GraphDatabase.driver(uri, auth=(user, password))
 
@@ -52,7 +52,7 @@ class App:
 
 
 if __name__ == "__main__":
-    # Aura queries use an encrypted connection using the "neo+s" URI scheme
+    # Aura queries use an encrypted connection using the "neoj+s" URI scheme
     app = App()
     #
     # g = Graph()
