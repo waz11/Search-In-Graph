@@ -1,59 +1,76 @@
+import json
+
 from neo4j import GraphDatabase
 
 # QUERIES:
 # MATCH (n) DETACH DELETE n
 # MATCH (n) RETURN (n)
+from Parser.old_version.Utils.json_functions import read_json_file
+
 
 class App:
 
     def __init__(self):
-        uri = "neo4j+s://4a367a96.databases.neo4j.io"
-        user = 'neoj'
-        password = 'tOfwQzxEEpycCb4X2hL2VkUjMBp5W86lyhhoezAXJL0'
+        uri = "neo4j://localhost:7687"
+        user = "neo4j"
+        password = "1234"
+
         self.driver = GraphDatabase.driver(uri, auth=(user, password))
+        self.session = self.driver.session()
 
-    def close(self):
-        # Don't forget to close the driver connection when you are finished with it
-        self.driver.close()
+    # def close(self):
+    #     self.driver.close()
 
-    def create_vertex(self, v1):
-        with self.driver.session() as session:
-            session.write_transaction(self.add_vertex, v1)
 
-    def create_edge(self, source, to, type):
-        with self.driver.session() as session:
-            session.write_transaction(self.add_edge, source, to, type)
+    def executeQuery(self, query):
+        tx = self.session.begin_transaction()
+        result = tx.run(query)
+        tx.commit()
+        return result
 
-    @staticmethod
-    def add_vertex(tx, vertex):
-        query = (
-            "CREATE (v:Vertex "
-            "{ key: $key, name: $name, type: $type }) "
-        )
-        tx.run(query, key=vertex.key, name=vertex.name, type=vertex.type)
+    def build_vertices(self, vertices, edges):
 
-    @staticmethod
-    def add_edge(tx, source, to, type):
-        if type=='extends':
-            query = """MATCH
-              (a:Vertex),
-              (b:Vertex)
-            WHERE a.key = $key1 AND b.key = $key2
-            CREATE (a)-[r:extends {key: a.key + 'extends' + b.key}]->(b)
-            RETURN type(r)"""
-        if type=='implements':
-            query = """MATCH
-              (a:Vertex),
-              (b:Vertex)
-            WHERE a.key = $key1 AND b.key = $key2
-            CREATE (a)-[r:implements {key: a.key + ' implements ' + b.key}]->(b)
-            RETURN type(r)"""
-        tx.run(query, key1=source.key, key2=to.key, type=type)
+        query='CREATE '
+        for v in vertices:
+            key = v['key']
+            name = v['name']
+            type = v['type']
+            attributes = v['attributes']
+            obj = 'Class'
+            if type=='method': obj='Method'
+            elif type=='interface': obj='Interface'
+            query = query + "(v{}:{} ".format(key,obj) + '{' + "key:'{}', name:'{}', type:'{}'".format(key,name,type,attributes) + '}),'
+
+        for e in edges:
+            type = e['type']
+            source = e['from']
+            to = e['to']
+            query = query + "((v{})-[:{}]->(v{})),".format(source, type, to)
+
+        query = query[:-1]
+        self.executeQuery(query)
+
+
+def loading_graph_file(path) -> None:
+    data :json = read_json_file(path)
+    vertices :list = data['vertices']
+    edges :list = data['edges']
+    return vertices, edges
+
+def main():
+    vertices, edges = loading_graph_file('./src1.json')
+    app = App()
+    app.executeQuery('MATCH (n) DETACH DELETE n')
+    app.build_vertices(vertices,edges)
+    # app.executeQuery()
+    # app.vert(edges)
 
 
 if __name__ == "__main__":
+    main()
+
     # Aura queries use an encrypted connection using the "neoj+s" URI scheme
-    app = App()
+    # app = App()
     #
     # g = Graph()
     # v1 = g.add_class('name1', 'type')
