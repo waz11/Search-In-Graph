@@ -52,7 +52,7 @@ class codeParser:
             current_query = CodeWrapper.CodeWrapper(title, body_dict[0])  # create the query
             current_query.set_code(body_dict[1])  # add post code to query
             current_query.set_tags(body_dict[2])  # add post tags to query
-            # current_query.find_url() # TODO: fix the url
+            # current_query.find_url()
 
             self.mapped_code[title] = []
             self.current_parsed = "Post"
