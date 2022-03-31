@@ -6,8 +6,9 @@ def code_to_graph_in_json_file(project_path, project_name=None):
     folder_name :string= os.path.basename(project_path)
     if project_name is None:
         project_name = folder_name
-    output_path = '../Files/json graphs/'+folder_name+'.json'
+    output_path = '../Files/json graphs/'+project_name+'.json'
     CodeFromFile(project_path,project_name, output_path)
+
 
 
 def main():
