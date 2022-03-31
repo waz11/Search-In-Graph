@@ -27,13 +27,7 @@ class BeamSearch(ISearcher):
                 candidates.add(vertex)
         return candidates
 
-    def generating_candidate_nodes(self)->set:
-        candidates_by_token = {}
-        for token in self.query.tokens:
-            curr_candidates = self.get_candidates_by_token(token)
-            heap = self.sort_candidates(curr_candidates)
-            candidates_by_token[token] = heap.pop()
-        return candidates_by_token
+
 
     def sort_candidates(self, candidates) ->float:
         weights_heap = MaxHeap()
@@ -65,21 +59,27 @@ class BeamSearch(ISearcher):
     def dist(self, vertex1, vertex2):
         return self.model.euclid(vertex1, vertex2)
 
-    def findShortestPath(self, X :Vertex, Y :set):
-        path_len = float('inf')
-        path = None
-        for goal in Y:
-            new_path = self.graph.bfs(goal, X)
-            if new_path == None:
-                new_path = self.graph.bfs(X, goal)
-            elif new_path != None and len(new_path) < path_len:
-                path = new_path
-        return path
 
-    def extend_vertex_set_to_connected_subgraph(self, vertex_set):
+
+
+
+
+    def search(self, k=1) ->Result:
+        Ci :dict = self.generating_candidate_nodes()
+        vertex_set = []
+        for c in Ci.values():
+            vertex_set.append(c[0])
+        result :Result = self.extend_vertex_set_to_connected_subgraph(vertex_set)
+        return result
+
+    def generating_candidate_nodes(self)->dict:
+        candidates_by_token = {}
+
+        return candidates_by_token
+
+    def extend_vertex_set_to_connected_subgraph(self, vertex_set:list) ->Result:
         Y = vertex_set
         E = set()
-        # print(Y)
         res = Result()
         while(Y.__len__()>0):
             X = Y.pop()
@@ -89,17 +89,18 @@ class BeamSearch(ISearcher):
                     res.add_vertex(vertex)
                 for edge in z.get_edges():
                     res.add_edge(edge)
-
         return res
 
-
-    def search(self, k=1):
-        Ci :dict = self.generating_candidate_nodes()
-        vertex_set = []
-        for c in Ci.values():
-            vertex_set.append(c[0])
-        result = self.extend_vertex_set_to_connected_subgraph(vertex_set)
-        result.graph.draw()
+    def findShortestPath(self, X :Vertex, Y :set) ->Graph:
+        path_len = float('inf')
+        path = None
+        for goal in Y:
+            new_path :Graph = self.graph.bfs(goal, X)
+            if new_path == None:
+                new_path = self.graph.bfs(X, goal)
+            elif new_path != None and len(new_path) < path_len:
+                path = new_path
+        return path
 
 
 

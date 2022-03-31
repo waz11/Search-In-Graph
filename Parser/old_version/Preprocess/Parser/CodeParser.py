@@ -309,7 +309,7 @@ class codeParser:
             # raise Exception("not implemented invocations expression")
             if isinstance(expression.expression, javalang.tree.Expression):
                 if isinstance(expression.expression, javalang.tree.MethodInvocation):
-                    if expression.expression.qualifier is "":
+                    if expression.expression.qualifier == "":
                         expression.expression.qualifier = expression.type.name
                 self.handle_method_expressions(expression.expression, method, current_query, current_method,
                                                parser_token_list)
@@ -495,7 +495,7 @@ class codeParser:
             expression.qualifier = member
         if current_method.find_method_call(expression.member) is not None:
             return
-        if expression.qualifier is not "":
+        if expression.qualifier != "":
             qualifier_list = expression.qualifier.split('.')
             call_qualifier = qualifier_list[0]
             if call_qualifier in self.system_methods or call_qualifier in primitive_types:  # check system methods calls
