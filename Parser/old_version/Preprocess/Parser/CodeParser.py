@@ -525,18 +525,18 @@ class codeParser:
                 if called_method is not None:
                     if called_method not in current_method.calling_methods:
                         current_method.add_method_calls(called_method)
-                else:
-                    # TODO: be careful!
-                    if expression.member not in current_query.imports:
-                        new_class_task = current_query.get_class("unknown_class")
-                        if new_class_task is None:
-                            new_class_task = CodeWrapper.ClassTask("unknown_class")
-                            current_query.add_class(new_class_task)
-                        called_method = CodeWrapper.MethodTask(expression.member, new_class_task)
-                        new_class_task.add_class_methods(called_method)
-
-                        if called_method not in current_method.calling_methods:
-                            current_method.add_method_calls(called_method)
+                # else:
+                #     # TODO: be careful!
+                #     if expression.member not in current_query.imports:
+                #         new_class_task = current_query.get_class("unknown_class")
+                #         if new_class_task is None:
+                #             new_class_task = CodeWrapper.ClassTask("unknown_class")
+                #             current_query.add_class(new_class_task)
+                #         called_method = CodeWrapper.MethodTask(expression.member, new_class_task)
+                #         new_class_task.add_class_methods(called_method)
+                #
+                #         if called_method not in current_method.calling_methods:
+                #             current_method.add_method_calls(called_method)
 
     def handle_super_method_calls(self, expression, method, current_query, current_method):
         current_class = current_method.get_method_super_class()  # get the super class
