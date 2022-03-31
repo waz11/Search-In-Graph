@@ -1,14 +1,15 @@
 import json
-
+import string
 from neo4j import GraphDatabase
-
-# QUERIES:
-# MATCH (n) DETACH DELETE n
-# MATCH (n) RETURN (n)
 from Parser.old_version.Utils.json_functions import read_json_file
 
 
-class App:
+# QUERIES:
+deleteAll = "MATCH (n) DETACH DELETE n"
+selectAll = "MATCH (n) RETURN (n)"
+
+
+class GraphByNeo4j:
 
     def __init__(self):
         uri = "neo4j://localhost:7687"
@@ -28,9 +29,23 @@ class App:
         tx.commit()
         return result
 
-    def build_vertices(self, vertices, edges):
+    def build_graph(self,vertices :list,edges :list):
+        query = self.__build_vertices(vertices)
+        query += self.__build_edges(edges)
+        query = query[:-1]
+        self.executeQuery(query)
 
-        query='CREATE '
+    def __build_edges(self,edges) ->string:
+        query = ""
+        for e in edges:
+            type = e['type']
+            source = e['from']
+            to = e['to']
+            query += "((v{})-[:{}]->(v{})),".format(source, type, to)
+        return query
+
+    def __build_vertices(self, vertices) ->string:
+        query = 'CREATE '
         for v in vertices:
             key = v['key']
             name = v['name']
@@ -39,16 +54,19 @@ class App:
             obj = 'Class'
             if type=='method': obj='Method'
             elif type=='interface': obj='Interface'
-            query = query + "(v{}:{} ".format(key,obj) + '{' + "key:'{}', name:'{}', type:'{}'".format(key,name,type,attributes) + '}),'
+            query += "(v{}:{} ".format(key,obj) + '{' + "key:'{}', name:'{}', type:'{}'".format(key,name,type,attributes) + '}),'
+        return query
 
-        for e in edges:
-            type = e['type']
-            source = e['from']
-            to = e['to']
-            query = query + "((v{})-[:{}]->(v{})),".format(source, type, to)
 
-        query = query[:-1]
-        self.executeQuery(query)
+
+        # for e in edges:
+        #     type = e['type']
+        #     source = e['from']
+        #     to = e['to']
+        #     query = query + "((v{})-[:{}]->(v{})),".format(source, type, to)
+        #
+        # query = query[:-1]
+        # self.executeQuery(query)
 
 
 def loading_graph_file(path) -> None:
@@ -59,26 +77,11 @@ def loading_graph_file(path) -> None:
 
 def main():
     vertices, edges = loading_graph_file('./src1.json')
-    app = App()
+    app = GraphByNeo4j()
     app.executeQuery('MATCH (n) DETACH DELETE n')
-    app.build_vertices(vertices,edges)
-    # app.executeQuery()
-    # app.vert(edges)
+    app.build_graph(vertices,edges)
+    # res = app.executeQuery(selectAll)
 
 
 if __name__ == "__main__":
     main()
-
-    # Aura queries use an encrypted connection using the "neoj+s" URI scheme
-    # app = App()
-    #
-    # g = Graph()
-    # v1 = g.add_class('name1', 'type')
-    # v2 = g.add_class('name2', 'type2')
-    # g.add_edge('extends', v1, v2)
-    #
-    # app.create_vertex(v1)
-    # app.create_vertex(v2)
-    # app.create_edge(v1,v2, 'extends')
-    #
-    # app.close()

@@ -9,7 +9,6 @@ from matplotlib import pyplot as plt
 from Parser.old_version.Graph.graph import Graph
 from Graph.utils.json_functions import list_to_json, save_json_to_file
 
-from neoj.connect import App
 
 class Graph:
     def __init__(self):
