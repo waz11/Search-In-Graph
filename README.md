@@ -12,9 +12,9 @@ output: graph object contains vertices & edges
 key : identifier
 name : class's name / method's name\
 type : class / interface / method\
-attributes : fields (in class) / arguments (in method)
+attributes : field / argument
 ### Edge Object:
-type : class / method / implements / extends / contains(for arguments)\
+type : class / method / implements / extends / contains(argument or field)\
 from : source vertex\
 to : target vertex
 ### ILLUSTRATION:
