@@ -1,4 +1,6 @@
 import math
+import string
+
 from Graph.graph import Graph
 from Graph.vertex import Vertex
 from Searcher.BeamSearch.group import Group
@@ -41,10 +43,10 @@ def top_groups(k, beam: list) -> list:
 
 
 class BeamSearch(ISearcher):
-    def __init__(self, graph:Graph, query:Query):
+    def __init__(self, graph:Graph, query:Query, java_project_name:string):
         self.graph :Graph = graph
         self.query :Query = query
-        self.model = WordEmbedding(Graph, 'src1')
+        self.model = WordEmbedding(self.graph, java_project_name)
         self.ranker = Ranker(self.model)
 
 
@@ -118,7 +120,7 @@ class BeamSearch(ISearcher):
 if __name__ == '__main__':
     query = Query("class list implements class iterable,class list contains class node")
     graph = CodeParser('../../Files/codes/src1').graph
-    searcher = BeamSearch(graph, query)
+    searcher = BeamSearch(graph, query, 'src1')
     searcher.search(50)
     # searcher.model.db.print_table('src1')
     # searcher.model.db.delete_db()

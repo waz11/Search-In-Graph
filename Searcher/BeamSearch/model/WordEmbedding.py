@@ -4,6 +4,8 @@ import fasttext
 import numpy
 from scipy import spatial
 from scipy.spatial import distance
+
+from Graph.graph import Graph
 from Graph.vertex import Vertex
 from Parser.codeToGraph.code_to_graph import CodeParser
 from Searcher.BeamSearch.model.VectorsDB import VectorsDB
@@ -11,19 +13,22 @@ from Searcher.BeamSearch.model.VectorsDB import VectorsDB
 
 class WordEmbedding:
 
-    def __init__(self, graph, project_name="src1"):
+    def __init__(self, graph :Graph, project_name="src1"):
         self.project_name = project_name
         self.db = VectorsDB()
         self.graph = graph
 
-        if not self.db.is_table_exist(project_name):
-            self.db.create_table(project_name)
-            self.load_model()
-            self.build_table()
+        if self.db.is_table_exist(project_name):
+            self.db.drop_table(project_name)
+
+        # if not self.db.is_table_exist(project_name):
+        self.db.create_table(project_name)
+        self.load_model()
+        self.build_table()
 
     def load_model(self):
         print("loading model")
-        self.model = fasttext.load_model('cc.en.300.bin')
+        self.model = fasttext.load_model('./model/cc.en.300.bin')
 
     def build_table(self):
         for vertex in self.graph.get_vertices():

@@ -69,7 +69,7 @@ class VectorsDB:
 
     def delete_db(self):
         self.conn.close()
-        os.remove('./vectors.db')
+        os.remove('./model/vectors.db')
 
 
 
