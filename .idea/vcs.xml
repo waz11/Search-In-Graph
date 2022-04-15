@@ -2,5 +2,17 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Files/codes/AES" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Files/codes/CV-Resume-Builder" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Files/codes/Electricity_Billing_System" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Files/codes/Exam-Seating-Arrangement-System-Using-JSP-Servlet" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Files/codes/GUI_maze" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Parser/Graph Builder" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Parser/Graph Builder/Files/codes/AES" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Parser/Graph Builder/Files/codes/CV-Resume-Builder" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Parser/Graph Builder/Files/codes/Electricity_Billing_System" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Parser/Graph Builder/Files/codes/Exam-Seating-Arrangement-System-Using-JSP-Servlet" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Parser/Graph Builder/Files/codes/GUI_maze" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Parser/GraphBuilder" vcs="Git" />
   </component>
 </project>

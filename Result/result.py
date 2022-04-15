@@ -28,14 +28,11 @@ class Result:
         return s
 
 
-def main():
+if __name__ == '__main__':
     res = Result()
     res.get_rank()
     res.add_vertex(Vertex(1,'v1',''))
     res.add_vertex(Vertex(2, 'v2', ''))
     print(res)
 
-
-if __name__ == '__main__':
-    main()
 

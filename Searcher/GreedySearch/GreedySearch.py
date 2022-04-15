@@ -1,16 +1,15 @@
 import string
 import time
-
 import Graph.graph
 from Graph.graph import Graph
-
 from Searcher.GreedySearch.Ranker.ranker import Ranker
 from Searcher.ISearcher import ISearcher
-from Utils.maxheap import MaxHeap
 from Query.query import Query
 from Result.result import Result
 import threading
-from Parser.codeToGraph.code_to_graph import CodeParser
+
+
+from utils.maxheap import MaxHeap
 
 
 class GreedySearch(ISearcher):
@@ -143,20 +142,18 @@ def convert_second(seconds)->string:
     seconds %= 60
     return "%d:%02d:%02d" % (hour, minutes, seconds)
 
-def main():
-    # query = Query("class list implements iterable,class list contains class node")
-    # query.graph.draw()
-
-    # query = Query("class longList implements iterable,class longList contains class node")
-
-    query = Query("class BSERecord,method getRecordName")
-    graph = CodeParser('../../Files/codes/poi/ddf').graph
-    graph.draw()
-    searcher = GreedySearch(graph, query)
-    searcher.search()
-    searcher.get_results()
-    # searcher.calculate_similarities_multi_threaded()
 
 
 if __name__ == '__main__':
-    main()
+    query = Query("class list implements iterable,class list contains class node")
+    query.graph.draw()
+
+
+
+
+    # graph = CodeParser('../../Files/codes/poi/ddf').graph
+    # graph.draw()
+    # searcher = GreedySearch(graph, query)
+    # searcher.search()
+    # searcher.get_results()
+    # searcher.calculate_similarities_multi_threaded()

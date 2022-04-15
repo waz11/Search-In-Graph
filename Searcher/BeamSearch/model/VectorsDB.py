@@ -73,14 +73,10 @@ class VectorsDB:
 
 
 
-def main():
+if __name__ == '__main__':
     # db = VectorsDB()
     # res = db.is_table_exist("src1")
     # print(res)
     # db.print_table("src1")
     # db.delete_db()
     print(os.getcwd())
-
-
-if __name__ == '__main__':
-    main()

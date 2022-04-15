@@ -75,13 +75,10 @@ def loading_graph_file(path) -> None:
     edges :list = data['edges']
     return vertices, edges
 
-def main():
+
+if __name__ == "__main__":
     vertices, edges = loading_graph_file('./src1.json')
     app = GraphByNeo4j()
     app.executeQuery('MATCH (n) DETACH DELETE n')
     app.build_graph(vertices,edges)
     # res = app.executeQuery(selectAll)
-
-
-if __name__ == "__main__":
-    main()

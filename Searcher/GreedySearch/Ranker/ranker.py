@@ -40,7 +40,9 @@ class Ranker:
             sim = wns.word_similarity(word1, word2)
         return sim
 
-def main():
+
+
+if __name__ == '__main__':
     # v1 = Vertex(1, "listIterator", "class")
     # v2 = Vertex(1, "list iterator", "class")
     # v3 = Vertex(1, "list iterator", "method")
@@ -54,6 +56,3 @@ def main():
     print(x)
     x = ranker.wns.word_similarity('high', 'low')
     print(x)
-
-if __name__ == '__main__':
-    main()

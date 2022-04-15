@@ -18,13 +18,13 @@ class WordEmbedding:
         self.db = VectorsDB()
         self.graph = graph
 
-        if self.db.is_table_exist(project_name):
-            self.db.drop_table(project_name)
+        # if self.db.is_table_exist(project_name):
+        #     self.db.drop_table(project_name)
 
-        # if not self.db.is_table_exist(project_name):
-        self.db.create_table(project_name)
-        self.load_model()
-        self.build_table()
+        if not self.db.is_table_exist(project_name):
+            self.db.create_table(project_name)
+            self.load_model()
+            self.build_table()
 
     def load_model(self):
         print("loading model")
@@ -61,12 +61,7 @@ class WordEmbedding:
 
 
 
-def main():
+if __name__ == '__main__':
     g = CodeParser('../../../Files/codes/src1').graph
     model = WordEmbedding(g, 'src1')
     model.db.print_table("src1")
-
-
-
-if __name__ == '__main__':
-    main()

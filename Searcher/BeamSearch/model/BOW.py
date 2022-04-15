@@ -27,13 +27,10 @@ def get_scores(bow_q:list, bow_v:list):
 
 
 
-def main():
+if __name__ == '__main__':
     doc1 = 'a'
     doc2 = 'a b c e f'
     doc1 = doc1.lower().split()
     doc2 = doc2.lower().split()
     score = get_scores(doc1 , doc2)
     print(score)
-
-if __name__ == '__main__':
-    main()

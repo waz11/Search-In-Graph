@@ -55,13 +55,11 @@ class Query:
                             g.add_edge1("contains", vertex1, vertex2)
         return g
 
-def main():
+
+
+if __name__ == '__main__':
     q = "class list implements class iterable,class list contains class node"
     query = Query(q)
     # print(query.tokens)
     g=query.graph
     g.draw()
-
-
-if __name__ == '__main__':
-    main()

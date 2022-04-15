@@ -5,7 +5,7 @@
 
 ## Part I: JAVA Project To Graph Object
 ### Graph object
-software project’s code graph 𝐺=(𝑉𝐺,𝐸𝐺) is an unweighted directed graph. Vertex set 𝑉𝐺 includes all nodes composed of classes, interfaces and methods. For each edge 𝑒(𝑢,𝑣)∈𝐸𝐺,∃𝑢𝑅𝑣∈𝑅𝑒𝑙, where 𝑢𝑅𝑣 means node 𝑢 and node v have a relationship R.\
+software project’s code graph 𝐺=(𝑉,𝐸) is an unweighted directed graph. Vertex set 𝑉𝐺 includes all nodes composed of classes, interfaces and methods. For each edge 𝑒(𝑢,𝑣)∈𝐸𝐺,∃𝑢𝑅𝑣∈𝑅𝑒𝑙, where 𝑢𝑅𝑣 means node 𝑢 and node v have a relationship R.\
 input: path to code folder\
 output: graph object contains vertices & edges
 ### Vertex Object:

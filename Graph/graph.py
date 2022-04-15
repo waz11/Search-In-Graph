@@ -1,7 +1,5 @@
 import string
 import json
-
-
 from Graph.edge import Edge
 from Graph.vertex import Vertex
 import networkx as nx
@@ -187,9 +185,6 @@ class Graph:
 
 
 def main():
-
-
-
     g = Graph()
     v1 = g.add_class('name1', 'type')
     v2 = g.add_class('name2', 'kkk')

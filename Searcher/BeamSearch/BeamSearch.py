@@ -54,7 +54,6 @@ class BeamSearch(ISearcher):
         beam = []
         for c in top(k, weights):
             beam.append(Group(c))
-
         for group in beam:
             for Ci in candidates_by_token.values():
                 x = group.select_candidate(Ci, self.model)
@@ -66,7 +65,6 @@ class BeamSearch(ISearcher):
         candidates_by_token, weights = self.__get_candidates()
         vertices = self.generate_subgraph(k, candidates_by_token, weights)
         graph :Graph = self.extend_vertex_set_to_connected_subgraph(vertices)
-        graph.draw()
         return graph
 
     def __get_candidates(self) ->tuple[dict, dict]:
@@ -112,7 +110,6 @@ class BeamSearch(ISearcher):
                     E.add(edge)
                     V.add(edge.source)
                     V.add(edge.to)
-
         graph: Graph = build_sub_graph(V, E)
         return graph
 
@@ -120,7 +117,9 @@ class BeamSearch(ISearcher):
 if __name__ == '__main__':
     query = Query("class list implements class iterable,class list contains class node")
     graph = CodeParser('../../Files/codes/src1').graph
+    graph.draw()
     searcher = BeamSearch(graph, query, 'src1')
-    searcher.search(50)
+    result = searcher.search(3)
+    result.draw()
     # searcher.model.db.print_table('src1')
     # searcher.model.db.delete_db()

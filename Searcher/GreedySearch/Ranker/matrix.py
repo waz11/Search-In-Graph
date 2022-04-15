@@ -43,10 +43,9 @@ class Matrix:
             sim = self.__Similarity_matrix_vertex[type2, type1]
         return sim
 
-def main():
+
+
+if __name__ == '__main__':
     m = Matrix()
     x=m.vertex_matrix('class','method')
     print(type(x))
-
-if __name__ == '__main__':
-    main()
