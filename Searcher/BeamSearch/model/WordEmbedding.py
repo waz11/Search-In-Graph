@@ -1,3 +1,5 @@
+import os
+
 import fasttext
 import numpy
 from scipy import spatial
@@ -58,7 +60,8 @@ class WordEmbedding:
 def main():
     g = CodeParser('../../../Files/codes/src1').graph
     model = WordEmbedding(g, 'src1')
-    model.db.print_table("src1")
+    # model.db.print_table("src1")
+    print(os.getcwd())
 
 
 

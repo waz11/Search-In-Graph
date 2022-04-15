@@ -13,7 +13,7 @@ def code_to_graph_in_json_file(project_path, project_name=None):
 
 def main():
     # code_to_graph_in_json_file('../Files/codes/src1', 'Project 1')
-    code_to_graph_in_json_file('../../../Files/codes/maze', 'maze')
+    code_to_graph_in_json_file('../Files/codes/x', 'x')
     # code_to_graph_in_json_file('../Files/codes/src3', 'Project 3')
     # code_to_graph_in_json_file('../../../Files/codes/poi/common/usermodel')
 

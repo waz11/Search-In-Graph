@@ -29,6 +29,10 @@ class Graph:
     def add_vertex(self,vertex:Vertex)->None:
         self.vertices[vertex.key] = vertex
 
+    def add_edge(self, edge: Edge):
+        self.edges[edge.source.key, edge.to.key] = edge
+        edge.source.add_neighbor(edge.to)
+
     def copy_vertex(self, other:Vertex):
         vertex = Vertex(other.key, other.name, other.type)
         self.vertices[other.key] = vertex
@@ -37,7 +41,7 @@ class Graph:
     def copy_edge(self, other :Edge):
         source = self.get_vertex(other.source.key)
         to = self.get_vertex(other.to.key)
-        self.add_edge(other.type, source,to)
+        self.add_edge1(other.type, source, to)
 
     def add_class(self, name:string, modifiers=[])->Vertex:
         vertex = self.classes_names.get(name)
@@ -70,7 +74,9 @@ class Graph:
             self.interfaces_names[name] = vertex
             return vertex
 
-    def add_edge(self, type:string, source:Vertex, to:Vertex):
+
+
+    def add_edge1(self, type:string, source:Vertex, to:Vertex):
         edge = Edge(source, to, type)
         self.edges[edge.source.key, edge.to.key] = edge
         edge.source.add_neighbor(edge.to)
@@ -158,7 +164,7 @@ class Graph:
 
 
 
-    def bfs(self, source :Vertex, goal :Vertex) -> Graph:
+    def bfs(self, source :Vertex, goal :Vertex) -> list:
         queue1 = []
         queue2 = []
         visited = set()
@@ -171,7 +177,7 @@ class Graph:
                 curr = queue1.pop()
                 visited.add(curr.key)
                 if(curr==goal):
-                    return self.get_path(dic, source, goal)
+                    return self.get_path(dic, source, goal).get_edges()
                 else:
                     for neighbor in curr.neighbors:
                         if not visited.__contains__(neighbor.key):
@@ -189,8 +195,8 @@ def main():
     v2 = g.add_class('name2', 'kkk')
     v3 = g.add_class('name3', 'kkk')
 
-    g.add_edge('extends',v1,v3)
-    g.add_edge('extends', v3, v2)
+    g.add_edge1('extends', v1, v3)
+    g.add_edge1('extends', v3, v2)
     # g.draw()
     sub_g :Graph= g.bfs(v1,v2)
     print(len(sub_g))

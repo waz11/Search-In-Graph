@@ -1,9 +1,7 @@
 import os
-import fasttext
 import sqlite3
 import numpy as np
 import io
-from Parser.codeToGraph.code_to_graph import CodeParser
 
 class VectorsDB:
     def __init__(self):
@@ -27,7 +25,7 @@ class VectorsDB:
     def __connect(self):
         sqlite3.register_adapter(np.ndarray, self.__adapt_array)
         sqlite3.register_converter("array", self.__convert_array)
-        conn = sqlite3.connect('./model/vectors.db', detect_types=sqlite3.PARSE_DECLTYPES)
+        conn = sqlite3.connect('./vectors.db', detect_types=sqlite3.PARSE_DECLTYPES)
         print("db - connected")
         return conn
 
@@ -71,15 +69,17 @@ class VectorsDB:
 
     def delete_db(self):
         self.conn.close()
-        os.remove('./model/vectors.db')
+        os.remove('./vectors.db')
 
 
 
 def main():
-    db = VectorsDB()
-    res = db.is_table_exist("src1")
-    print(res)
-    db.print_table("src1")
+    # db = VectorsDB()
+    # res = db.is_table_exist("src1")
+    # print(res)
+    # db.print_table("src1")
+    # db.delete_db()
+    print(os.getcwd())
 
 
 if __name__ == '__main__':

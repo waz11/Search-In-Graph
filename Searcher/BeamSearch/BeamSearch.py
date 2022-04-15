@@ -1,9 +1,7 @@
-import string
-import sys
-
+import math
 from Graph.graph import Graph
 from Graph.vertex import Vertex
-from Result.result import Result
+from Searcher.BeamSearch.group import Group
 from Searcher.BeamSearch.model.WordEmbedding import WordEmbedding
 from Searcher.ISearcher import ISearcher
 from Parser.codeToGraph.code_to_graph import CodeParser
@@ -11,99 +9,114 @@ from Query.query import Query
 from Searcher.BeamSearch.Ranker.ranker import Ranker
 from utils.maxheap import MaxHeap
 
+def top(k, weights_map: dict) -> list:
+    heap = MaxHeap()
+    for item in weights_map:
+        heap.push(weights_map[item],item)
+    res = []
+    while(min(k,heap.size)>0):
+        candidate = heap.pop()
+        res.append(candidate[0])
+        k-=1
+    return res
+
+def build_sub_graph(vertices, edges) ->Graph:
+    g = Graph()
+    for v in vertices:
+        g.add_vertex(v)
+    for e in edges:
+        g.add_edge(e)
+    return g
+
+def top_groups(k, beam: list) -> list:
+    heap = MaxHeap()
+    for group in beam:
+        heap.push(group.cost, group)
+    res = []
+    while(min(k,heap.size)>0):
+        candidate = heap.pop()
+        res.append(candidate[0])
+        k-=1
+    return res
+
 
 class BeamSearch(ISearcher):
-
     def __init__(self, graph:Graph, query:Query):
         self.graph :Graph = graph
         self.query :Query = query
         self.model = WordEmbedding(Graph, 'src1')
         self.ranker = Ranker(self.model)
 
-    def get_candidates_by_token(self, token:string) ->set:
-        candidates = set()
+
+    def generate_subgraph(self, k, candidates_by_token, weights):
+        beam = []
+        for c in top(k, weights):
+            beam.append(Group(c))
+
+        for group in beam:
+            for Ci in candidates_by_token.values():
+                group.select_candidate(Ci)
+
+        beam = top_groups(k, beam)
+        return top_groups(1, beam)[0].vertices
+
+
+    def search(self, k=2):
+        candidates_by_token, weights = self.__get_candidates()
+        vertices = self.generate_subgraph(k, candidates_by_token, weights)
+        graph :Graph = self.extend_vertex_set_to_connected_subgraph(vertices)
+        graph.draw()
+        return graph
+
+    def __get_candidates(self) ->tuple[dict, dict]:
+        candidates_by_token = dict()
+        weights = dict()
+        for token in self.query.get_tokens():
+            candidates_by_token[token] = set()
         for vertex in self.graph.get_vertices():
-            if self.ranker.is_candidate_node(token, vertex):
-                candidates.add(vertex)
-        return candidates
-
-    def generating_candidate_nodes(self)->set:
-        candidates_by_token = {}
-        for token in self.query.tokens:
-            curr_candidates = self.get_candidates_by_token(token)
-            heap = self.sort_candidates(curr_candidates)
-            candidates_by_token[token] = heap.pop()
-        return candidates_by_token
-
-    def sort_candidates(self, candidates) ->float:
-        weights_heap = MaxHeap()
-        for candidate in candidates:
-            weight = self.ranker.get_scores(self.query.tokens, list(candidate.tokens))
-            if(weight > 0):
-                weights_heap.insert_item(weight, candidate)
-        return weights_heap
-
-    def union_candidates(self, candidates_by_token:dict):
-        candidates = set()
-        for token in self.query.tokens:
-            candidates |= candidates_by_token[token]
-        return candidates
-
-    def generating_and_measuring_subgraph(self, candidates, candidates_by_token):
-        weights_heap = self.sort_candidates(candidates)
-        candidate, rank = weights_heap.pop()
-        pass
-
-    def top(self, k:int, C:MaxHeap):
-        result = []
-        k = min(k, C.size)
-        while(k>0):
-            result.append(C.pop())
-            k-=1
-        return result
+            for token in self.query.get_tokens():
+                if self.ranker.is_candidate_node(token, vertex):
+                    candidates_by_token[token].add(vertex)
+                    if vertex not in weights:
+                        weight = self.ranker.get_scores(self.query.tokens, list(vertex.tokens))
+                        weights[vertex] = weight
+        return candidates_by_token, weights
 
     def dist(self, vertex1, vertex2):
         return self.model.euclid(vertex1, vertex2)
 
     def findShortestPath(self, X :Vertex, Y :set):
-        path_len = float('inf')
-        path = None
+        shortest_path = float('inf')
+        path :list = None
+        v = None
         for goal in Y:
-            new_path = self.graph.bfs(goal, X)
-            if new_path == None:
-                new_path = self.graph.bfs(X, goal)
-            elif new_path != None and len(new_path) < path_len:
+            new_path :list = self.graph.bfs(goal, X)
+            if new_path == None: new_path = self.graph.bfs(X, goal)
+            if new_path != None and len(new_path) < shortest_path:
+                shortest_path = len(new_path)
                 path = new_path
-        return path
+                v = goal
+        return v, path
 
-    def extend_vertex_set_to_connected_subgraph(self, vertex_set):
+    def extend_vertex_set_to_connected_subgraph(self, vertex_set) ->Graph:
         Y = vertex_set
         E = set()
-        # print(Y)
-        res = Result()
+        V = set()
+        E = set()
         while(Y.__len__()>0):
             X = Y.pop()
-            z = self.findShortestPath(X, Y)
-            if z != None:
-                for vertex in z.get_vertices():
-                    res.add_vertex(vertex)
-                for edge in z.get_edges():
-                    res.add_edge(edge)
+            v, path = self.findShortestPath(X, Y)
+            if path != None:
+                for edge in path:
+                    E.add(edge)
+                    V.add(edge.source)
+                    V.add(edge.to)
 
-        return res
-
-
-    def search(self, k=1):
-        Ci :dict = self.generating_candidate_nodes()
-        vertex_set = []
-        for c in Ci.values():
-            vertex_set.append(c[0])
-        result = self.extend_vertex_set_to_connected_subgraph(vertex_set)
-        result.graph.draw()
+        graph: Graph = build_sub_graph(V, E)
+        return graph
 
 
-
-def main():
+if __name__ == '__main__':
     query = Query("class list implements class iterable,class list contains class node")
     # query.graph.draw()
     graph = CodeParser('../../Files/codes/src1').graph
@@ -111,23 +124,3 @@ def main():
     searcher.search()
     # searcher.model.db.print_table('src1')
     # searcher.model.db.delete_db()
-
-
-if __name__ == '__main__':
-    main()
-
-
-
-
-
-# C :set = self.union_candidates(Ci)
-# C :MaxHeap = self.sort_candidates(C)
-# a =  list((item,rank) for item, rank in C)
-# beam = self.top(k,C)
-# for v in beam:
-#     Wv = v[1]
-#     vi = v[0]
-#     delta = 0
-# dist = self.dist(v,c) / Wc*Wv
-# delta += self.dist(v,c)
-# self.generating_and_measuring_subgraph(candidates, candidate_Q)

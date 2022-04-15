@@ -86,7 +86,7 @@ class GreedySearch(ISearcher):
             visited.add(vertex.key)
             self.__greedy_algorithm_recursive(result, k, threshold, visited)
             rank = result.get_rank() / max(self.query.graph.num_of_vertices(), len(result.graph))
-            self.__results.insert_item(rank, result)
+            self.__results.push(rank, result)
         end_time = time.time()
         total_time = end_time - start_time
         convert_second(total_time)

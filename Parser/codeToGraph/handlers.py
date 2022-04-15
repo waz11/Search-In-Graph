@@ -28,7 +28,7 @@ def component_handler(graph, x):
         if attr.type not in unwanted_types:
             class_vertex.add_attribute(attr.type)
             field_type_vertex = graph.add_class(attr.type, 'class')
-            graph.add_edge('field', class_vertex, field_type_vertex)
+            graph.add_edge1('field', class_vertex, field_type_vertex)
 
     for method in class_component.methods:
         name = method.name
@@ -40,25 +40,25 @@ def component_handler(graph, x):
                 arguments.append(arg)
         return_type = method.return_type
         method_vertex = graph.add_method(name, arguments, modifiers, return_type)
-        graph.add_edge('method', class_vertex, method_vertex)
+        graph.add_edge1('method', class_vertex, method_vertex)
 
         for arg in arguments:
             arg_vertex = graph.add_class(arg)
-            graph.add_edge('argument', method_vertex, arg_vertex)
+            graph.add_edge1('argument', method_vertex, arg_vertex)
 
     for inner_class in class_component.inner_classes:
         inner_class_vertex = component_handler(graph, inner_class)
-        graph.add_edge('inner class', class_vertex, inner_class_vertex)
+        graph.add_edge1('inner class', class_vertex, inner_class_vertex)
 
 
     if class_component.extends:
         name = class_component.extends
         extended_class_vertex = graph.add_class(name, 'class')
-        graph.add_edge('extends', class_vertex, extended_class_vertex)
+        graph.add_edge1('extends', class_vertex, extended_class_vertex)
 
     for interface_name in class_component.implements:
         interface_vertex = graph.add_interface(interface_name)
-        graph.add_edge('implements', class_vertex, interface_vertex)
+        graph.add_edge1('implements', class_vertex, interface_vertex)
 
     return class_vertex
 

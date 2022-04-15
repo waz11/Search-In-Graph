@@ -35,11 +35,11 @@ class Query:
                     elif word=='extends':
                         vertex1 = g.add_class(words[i - 1])
                         vertex2 = g.add_class(words[i + 2])
-                        g.add_edge("extends", vertex1, vertex2)
+                        g.add_edge1("extends", vertex1, vertex2)
                     elif word=='implements':
                         vertex1 = g.add_class(words[i - 1])
                         vertex2 = g.add_interface(words[i + 1])
-                        g.add_edge("implements", vertex1, vertex2)
+                        g.add_edge1("implements", vertex1, vertex2)
                     elif word == 'interface':
                         g.add_interface(words[i + 1])
                     elif word=='contains':
@@ -49,10 +49,10 @@ class Query:
                             vertex1 = g.add_class(words[i - 1])
                         if words[i+1]== 'method':
                             vertex2 = g.add_method(words[i + 2])
-                            g.add_edge("method", vertex1, vertex2)
+                            g.add_edge1("method", vertex1, vertex2)
                         elif words[i+1]== 'class':
                             vertex2 = g.add_class(words[i + 2])
-                            g.add_edge("contains", vertex1, vertex2)
+                            g.add_edge1("contains", vertex1, vertex2)
         return g
 
 def main():

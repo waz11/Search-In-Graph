@@ -98,7 +98,7 @@ class MaxHeap:
             self._heapify_up(index)
             self._heapify_down(index)
 
-    def insert_item(self, item_value, item):
+    def push(self, item_value, item):
         """Inserts given item with given value in heap"""
         arr_len = len(self.arr)
         if arr_len == self.size:
@@ -109,7 +109,7 @@ class MaxHeap:
         self.size += 1
         self._heapify_up(self.size - 1)
 
-    def get_top(self):
+    def top(self):
         """Returns top item tuple (Calculated value, item) from heap if present"""
         return self.arr[0] if self.size else None
 
@@ -118,9 +118,11 @@ class MaxHeap:
         Return top item tuple (Calculated value, item) from heap and removes it as well
         if present
         """
-        top_item_tuple = self.get_top()
+        top_item_tuple = self.top()
         if top_item_tuple:
             self.delete_item(top_item_tuple[0])
+        if not top_item_tuple:
+            return None
         return top_item_tuple
 
     def __iter__(self):
@@ -129,15 +131,10 @@ class MaxHeap:
 
 
 if __name__ == "__main__":
-    res = Result()
-    v1 = Vertex(1, 'v1', '')
-    res.add_vertex(v1,1)
-    v2 = Vertex(2, 'v2', '')
-    res.add_vertex(v2,3)
-
-
     maxHeap = MaxHeap()
-    maxHeap.insert_item(20, res)
+    maxHeap.push(1, Vertex(1, "1", "class"))
+    # maxHeap.insert_item(1, Vertex(2, "2", "class"))
+    # maxHeap.insert_item(1, Vertex(3, "3", "class"))
     res, rank = maxHeap.pop()
     print(res)
     print(rank)

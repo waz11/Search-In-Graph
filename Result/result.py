@@ -14,7 +14,7 @@ class Result:
         self.rank += rank
 
     def add_edge(self, edge:Edge)->None:
-        self.graph.add_edge(edge.type, edge.source, edge.to)
+        self.graph.add_edge1(edge.type, edge.source, edge.to)
 
     def get_rank(self)->float:
         return self.rank
