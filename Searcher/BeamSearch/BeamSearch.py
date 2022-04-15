@@ -55,11 +55,10 @@ class BeamSearch(ISearcher):
 
         for group in beam:
             for Ci in candidates_by_token.values():
-                group.select_candidate(Ci)
+                group.select_candidate(Ci, self.model)
 
         beam = top_groups(k, beam)
         return top_groups(1, beam)[0].vertices
-
 
     def search(self, k=2):
         candidates_by_token, weights = self.__get_candidates()

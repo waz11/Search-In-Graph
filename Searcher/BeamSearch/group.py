@@ -2,8 +2,10 @@ import math
 
 from Graph.vertex import Vertex
 
-def getDelta(c:Vertex, v:Vertex) ->float:
-    return 1
+def getDelta(model, c:Vertex, v:Vertex) ->float:
+    delta = model.euclid(c, v)
+    print(delta)
+    return delta
 
 class Group:
     def __init__(self, vertex:Vertex):
@@ -14,13 +16,13 @@ class Group:
     def __len__(self):
         return len(self.vertices)
 
-    def select_candidate(self, candidates:list):
+    def select_candidate(self, candidates:list, model):
         min_delta = math.inf
         selected_candidate = None
         for c in candidates:
             delta = 0
             for v in self.vertices:
-                delta += getDelta(c,v)
+                delta += getDelta(model, c,v)
             if delta < min_delta:
                 min_delta = delta
                 selected_candidate = c
