@@ -40,8 +40,6 @@ class WordEmbedding:
             return self.model[item]
         return self.db.get(self.project_name, item)
 
-
-
     def cossin_distance(self, v1, v2):
         # distance.euclidean(v1, v2)
         return 1.0 - spatial.distance.cosine(v1, v2)
@@ -50,9 +48,10 @@ class WordEmbedding:
         if isinstance(v1,numpy.ndarray):
             return distance.euclidean(v1, v2)
         if(isinstance(v1,Vertex) and isinstance(v2,Vertex)):
-            print(v1.key, v2.key)
+            # print(v1.key, v2.key)
             v1 = self.__getitem__(v1)
             v2 = self.__getitem__(v2)
+            # print(v1, v2)
             return distance.euclidean(v1, v2)
 
 
@@ -60,8 +59,7 @@ class WordEmbedding:
 def main():
     g = CodeParser('../../../Files/codes/src1').graph
     model = WordEmbedding(g, 'src1')
-    # model.db.print_table("src1")
-    print(os.getcwd())
+    model.db.print_table("src1")
 
 
 

@@ -55,7 +55,7 @@ class BeamSearch(ISearcher):
 
         for group in beam:
             for Ci in candidates_by_token.values():
-                group.select_candidate(Ci, self.model)
+                x = group.select_candidate(Ci, self.model)
 
         beam = top_groups(k, beam)
         return top_groups(1, beam)[0].vertices
@@ -117,9 +117,8 @@ class BeamSearch(ISearcher):
 
 if __name__ == '__main__':
     query = Query("class list implements class iterable,class list contains class node")
-    # query.graph.draw()
     graph = CodeParser('../../Files/codes/src1').graph
     searcher = BeamSearch(graph, query)
-    searcher.search()
+    searcher.search(50)
     # searcher.model.db.print_table('src1')
     # searcher.model.db.delete_db()

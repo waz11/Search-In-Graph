@@ -4,7 +4,6 @@ from Graph.vertex import Vertex
 
 def getDelta(model, c:Vertex, v:Vertex) ->float:
     delta = model.euclid(c, v)
-    print(delta)
     return delta
 
 class Group:
@@ -22,7 +21,7 @@ class Group:
         for c in candidates:
             delta = 0
             for v in self.vertices:
-                delta += getDelta(model, c,v)
+                delta += getDelta(model, c, v)
             if delta < min_delta:
                 min_delta = delta
                 selected_candidate = c
