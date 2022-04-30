@@ -25,7 +25,7 @@ class VectorsDB:
     def __connect(self):
         sqlite3.register_adapter(np.ndarray, self.__adapt_array)
         sqlite3.register_converter("array", self.__convert_array)
-        conn = sqlite3.connect('./model/vectors.db', detect_types=sqlite3.PARSE_DECLTYPES)
+        conn = sqlite3.connect('./Searcher/BeamSearch/model/vectors.db', detect_types=sqlite3.PARSE_DECLTYPES)
         print("db - connected")
         return conn
 

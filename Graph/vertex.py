@@ -1,43 +1,29 @@
-import json
+import string
 from Parser.tokenizer import Tokenizer
+import enum
+
+class VertexTypeEnum(enum.Enum):
+   CLASS = "class"
+   METHOD = "method"
+   INTERFACE = "interface"
 
 
 class Vertex:
+    def __init__(self,key:int, name, type: VertexTypeEnum, attributes=None):
+        self.key :int = key
+        self.type :VertexTypeEnum = type
+        self.name :string = name
 
-    def __init__(self,key:int, name, type, attributes=[], modifiers=[]):
-        self.key = key
-        self.type = type
-        if 'abstract' in modifiers:
-            self.type = 'abstract'
-        self.name = name
-        self.modifiers = []
-        self.attributes = set()
-        for att in attributes:
-            self.attributes.add(att)
         self.neighbors = set()
+        self.attributes = set()
+        if attributes:
+            for att in attributes: self.attributes.add(att)
+
         self.tokens = Tokenizer().get_tokens(name)
-
-    def set_modifiers(self,modifiers)->None:
-        self.modifiers=modifiers
-
-    def add_attribute(self, type)->None:
-        self.attributes.add(type)
-
-    def add_neighbor(self, vertex)->None:
-        self.neighbors.add(vertex)
-
-    def toJson(self)->json:
-        json = {}
-        json["key"] = self.key
-        json["type"] = self.type
-        json["name"] = self.name
-        # json["modifiers"] = self.modifiers
-        json["attributes"] = list(self.attributes)
-        return json
 
     def __str__(self):
         neighbors = []
         if self.neighbors:
             for neighbor in self.neighbors:
                 neighbors.append(neighbor.name)
-        return "[{},{},{}]".format(self.key, self.type, self.name)
+        return "[{},{},{}]".format(self.key, self.type.value, self.name)

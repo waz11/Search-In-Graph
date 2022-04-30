@@ -1,20 +1,18 @@
-import json
-import string
-from Graph.vertex import Vertex
+import enum
+
+class EdgeTypeEnum(enum.Enum):
+   IMPLEMENTS = "implements"
+   EXTENDS = "extends"
+   CONTAINS = "contains"
+   METHOD = "method"
+
 
 class Edge():
 
-    def __init__(self, source:Vertex, to:Vertex, type):
-        self.type :string = type
-        self.source :Vertex = source
-        self.to :Vertex = to
-
-    def toJson(self) -> json:
-        json = {}
-        json["type"] = self.type
-        json["from"] = self.source.key
-        json["to"] = self.to.key
-        return json
+    def __init__(self, source:int, to:int, type:EdgeTypeEnum):
+        self.type :EdgeTypeEnum = type
+        self.source :int = source
+        self.to :int = to
 
     def __str__(self):
-        return "({}-{}->{})".format(self.source.key,self.type, self.to.key)
+        return "({}-{}->{})".format(self.source,self.type.value, self.to)

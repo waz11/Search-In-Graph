@@ -1,3 +1,4 @@
-/Searcher/GreedySearch/Ranker/sematch/
-/Searcher/BeamSearch/model/vectors.db
 /Searcher/BeamSearch/model/cc.en.300.bin
+/Searcher/BeamSearch/model/vectors.db
+/Searcher/GreedySearch/Ranker/database.db
+/Searcher/GreedySearch/Ranker/sematch/

@@ -1,159 +1,108 @@
-import string
-import time
 import Graph.graph
 from Graph.graph import Graph
-from Searcher.GreedySearch.Ranker.ranker import Ranker
-from Searcher.ISearcher import ISearcher
 from Query.query import Query
-from Result.result import Result
-import threading
+from Searcher.GreedySearch.Ranker.VectorsDB import VectorsDB
+from Searcher.GreedySearch.Ranker.ranker import Ranker
+from Searcher.GreedySearch.Result.result import Result
+from utils.heap import Heap
 
 
-from utils.maxheap import MaxHeap
+class GreedySearch():
 
-
-class GreedySearch(ISearcher):
-    def __init__(self, graph:Graph, query:Query):
+    def __init__(self, graph:Graph, database=False):
         self.graph :Graph = graph
-        self.query :Query = query
-        self.__ranker :Ranker = Ranker()
-        self.__results :MaxHeap = MaxHeap()
+        self.ranker :Ranker = Ranker()
+        self.results :Heap = Heap()
         self.similarities = dict()
+        self.database = database
+        if database:
+            self.db = VectorsDB()
+            self.db.create_table("sim")
 
-    def __calculate_similarities(self, vertices = []) -> None:
-        if len(vertices) == 0:
-            vertices = self.graph.get_vertices()
-        for vertex1 in self.query.graph.get_vertices():
-            for vertex2 in vertices:
-                # **for multithreading:**
-                # print(threading.get_ident())
-                # sim = Ranker().get_rank(vertex1, vertex2)
+    def get_sim(self, vertex1_key, vertex2_key):
+        if self.database:
+            return self.db.get("sim", vertex1_key, vertex2_key)
+        return self.similarities[vertex1_key, vertex2_key]
 
-                # for single-threaded:
-                sim = self.__ranker.get_rank(vertex1, vertex2)
+    def calculate_similarities(self, query :Query) -> None:
+        graphV = self.graph.get_vertices()
+        queryV = query.graph.get_vertices()
 
-                self.similarities[vertex1.key, vertex2.key] = sim
+        for v1 in queryV:
+            for v2 in graphV:
+                sim = self.ranker.get_vertices_rank(v1, v2)
+                self.similarities[v1.key, v2.key] = sim
+                if self.database: self.db.add("sim",v1.key,v2.key,sim)
+
+        if self.database: self.db.print_table("sim")
 
 
-    def calculate_similarities_multi_threaded(self) -> None:
-        vertices_list = self.graph.get_vertices()
-        length = len(vertices_list)
-        middle_index = length // 3
-
-        first = vertices_list[:middle_index]
-        second = vertices_list[middle_index:2*middle_index]
-        third = vertices_list[2*middle_index:3*middle_index]
-
-        t1 = threading.Thread(target=self.__calculate_similarities, args = (first,))
-        t2 = threading.Thread(target=self.__calculate_similarities, args = (second,))
-        t3 = threading.Thread(target=self.__calculate_similarities, args = (third,))
-        t1.start()
-        t2.start()
-        t3.start()
-        t1.join()
-        t2.join()
-        t3.join()
-
-    def __get_first_nodes(self)->list:
+    def get_first_nodes(self, query)->list:
         vertices = {}
-        for vertex1 in self.query.graph.get_vertices():
+        for vertex1 in query.graph.get_vertices():
             max_sim = 0
-            vertex = None
+            v_key = None
             for vertex2 in self.graph.get_vertices():
-                sim = self.similarities[vertex1.key, vertex2.key]
+
+                if self.database: sim = self.db.get("sim", vertex1.key, vertex2.key)
+                else: sim = self.similarities[vertex1.key, vertex2.key]
+
                 if sim>max_sim:
                     max_sim=sim
-                    vertex = vertex2
-            if(vertex not in vertices.keys() or vertices[vertex] < max_sim):
-                vertices[vertex] = max_sim
+                    v_key = vertex2.key
+            if(v_key not in vertices.keys() or vertices[v_key] < max_sim):
+                vertices[v_key] = max_sim
         return vertices
 
-    def search(self, k=2, threshold = 1):
-        start_time = time.time()
+    def search(self, query ,k=2, threshold = 1):
+        self.results: Heap = Heap()
+        self.calculate_similarities(query)
+        first_vertices = self.get_first_nodes(query)
 
-        self.__calculate_similarities()
-        # print(self.similarities)
-        # self.calculate_similarities_multi_threaded()
-
-        first_vertices = self.__get_first_nodes()
-        self.__results = MaxHeap()
-        for vertex in first_vertices.keys():
-            rank = first_vertices[vertex]
+        results = Heap()
+        for v_key in first_vertices.keys():
+            rank = first_vertices[v_key]
             result = Result()
-            result.add_vertex(vertex, rank)
+            result.add_vertex(self.graph.get_vertex(v_key), rank)
             visited = set()
-            visited.add(vertex.key)
-            self.__greedy_algorithm_recursive(result, k, threshold, visited)
-            rank = result.get_rank() / max(self.query.graph.num_of_vertices(), len(result.graph))
-            self.__results.push(rank, result)
-        end_time = time.time()
-        total_time = end_time - start_time
-        convert_second(total_time)
-        print('total time:', convert_second(total_time))
+            visited.add(v_key)
+            self.greedy_algorithm_recursive(query, result, k, threshold, visited)
+            rank = result.get_rank() / max(query.graph.num_of_vertices(), len(result.graph))
+            results.push(rank, result)
+        return results.pop()[0]
 
-        # # TEST:
-        # vertex = list(first_vertices)[0]
-        # result = Result()
-        # result.add_vertex(vertex, 1)
-        # visited = set()
-        # visited.add(vertex.key)
-        # self.__greedy_algorithm_recursive(result, 2, threshold, visited)
-        # print(result.graph.toJson())
-        # # END
-
-    def get_results(self):
+    def get_results(self, result_heap):
         results = []
-        while self.__results.size > 0:
-            result, rank = self.__results.pop()
+        while result_heap.size > 0:
+            result, rank = result_heap.pop()
             results.append(result)
-            print(rank, result.graph.toJson())
-            result.graph.draw()
-        return self.__results
+            print(rank, result.graph)
+            # result.graph.draw()
+        return results
 
-    def __greedy_algorithm_recursive(self, result:Result, k, th, visited:set) -> Result:
+    def greedy_algorithm_recursive(self, query, result, k, th, visited:set) :
         if k==0:
             return result
         max_sim = 0
-        edge = None
+        _edge = None
         vertex = None
-        for vertex1 in self.query.graph.get_vertices():
-            for vertex2 in result.graph.get_vertices():
-                for neighbor in vertex2.neighbors:
-                    if neighbor.key not in visited:
-                        sim = self.similarities[vertex1.key, neighbor.key]
+
+        graphV = self.graph.get_vertices()
+        queryV = query.graph.get_vertices()
+
+        for v1 in graphV:
+            for v2 in queryV:
+                for edge in self.graph.edges_dict[v1.key]:
+                    if edge.to not in visited:
+                        sim = self.get_sim(v2.key, edge.to)
                         if sim > max_sim:
                             max_sim = sim
-                            vertex = neighbor
-                            edge = self.graph.get_edge(vertex2.key, vertex.key)
+                            vertex = edge.to
+                            _edge = edge
 
         if vertex is None:
             return result
-        result.add_vertex(vertex, max_sim)
-        result.add_edge(edge)
-        visited.add(vertex.key)
-        self.__greedy_algorithm_recursive(result, k - 1, 0, visited)
-
-
-def convert_second(seconds)->string:
-    seconds = seconds % (24 * 3600)
-    hour = seconds // 3600
-    seconds %= 3600
-    minutes = seconds // 60
-    seconds %= 60
-    return "%d:%02d:%02d" % (hour, minutes, seconds)
-
-
-
-if __name__ == '__main__':
-    query = Query("class list implements iterable,class list contains class node")
-    query.graph.draw()
-
-
-
-
-    # graph = CodeParser('../../Files/codes/poi/ddf').graph
-    # graph.draw()
-    # searcher = GreedySearch(graph, query)
-    # searcher.search()
-    # searcher.get_results()
-    # searcher.calculate_similarities_multi_threaded()
+        result.add_vertex(self.graph.get_vertex(vertex), max_sim)
+        result.add_edge(_edge)
+        visited.add(vertex)
+        self.greedy_algorithm_recursive(query, result, k - 1, 0, visited)
