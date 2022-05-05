@@ -26,7 +26,7 @@ def main():
     query2 = Query("list iterable node")
     print("Query:", query1)
     print("Query:", query2)
-    testBeamSearch(graph, query2)
+    # testBeamSearch(graph, query2)
     testGreedySearch(graph, query1)
 
 
