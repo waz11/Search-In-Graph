@@ -18,7 +18,6 @@ type : class / method / implements / extends / contains(argument or field)\
 from : source vertex\
 to : target vertex
 ### ILLUSTRATION:
-![src1 (1)](https://user-images.githubusercontent.com/62445178/148656861-98410dbf-f92d-4e69-9fae-c562716cd0e5.png)
 ![IterableList](https://user-images.githubusercontent.com/62445178/166119423-c897ad8f-f291-4b67-b251-0ba3ecc67242.png)
 
 # Part II: Search Engine
