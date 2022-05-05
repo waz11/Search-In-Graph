@@ -6,7 +6,7 @@
       <excludeFolder url="file://$MODULE_DIR$/Searcher/GreedySearch/Ranker/sematch/dataset/aspect" />
       <excludeFolder url="file://$MODULE_DIR$/Searcher/GreedySearch/Ranker/sematch/models" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.7 (Code-To-Graph--draft-)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.7 (Code-To-Graph)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="PackageRequirementsSettings">
