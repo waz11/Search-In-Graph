@@ -1,9 +1,9 @@
 import Graph.graph
 from Graph.graph import Graph
 from Query.query import Query
+from Result.result import Result
 from Searcher.GreedySearch.Ranker.VectorsDB import VectorsDB
 from Searcher.GreedySearch.Ranker.ranker import Ranker
-from Searcher.GreedySearch.Result.result import Result
 from utils.heap import Heap
 
 

@@ -1,8 +1,8 @@
 import string
-import snowballstemmer
 from Graph.vertex import Vertex
 from Searcher.BeamSearch.Ranker.matrix import Matrix
-from Searcher.BeamSearch.model import BOW
+import snowballstemmer
+import Searcher.BeamSearch.model.BOW as BOW
 from Searcher.BeamSearch.model.WordEmbedding import WordEmbedding
 
 
@@ -38,7 +38,6 @@ class Ranker:
         for word1 in vertex1.tokens:
             for word2 in vertex2.tokens:
                 rank += self.words_sim(word1, word2)
-                # print(word1, word2, rank)
         rank /= max(len(vertex1.tokens), len(vertex2.tokens))
         return rank
 
@@ -72,16 +71,3 @@ class Ranker:
         vec1 = self.model[vertex1.key]
         vec2 = self.model[vertex2.key]
         return self.model.cossin_distance(vec1, vec2)
-
-
-def main():
-    v1 = Vertex(1, 'list','class')
-    v2 = Vertex(12, 'node', 'class')
-    ranker = Ranker()
-    ans = ranker.is_candidate_node(v1,v2)
-    print(ans)
-
-
-
-if __name__ == '__main__':
-    main()

@@ -26,15 +26,13 @@ class VectorsDB:
         sqlite3.register_adapter(np.ndarray, self.__adapt_array)
         sqlite3.register_converter("array", self.__convert_array)
         conn = sqlite3.connect('./Searcher/BeamSearch/model/vectors.db', detect_types=sqlite3.PARSE_DECLTYPES)
-        print("db - connected")
+        # print("db - connected")
         return conn
-
-
 
     def is_table_exist(self, table_name) ->bool:
         try:
             self.crsr.execute('SELECT key FROM %s' % table_name)
-            print("table already exist")
+            # print("table already exist")
             return True
         except:
             return False
@@ -70,13 +68,3 @@ class VectorsDB:
     def delete_db(self):
         self.conn.close()
         os.remove('./model/vectors.db')
-
-
-
-if __name__ == '__main__':
-    # db = VectorsDB()
-    # res = db.is_table_exist("src1")
-    # print(res)
-    # db.print_table("src1")
-    # db.delete_db()
-    print(os.getcwd())

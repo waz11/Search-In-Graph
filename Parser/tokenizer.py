@@ -30,11 +30,3 @@ class Tokenizer:
     def __camel_case_split(self, word)->list:
         matches = re.finditer('.+?(?:(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])|$)', word)
         return [m.group(0).lower() for m in matches]
-
-def main():
-    t = Tokenizer("list_iterable")
-    print(t.tokens)
-
-
-if __name__ == '__main__':
-    main()

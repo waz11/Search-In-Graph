@@ -61,6 +61,8 @@ class BeamSearch():
 
     def search(self, query:Query, k :int=2) ->Graph:
         candidates_by_token, weights = self.__get_candidates(query)
+        # print(candidates_by_token)
+        # print(weights)
         vertices_keys = self.generate_subgraph(k, candidates_by_token, weights)
         graph :Graph = self.extend_vertex_set_to_connected_subgraph(vertices_keys)
         return graph

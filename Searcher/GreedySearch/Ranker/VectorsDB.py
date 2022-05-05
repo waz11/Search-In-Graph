@@ -9,16 +9,15 @@ class VectorsDB:
     # def __del__(self):
     #     self.conn.close()
 
-
     def __connect(self):
         conn = sqlite3.connect('./Ranker/database.db', detect_types=sqlite3.PARSE_DECLTYPES)
-        print("db - connected")
+        # print("db - connected")
         return conn
 
     def is_table_exist(self, table_name) ->bool:
         try:
             c=self.crsr.execute('SELECT key1 FROM %s' % table_name)
-            print("table already exist")
+            # print("table already exist")
             return True
         except:
             return False
@@ -55,11 +54,3 @@ class VectorsDB:
     def delete_db(self):
         self.conn.close()
         os.remove('./model/vectors.db')
-
-
-
-if __name__ == '__main__':
-    db = VectorsDB()
-    db.create_table("ron")
-    db.add("ron",0,0,0)
-    db.get("ron",0,0)
